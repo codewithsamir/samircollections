@@ -1,5 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const MapComponent = dynamic(() => import('@/components/map/MapComponent'), { ssr: false });
 
 interface FormData {
   name: string;
@@ -8,7 +11,7 @@ interface FormData {
   notes: string;
 }
 
-const PickupRequest: React.FC = () => {
+const LocationUpdate: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     address: '',
@@ -16,10 +19,18 @@ const PickupRequest: React.FC = () => {
     notes: ''
   });
   const [submissionStatus, setSubmissionStatus] = useState<string | null>(null);
+  const [position, setPosition] = useState<[number, number]>([51.505, -0.09]);
+  const [location, setLocation] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleMapClick = (e: any) => {
+    const { lat, lng } = e.latlng;
+    setPosition([lat, lng]);
+    setLocation(`Latitude: ${lat}, Longitude: ${lng}`);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,14 +57,20 @@ const PickupRequest: React.FC = () => {
   };
 
   return (
-    <>
-      <main className="container mx-auto py-10 px-6">
-        <section className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-800">Request a Pickup</h2>
-          <p className="text-lg mt-4 text-gray-600">Enter your address to request a pickup. We’ll come to your location to collect the items.</p>
-        </section>
+    <main className="container mx-auto py-10 px-6">
+      <section className="text-center mb-8">
+        <h2 className="text-3xl font-extrabold text-gray-800">Request a Pickup</h2>
+        <p className="text-lg mt-4 text-gray-600">Enter your address to request a pickup. We’ll come to your location to collect the items.</p>
+      </section>
 
-        <form onSubmit={handleSubmit} className="mt-8 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Left side: Map */}
+        <div className="h-96 w-full">
+          <MapComponent position={position} onClick={handleMapClick} />
+        </div>
+
+        {/* Right side: Form */}
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 font-semibold">Name</label>
             <input
@@ -110,16 +127,16 @@ const PickupRequest: React.FC = () => {
             Submit Request
           </button>
         </form>
+      </div>
 
-        {/* Display submission status */}
-        {submissionStatus && (
-          <p className="text-center mt-4 text-green-600 font-semibold">
-            {submissionStatus}
-          </p>
-        )}
-      </main>
-    </>
+      {/* Display submission status */}
+      {submissionStatus && (
+        <p className="text-center mt-4 text-green-600 font-semibold">
+          {submissionStatus}
+        </p>
+      )}
+    </main>
   );
 };
 
-export default PickupRequest;
+export default LocationUpdate;
