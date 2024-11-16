@@ -7,23 +7,29 @@ import Image from 'next/image';
 
 
 const services = [
-  { title: 'Jean Repair', description: 'Quality jean repairs and alterations.', imageSrc: 'https://source.unsplash.com/400x300/?jeans,repair' },
-  { title: 'Bag Repair', description: 'Repair and revamp your favorite bags.', imageSrc: 'https://source.unsplash.com/400x300/?bag,repair' },
-  { title: 'Jacket Fitting', description: 'Custom jacket fitting for style and comfort.', imageSrc: 'https://source.unsplash.com/400x300/?jacket' },
+  { title: 'Jean Repair', description: 'Quality jean repairs and alterations.', imageSrc: 'https://plus.unsplash.com/premium_photo-1674828601362-afb73c907ebe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8amVhbnN8ZW58MHx8MHx8fDA%3D' },
+  { title: 'Bag Repair', description: 'Repair and revamp your favorite bags.', imageSrc: 'https://images.unsplash.com/photo-1472717400230-1c592a3179d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHNjaG9vbCUyMGJhZ3xlbnwwfHwwfHx8MA%3D%3D' },
+  { title: 'Jacket Fitting', description: 'Custom jacket fitting for style and comfort.', imageSrc: 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGphY2tldHxlbnwwfHwwfHx8MA%3D%3D' },
+  {
+    title: 'Kurti Surwal',
+    description: 'Expert repair and fitting services for your Kurti and Surwal, ensuring perfect style and comfort.',
+    imageSrc: 'https://images.pexels.com/photos/28512787/pexels-photo-28512787/free-photo-of-elegant-woman-in-chikankari-kurti-in-lucknow.jpeg?auto=compress&cs=tinysrgb&w=600'
+  }
+  
 ];
 
 const Home: React.FC = () => {
   return (
-    <>
+ 
 
-      <main className="container ">
+      <main className=" w-full ">
         {/* Hero Section */}
-        <section className="text-center py-10 relative bg-blue-100 h-[60vh] shadow-md flex flex-col items-center justify-center">
-          <div className='w-full h-full absolute '>
-            <Image src="/bg-hero.jpg" alt="tailor" width={100} height={100}  className='w-full h-full object-cover'/>
+        <section className="  lg:w-full   relative h-[50vh]  ">
+          <div className='w-full h-full  '>
+            <Image src="/bg-image.jpg" alt="tailor" width={100} height={1000}  className='w-full h-full object-cover object-center'/>
           </div>
-          <div className="bg w-full h-full bg-[#2020f56b] z-10 absolute"></div>
-         <div className="z-20">
+          <div className="bg w-full h-full bg-[#2020f56b] z-10 absolute top-0 left-0"></div>
+         {/* <div className="z-20">
          <h2 className="text-4xl font-extrabold text-white">Welcome to Samir Bag and Jean Repairing Center</h2>
           <p className="text-xl mt-4 text-white">
             Your one-stop shop for high-quality clothing repair, fitting, and customization services.
@@ -32,15 +38,15 @@ const Home: React.FC = () => {
             Contact Us
           </button>
 
-         </div>
+         </div> */}
         </section>
 
           
 
         {/* Highlighted Services */}
-        <section className="mt-10">
-          <h3 className="text-2xl font-semibold text-gray-800">Our Popular Services</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <section className="mt-5">
+          <h3 className="text-3xl font-semibold text-white text-center ">Our Popular Services</h3>
+          <div className="flex flex-wrap gap-5 justify-center mt-6">
             {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
             ))}
@@ -48,7 +54,7 @@ const Home: React.FC = () => {
         </section>
 
       {/* Home Pickup Service */}
-      <section className="mt-10 bg-yellow-100 p-6 rounded-lg shadow-md text-center">
+      <section className="my-10 bg-yellow-100 p-6 rounded-lg shadow-md text-center">
           <div className="flex justify-center items-center mb-4">
             <FaHome className="text-yellow-600 text-4xl mr-2" />
             <h3 className="text-2xl font-semibold text-gray-800">Home Pickup Service</h3>
@@ -56,7 +62,7 @@ const Home: React.FC = () => {
           <p className="text-gray-600 mt-4">
             Connect with us through our contact form, and we’ll come to your home to pick up your items for repair. Enjoy the convenience of our doorstep service for your repair and fitting needs!
           </p>
-          <Link href="/pickup-request">
+          <Link href="/https://forms.gle/9dTFDHp4HL27ozry8">
             <button className="mt-6 px-6 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
               Request Pickup
             </button>
@@ -64,15 +70,15 @@ const Home: React.FC = () => {
         </section>
 
         {/* Future Categories */}
-        <section className="mt-10 bg-gray-100 p-6 rounded-lg shadow-md">
+        {/* <section className="mt-10 bg-gray-100 p-6 rounded-lg shadow-md">
           <h3 className="text-2xl font-semibold text-gray-800">More Categories Coming Soon!</h3>
           <p className="text-gray-600 mt-4">
             Stay tuned as we expand our services to include more types of repairs and fittings, including belts, wallets, and more.
           </p>
-        </section>
+        </section> */}
       </main>
     
-    </>
+
   );
 };
 
