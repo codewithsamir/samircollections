@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-900 text-white p-4 text-center">
       <p>© 2024 Samir Bag and Jean Repairing Center</p>
       <p>Location: JanakpurDham-9, Pidari Chowk</p>
-      <p>Contact: 9804817621</p>
+      <p>Contact: 9824823877</p>
     </footer>
   );
 };
