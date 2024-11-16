@@ -2,7 +2,7 @@ import React from 'react';
 
 import ServiceCard from '@/components/Landingpage/Servicecard'
 import { FaHome } from 'react-icons/fa';
-import Link from 'next/link';
+
 import Image from 'next/image';
 
 
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
           <p className="text-gray-600 mt-4">
             Connect with us through our contact form, and we’ll come to your home to pick up your items for repair. Enjoy the convenience of our doorstep service for your repair and fitting needs!
           </p>
-          <a href="/https://forms.gle/9dTFDHp4HL27ozry8">
+          <a href="https://forms.gle/9dTFDHp4HL27ozry8">
             <button className="mt-6 px-6 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
               Request Pickup
             </button>
