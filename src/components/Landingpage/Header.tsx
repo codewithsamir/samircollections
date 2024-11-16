@@ -22,7 +22,7 @@ const Header: React.FC = () => {
 
         {/* Navigation Section */}
         <nav className='flex items-center gap-5'>
-          <ul className=" flex gap-6">
+          <ul className=" md:flex gap-6">
             <li><Link href="/" className="hover:text-yellow-400 transition-colors text-xl font-medium">Home</Link></li>
             <li>
             <a 
