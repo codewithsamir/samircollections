@@ -15,7 +15,6 @@ const services = [
     description: 'Expert repair and fitting services for your Kurti and Surwal, ensuring perfect style and comfort.',
     imageSrc: 'https://images.pexels.com/photos/28512787/pexels-photo-28512787/free-photo-of-elegant-woman-in-chikankari-kurti-in-lucknow.jpeg?auto=compress&cs=tinysrgb&w=600'
   }
-  
 ];
 
 const Home: React.FC = () => {
@@ -26,7 +25,7 @@ const Home: React.FC = () => {
         {/* Hero Section */}
         <section className="  lg:w-full   relative h-[50vh]  ">
           <div className='w-full h-full  '>
-            <Image src="/bg-image.jpg" alt="tailor" width={100} height={1000}  className='w-full h-full object-cover object-center'/>
+            <Image src="/bg-image.jpg" alt="tailor" width={500} height={1000}  className='w-full h-full object-cover object-center'/>
           </div>
           <div className="bg w-full h-full bg-[#2020f56b] z-10 absolute top-0 left-0"></div>
          {/* <div className="z-20">
@@ -62,11 +61,11 @@ const Home: React.FC = () => {
           <p className="text-gray-600 mt-4">
             Connect with us through our contact form, and we’ll come to your home to pick up your items for repair. Enjoy the convenience of our doorstep service for your repair and fitting needs!
           </p>
-          <Link href="/https://forms.gle/9dTFDHp4HL27ozry8">
+          <a href="/https://forms.gle/9dTFDHp4HL27ozry8">
             <button className="mt-6 px-6 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
               Request Pickup
             </button>
-          </Link>
+          </a>
         </section>
 
         {/* Future Categories */}

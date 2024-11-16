@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Header: React.FC = () => {
   return (
     <header className="bg-blue-800 text-white py-4 px-10 ">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto md:flex justify-between items-center">
         {/* Logo Section */}
         <Link href="/">
           <div className="flex items-center space-x-2 cursor-pointer overflow-hidden">
@@ -22,9 +22,18 @@ const Header: React.FC = () => {
 
         {/* Navigation Section */}
         <nav className='flex items-center gap-5'>
-          <ul className="hidden md:flex gap-6">
+          <ul className=" flex gap-6">
             <li><Link href="/" className="hover:text-yellow-400 transition-colors text-xl font-medium">Home</Link></li>
-            <li><Link href="https://forms.gle/9dTFDHp4HL27ozry8" className="hover:text-yellow-400 transition-colors text-xl font-medium">Request pickup</Link></li>
+            <li>
+            <a 
+    href="https://forms.gle/9dTFDHp4HL27ozry8" 
+    className="hover:text-yellow-400 transition-colors text-xl font-medium" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    Request pickup
+  </a>
+            </li>
             <li><Link href="/termandcondition" className="hover:text-yellow-400 transition-colors text-xl font-medium">Term and Condition</Link></li>
             {/* <li><Link href="/about" className="hover:text-yellow-400 transition-colors text-xl">About</Link></li>
             <li><Link href="/contact" className="hover:text-yellow-400 transition-colors text-xl">Contact</Link></li> */}
