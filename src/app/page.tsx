@@ -4,6 +4,7 @@ import ServiceCard from '@/components/Landingpage/Servicecard'
 import { FaHome } from 'react-icons/fa';
 
 import Image from 'next/image';
+import Mapsection from '@/components/Landingpage/Mapsection';
 
 
 const services = [
@@ -23,11 +24,11 @@ const Home: React.FC = () => {
 
       <main className=" w-full ">
         {/* Hero Section */}
-        <section className="  lg:w-full   relative h-[50vh]  ">
+        <section className="  lg:w-full   relative h-[400px]  ">
           <div className='w-full h-full  '>
-            <Image src="/bg-image.jpg" alt="tailor" width={500} height={1000}  className='w-full h-full object-cover object-center'/>
+            <Image src="/jacket-repairing-and-fitting.png" alt="tailor" width={500} height={1000}  className='w-full h-full object-cover object-center'/>
           </div>
-          <div className="bg w-full h-full bg-[#2020f56b] z-10 absolute top-0 left-0"></div>
+          <div className="bg w-full h-full bg-[#f5b92010] z-10 absolute top-0 left-0"></div>
          {/* <div className="z-20">
          <h2 className="text-4xl font-extrabold text-white">Welcome to Samir Bag and Jean Repairing Center</h2>
           <p className="text-xl mt-4 text-white">
@@ -68,13 +69,7 @@ const Home: React.FC = () => {
           </a>
         </section>
 
-        {/* Future Categories */}
-        {/* <section className="mt-10 bg-gray-100 p-6 rounded-lg shadow-md">
-          <h3 className="text-2xl font-semibold text-gray-800">More Categories Coming Soon!</h3>
-          <p className="text-gray-600 mt-4">
-            Stay tuned as we expand our services to include more types of repairs and fittings, including belts, wallets, and more.
-          </p>
-        </section> */}
+ <Mapsection />
       </main>
     
 
