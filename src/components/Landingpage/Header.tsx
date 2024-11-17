@@ -11,14 +11,14 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-orange-500 text-white py-4 px-6 shadow-md">
+    <header className="bg-orange-900 text-white py-4 px-6 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <Link href="/">
           <div className="flex items-center space-x-2 cursor-pointer">
             {/* Placeholder for Logo Image */}
             {/* <Image src="/machinelogo.png" alt="Logo" width={120} height={100} className="rounded-full" /> */}
-            <h1 className="text-3xl font-bold capitalize">samir collections</h1>
+            <h1 className="text-3xl font-bold capitalize">samir Bag and Jeans Repairing center</h1>
           </div>
         </Link>
 
