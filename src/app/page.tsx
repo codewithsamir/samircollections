@@ -3,7 +3,7 @@ import React from 'react';
 import ServiceCard from '@/components/Landingpage/Servicecard'
 import { FaHome } from 'react-icons/fa';
 
-import Image from 'next/image';
+
 import Mapsection from '@/components/Landingpage/Mapsection';
 import Herosection from '@/components/Herosection';
 
