@@ -1,63 +1,51 @@
-"use client"
-import { useState, useEffect } from 'react';
+"use client";
+import React from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// import required modules
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 
 const images = [
   { src: '/jacket-repairing.png', alt: 'Tailor' },
-  { src: '/jacket-repairing-2.png', alt: 'jacket zipper change' },
+  { src: '/jacket-repairing-2.png', alt: 'Jacket Zipper Change' },
   // Add more images as needed
 ];
 
 const Herosection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 3000); // Auto slide every 3 seconds
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="relative lg:w-full h-[400px]">
-      <div className="w-full h-full overflow-hidden relative">
+    <div className="relative w-full lg:h-[400px] h-[300px]">
+      <Swiper
+        pagination={{ clickable: true }}
+        navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
+        autoplay={{ delay: 10000 }} // Auto slide every 10 seconds
+        modules={[Navigation, Pagination, Autoplay]}
+        className="w-full h-full"
+      >
         {images.map((image, index) => (
-          <div
-            key={index}
-            className={`w-full h-full absolute transition-opacity duration-1000 ${
-              index === currentIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center"
-              className="w-full h-full"
-            />
-          </div>
+          <SwiperSlide key={index}>
+            <div className="relative w-full h-full">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                className="w-full h-full"
+              />
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
-      <div className="bg w-full h-full bg-[#f5b92010] z-10 absolute top-0 left-0"></div>
-      <button
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1"
-        onClick={prevSlide}
-      >
-        &#8249;
-      </button>
-      <button
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1"
-        onClick={nextSlide}
-      >
-        &#8250;
-      </button>
+      </Swiper>
+      <div className="bg-[#f5b92010] absolute top-0 left-0 w-full h-full z-10"></div>
+      {/* Navigation buttons */}
+      <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
+      <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
     </div>
   );
 };
