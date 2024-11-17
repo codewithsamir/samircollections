@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 const images = [
   { src: '/jacket-repairing.png', alt: 'Tailor', mobileSrc: '/small-jacket-repairing.png' },
-  { src: '/jacket-repairing-2.png', alt: 'Jacket Zipper Change', mobileSrc: '/small-jacket-repairing-2.png' },
+  { src: '/jacket-repairing-2.png', alt: 'Jacket Zipper Change', mobileSrc: '/small-jacket-reparing2.png' },
   // Add more images as needed
 ];
 
