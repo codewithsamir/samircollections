@@ -5,6 +5,7 @@ import { FaHome } from 'react-icons/fa';
 
 import Image from 'next/image';
 import Mapsection from '@/components/Landingpage/Mapsection';
+import Herosection from '@/components/Herosection';
 
 
 const services = [
@@ -24,22 +25,7 @@ const Home: React.FC = () => {
 
       <main className=" w-full ">
         {/* Hero Section */}
-        <section className="  lg:w-full   relative h-[400px]  ">
-          <div className='w-full h-full  '>
-            <Image src="/jacket-repairing-and-fitting.png" alt="tailor" width={500} height={1000}  className='w-full h-full object-cover object-center'/>
-          </div>
-          <div className="bg w-full h-full bg-[#f5b92010] z-10 absolute top-0 left-0"></div>
-         {/* <div className="z-20">
-         <h2 className="text-4xl font-extrabold text-white">Welcome to Samir Bag and Jean Repairing Center</h2>
-          <p className="text-xl mt-4 text-white">
-            Your one-stop shop for high-quality clothing repair, fitting, and customization services.
-          </p>
-          <button className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Contact Us
-          </button>
-
-         </div> */}
-        </section>
+  <Herosection />
 
           
 
