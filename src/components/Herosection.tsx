@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -13,12 +13,29 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 
 const images = [
-  { src: '/jacket-repairing.png', alt: 'Tailor' },
-  { src: '/jacket-repairing-2.png', alt: 'Jacket Zipper Change' },
+  { src: '/jacket-repairing.png', alt: 'Tailor', mobileSrc: '/small-jacket-repairing.png' },
+  { src: '/jacket-repairing-2.png', alt: 'Jacket Zipper Change', mobileSrc: '/small-jacket-repairing-2.png' },
   // Add more images as needed
 ];
 
 const Herosection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className="relative w-full lg:h-[400px] h-[300px]">
       <Swiper
@@ -32,7 +49,7 @@ const Herosection = () => {
           <SwiperSlide key={index}>
             <div className="relative w-full h-full">
               <Image
-                src={image.src}
+                src={isMobile ? image.mobileSrc : image.src}
                 alt={image.alt}
                 fill
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
@@ -43,9 +60,13 @@ const Herosection = () => {
         ))}
       </Swiper>
       <div className="bg-[#f5b92010] absolute top-0 left-0 w-full h-full z-10"></div>
-      {/* Navigation buttons */}
-      <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
-      <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
+      {!isMobile && (
+        <>
+          {/* Navigation buttons */}
+          <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
+          <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
+        </>
+      )}
     </div>
   );
 };
