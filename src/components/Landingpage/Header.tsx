@@ -3,10 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { HiMenu, HiX } from 'react-icons/hi';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
-const Header: React.FC = () => {
+
+const Header: React.FC = ({classname}:any) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const pathname = usePathname()
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -18,7 +22,9 @@ const Header: React.FC = () => {
     const handleScroll = () => {
       if (window.scrollY > 500) { // Change 100 to the height of your hero section
         setIsScrolled(true);
-      } else {
+      } 
+
+      else {
         setIsScrolled(false);
       }
     };
@@ -32,7 +38,8 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className={`fixed w-full top-0 z-20 py-2 px-10 text-white ${isScrolled ? 'bg-slate-900' : 'bg-transparent'} transition-all`}>
+<header className={`w-full top-0 z-20 py-2 px-10 text-white transition-all ${pathname === "/" ? (isScrolled ? 'bg-slate-900 fixed' : 'bg-transparent fixed') : 'bg-slate-900 relative'}`}>
+
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <Link href="/">

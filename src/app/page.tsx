@@ -7,6 +7,7 @@ import { FaHome } from 'react-icons/fa';
 import Mapsection from '@/components/Landingpage/Mapsection';
 import Herosection from '@/components/Herosection';
 import ServiceSteps from '@/components/Landingpage/ServiceSteps';
+import Header from '@/components/Landingpage/Header';
 
 
 const services = [
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
  
 
       <main className=" w-full ">
+         
         {/* Hero Section */}
   <Herosection />
 
