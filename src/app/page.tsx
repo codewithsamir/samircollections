@@ -6,6 +6,7 @@ import { FaHome } from 'react-icons/fa';
 
 import Mapsection from '@/components/Landingpage/Mapsection';
 import Herosection from '@/components/Herosection';
+import ServiceSteps from '@/components/Landingpage/ServiceSteps';
 
 
 const services = [
@@ -38,6 +39,13 @@ const Home: React.FC = () => {
             ))}
           </div>
         </section>
+
+        {/* Service Steps how we works  */}
+
+        <div className="container mx-auto p-8">
+      <h1 className="text-4xl font-bold text-center mb-6">Your clothes, your way.</h1>
+      <ServiceSteps />
+    </div>
 
       {/* Home Pickup Service */}
       <section className="my-10 bg-yellow-100 p-6 rounded-lg shadow-md text-center">
