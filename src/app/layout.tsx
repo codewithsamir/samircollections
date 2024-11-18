@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" >
 <Head>
   {/* Main Meta Tags */}
   <title>Samir Bag and Jeans Repairing Center - Expert Bag & Clothing Repair in Janakpur, Nepal</title>
@@ -85,6 +85,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
               <Header />
+              
         {children}
         <Footer />
       </body>
