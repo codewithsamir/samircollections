@@ -42,10 +42,11 @@ const Home: React.FC = () => {
 
         {/* Service Steps how we works  */}
 
-        <div className="container mx-auto p-8">
-      <h1 className="text-4xl font-bold text-center mb-6">Your clothes, your way.</h1>
-      <ServiceSteps />
-    </div>
+        <div className="container mx-auto pt-16 pb-16 px-8">
+  <h1 className="text-4xl font-bold text-center mb-10">How We Work</h1>
+  <ServiceSteps />
+</div>
+
 
       {/* Home Pickup Service */}
       <section className="my-10 bg-yellow-100 p-6 rounded-lg shadow-md text-center">

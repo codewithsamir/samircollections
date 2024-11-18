@@ -12,25 +12,25 @@ const steps: ServiceStep[] = [
   {
     stepNumber: 1,
     title: 'BOOK YOUR SERVICE',
-    description: 'Schedule your service online or by phone at a time that suits you best.',
+    description: 'Select a convenient time for us to collect your items, either online or by phone.',
     Icon: FaCalendarCheck,
   },
   {
     stepNumber: 2,
-    title: 'WE COLLECT',
-    description: 'Choose a time that works for you, and our friendly team will pick up your items.',
+    title: 'WE COME TO COLLECT',
+    description: 'Our team will arrive at the scheduled time to pick up your items with care.',
     Icon: FaBoxOpen,
   },
   {
     stepNumber: 3,
     title: 'WE GET TO WORK',
-    description: 'Our skilled experts will handle your repairs or fittings with care.',
+    description: 'Our skilled experts will handle your repairs or fittings with precision.',
     Icon: FaTools,
   },
   {
     stepNumber: 4,
-    title: 'WE DELIVER',
-    description: 'We’ll return your items, perfectly repaired or adjusted, at your convenience.',
+    title: 'WE DELIVER BACK',
+    description: 'Once complete, we’ll return your items at a time convenient for you.',
     Icon: FaTruck,
   },
 ];
