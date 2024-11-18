@@ -33,17 +33,17 @@ export default function RootLayout({
     <html lang="en">
 <Head>
   {/* Main Meta Tags */}
-  <title>Samir Bag and Jeans Repairing Center - Expert Clothing Repair in Janakpur, Nepal</title>
-  <meta name="description" content="Samir Bag and Jeans Repairing Center in Janakpur, Nepal, offers expert repair services for all types of clothing, including jeans, jackets, kurtis, trousers, and winter wear. Convenient home pickup service available." />
-  <meta name="keywords" content="clothing repair, jeans repair, jacket repair, kurti repair, trouser elastic replacement, Janakpur, Samir Bag and Jeans Repairing Center, garment repair, winter wear repair, Nepal" />
+  <title>Samir Bag and Jeans Repairing Center - Expert Bag & Clothing Repair in Janakpur, Nepal</title>
+  <meta name="description" content="Samir Bag and Jeans Repairing Center in Janakpur, Nepal, specializes in expert repair services for bags, jeans, jackets, kurtis, trousers, and all types of clothing. Convenient home pickup service available." />
+  <meta name="keywords" content="bag repair, bag repairing, bag fixing, cloth repair, cloth repairing, clothing alterations, jeans repair, jeans alterations, jacket repair, jacket fitting, kurti repair, trouser elastic replacement, clothing fitting, garment repair, winter wear repair, leather bag repair, travel bag repair, backpack repair, tailor shop, tailor service, clothing adjustment, Janakpur, Samir Bag and Jeans Repairing Center, garment repair center, fashion alterations, winter clothing repair, clothing mending, Nepal" />
 
   {/* Google Site Verification */}
   <meta name="google-site-verification" content="Geg6MyqELKWvjbsABit5WRiVwZ9ua-TMkbRUObCVSIA" />
 
   {/* Open Graph / Facebook */}
-  <meta property="og:title" content="Samir Bag and Jeans Repairing Center - Expert Clothing Repair in Janakpur, Nepal" />
-  <meta property="og:description" content="Offering top-quality repair services for all types of clothing, including jeans, vests, jackets, kurtis, trousers, and winter items in Janakpur, Nepal. Home pickup available." />
-  <meta property="og:image" content="https://www.yourwebsite.com/path-to-image.jpg" />
+  <meta property="og:title" content="Samir Bag and Jeans Repairing Center - Expert Bag & Clothing Repair in Janakpur, Nepal" />
+  <meta property="og:description" content="Offering top-quality repair services for bags, jeans, jackets, kurtis, trousers, and winter items in Janakpur, Nepal. Expert fitting and mending services with home pickup available." />
+  <meta property="og:image" content="https://www.samirrain.com.np/bg-image.jpg" />
   <meta property="og:url" content="https://www.samirrain.com.np/" />
   <meta property="og:type" content="website" />
 
@@ -54,8 +54,8 @@ export default function RootLayout({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Samir Bag and Jeans Repairing Center",
-        "description": "Samir Bag and Jeans Repairing Center in Janakpur, Nepal, specializes in high-quality clothing repairs for jeans, jackets, kurtis, trousers, winter wear, and more. Convenient home pickup service available.",
-        "image": "https://www.yourwebsite.com/path-to-image.jpg",
+        "description": "Samir Bag and Jeans Repairing Center in Janakpur, Nepal, specializes in high-quality clothing and bag repairs, including jeans, jackets, kurtis, trousers, leather bags, backpacks, and winter wear. Expert fitting and mending services with convenient home pickup available.",
+        "image": "https://www.samirrain.com.np/bg-image.jpg",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Pidari Chowk",
@@ -67,7 +67,7 @@ export default function RootLayout({
         "telephone": "+977 9824823877",
         "url": "https://www.samirrain.com.np/",
         "sameAs": [
-          "https://www.facebook.com/YourPage",
+          "https://www.facebook.com/profile.php?id=61569347120608&mibextid=ZbWKwl",
           "https://www.instagram.com/YourPage"
         ],
         "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 09:00-18:00",
@@ -76,6 +76,7 @@ export default function RootLayout({
     `}
   </script>
 </Head>
+
 
 
 
