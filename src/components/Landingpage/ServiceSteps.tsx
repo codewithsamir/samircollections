@@ -5,7 +5,7 @@ interface ServiceStep {
   stepNumber: number;
   title: string;
   description: string;
-  Icon: React.ComponentType;
+  Icon: React.ComponentType<{ className?: string }>; // Type Icon with className prop
 }
 
 const steps: ServiceStep[] = [
@@ -38,14 +38,14 @@ const steps: ServiceStep[] = [
 const ServiceSteps: React.FC = () => {
   return (
     <div className="flex justify-center gap-6 mt-8 flex-wrap">
-      {steps.map((step) => (
+      {steps.map(({ stepNumber, title, description, Icon }) => (
         <div
-          key={step.stepNumber}
+          key={stepNumber}
           className="w-72 h-80 bg-orange-500 text-white rounded-lg shadow-lg flex flex-col justify-center items-center p-6 transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
         >
-          <step.Icon className="text-5xl mb-4" />
-          <div className="text-xl font-bold mb-2">{step.stepNumber}. {step.title}</div>
-          <p className="text-center">{step.description}</p>
+          <Icon className="text-5xl mb-4" />
+          <div className="text-xl font-bold mb-2">{stepNumber}. {title}</div>
+          <p className="text-center">{description}</p>
         </div>
       ))}
     </div>
