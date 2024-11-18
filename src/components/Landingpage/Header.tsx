@@ -1,24 +1,44 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { HiMenu, HiX } from 'react-icons/hi';
+import Image from 'next/image';
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Detect scroll position and update background color
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) { // Change 100 to the height of your hero section
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="bg-orange-900 text-white py-4 px-6 shadow-md">
+    <header className={`fixed w-full top-0 z-20 py-2 px-10 text-white ${isScrolled ? 'bg-slate-900' : 'bg-transparent'} transition-all`}>
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <Link href="/">
-          <div className="flex items-center space-x-2 cursor-pointer">
+          <div className="flex items-center space-x-2 cursor-pointer md:ml-10">
             {/* Placeholder for Logo Image */}
-            {/* <Image src="/machinelogo.png" alt="Logo" width={120} height={100} className="rounded-full" /> */}
-            <h1 className="text-3xl font-bold capitalize">samir Bag and Jeans Repairing center</h1>
+            <Image src="/logo.png" alt="Logo" width={80} height={70} />
           </div>
         </Link>
 

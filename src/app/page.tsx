@@ -31,8 +31,8 @@ const Home: React.FC = () => {
           
 
         {/* Highlighted Services */}
-        <section className="mt-5">
-          <h3 className="text-3xl font-semibold text-white text-center ">Our Popular Services</h3>
+        <section className="mt-5 py-2">
+          <h3 className="text-4xl font-semibold  text-center py-4 ">Our Popular Services</h3>
           <div className="flex flex-wrap gap-5 justify-center mt-6">
             {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
@@ -49,7 +49,7 @@ const Home: React.FC = () => {
 
 
       {/* Home Pickup Service */}
-      <section className="my-10 bg-yellow-100 p-6 rounded-lg shadow-md text-center">
+      <section className="my-10 bg-orange-100 p-6 rounded-lg shadow-md text-center">
           <div className="flex justify-center items-center mb-4">
             <FaHome className="text-yellow-600 text-4xl mr-2" />
             <h3 className="text-2xl font-semibold text-gray-800">Home Pickup Service</h3>

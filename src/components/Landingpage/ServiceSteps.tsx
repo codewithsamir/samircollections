@@ -41,7 +41,7 @@ const ServiceSteps: React.FC = () => {
       {steps.map(({ stepNumber, title, description, Icon }) => (
         <div
           key={stepNumber}
-          className="w-72 h-80 bg-orange-500 text-white rounded-lg shadow-lg flex flex-col justify-center items-center p-6 transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
+          className="w-72 h-80 bg-slate-800 text-white rounded-lg shadow-lg flex flex-col justify-center items-center p-6 transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
         >
           <Icon className="text-5xl mb-4" />
           <div className="text-xl font-bold mb-2">{stepNumber}. {title}</div>
