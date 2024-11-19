@@ -11,9 +11,9 @@ import ServiceSteps from '@/components/Landingpage/ServiceSteps';
 
 
 const services = [
-  { title: 'Jean Repair', description: 'Quality jean repairs and alterations.', imageSrc: 'https://plus.unsplash.com/premium_photo-1674828601362-afb73c907ebe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8amVhbnN8ZW58MHx8MHx8fDA%3D' },
-  { title: 'Bag Repair', description: 'Repair and revamp your favorite bags.', imageSrc: 'https://images.unsplash.com/photo-1472717400230-1c592a3179d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHNjaG9vbCUyMGJhZ3xlbnwwfHwwfHx8MA%3D%3D' },
-  { title: 'Jacket Fitting', description: 'Custom jacket fitting for style and comfort.', imageSrc: 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGphY2tldHxlbnwwfHwwfHx8MA%3D%3D' },
+  { title: 'Jean Repair', description: 'Quality jean repairs and alterations. Expert stitching and patching for a seamless look. From hems to waist adjustments, we tailor your jeans to perfection.', imageSrc: 'https://plus.unsplash.com/premium_photo-1674828601362-afb73c907ebe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8amVhbnN8ZW58MHx8MHx8fDA%3D' },
+  { title: 'Bag Repair', description: 'Quality jean repairs and alterations. Expert stitching and patching for a seamless look. Repair and revamp your favorite bags here, restoring them to like-new condition.', imageSrc: 'https://images.unsplash.com/photo-1472717400230-1c592a3179d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHNjaG9vbCUyMGJhZ3xlbnwwfHwwfHx8MA%3D%3D' },
+  { title: 'Jacket Fitting', description: 'Custom jacket fitting and repairing for style and comfort. Tailored adjustments and expert repairs to restore your jacket to its perfect fit and condition.', imageSrc: 'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGphY2tldHxlbnwwfHwwfHx8MA%3D%3D' },
   {
     title: 'Kurti Surwal',
     description: 'Expert repair and fitting services for your Kurti and Surwal, ensuring perfect style and comfort.',

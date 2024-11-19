@@ -69,7 +69,7 @@ export default function RootLayout({
         "url": "https://www.samirrain.com.np/",
         "sameAs": [
           "https://www.facebook.com/profile.php?id=61569347120608&mibextid=ZbWKwl",
-          "https://www.instagram.com/YourPage"
+          "https://www.instagram.com/teamofsamir"
         ],
         "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 09:00-18:00",
         "priceRange": "10+"
