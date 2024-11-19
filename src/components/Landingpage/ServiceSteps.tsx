@@ -45,7 +45,7 @@ const ServiceSteps: React.FC = () => {
         >
           <Icon className="text-5xl mb-4" />
           <div className="text-xl font-bold mb-2">{stepNumber}. {title}</div>
-          <p className="text-center">{description}</p>
+          <p className="text-center hidden hover:block">{description}</p>
         </div>
       ))}
     </div>
