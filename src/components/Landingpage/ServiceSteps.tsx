@@ -39,14 +39,15 @@ const ServiceSteps: React.FC = () => {
   return (
     <div className="flex justify-center gap-6 mt-8 flex-wrap">
       {steps.map(({ stepNumber, title, description, Icon }) => (
-        <div
-          key={stepNumber}
-          className="w-70 h-72 bg-white hover:bg-slate-700 text-black hover:text-white transition-all rounded-lg shadow-lg flex flex-col justify-center items-center p-6 transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
-        >
-          <Icon className="text-5xl mb-4" />
-          <div className="text-xl font-bold mb-2">{stepNumber}. {title}</div>
-          <p className="text-center hidden group-hover:block">{description}</p>
-        </div>
+    <div
+    key={stepNumber}
+    className="group w-70 h-72 bg-white hover:bg-slate-700 text-black hover:text-white transition-all rounded-lg shadow-lg flex flex-col justify-center items-center p-6 transform hover:scale-105 hover:shadow-xl cursor-pointer"
+  >
+    <Icon className="text-5xl mb-4" />
+    <div className="text-xl font-bold mb-2">{stepNumber}. {title}</div>
+    <p className="text-center hidden group-hover:block">{description}</p>
+  </div>
+  
       ))}
     </div>
   );
