@@ -1,0 +1,15 @@
+# Allow all search engines to crawl all content
+User-agent: *
+Disallow: /private/
+Disallow: /temp/
+
+# Specify the location of the sitemap
+Sitemap: https://www.samirrain.com.np/sitemap.xml
+
+# Allow Googlebot to access everything (optional, as it's usually allowed by default)
+User-agent: Googlebot
+Allow: /
+
+# Block a specific bot (optional, if needed)
+User-agent: BadBot
+Disallow: /
