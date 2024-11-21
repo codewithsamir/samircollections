@@ -44,8 +44,8 @@ export default function RootLayout({
   {/* Open Graph / Facebook */}
   <meta property="og:title" content="Samir Bag and Jeans Repairing Center - Expert Bag & Clothing Repair in Janakpur, Nepal" />
   <meta property="og:description" content="Offering top-quality repair services for bags, jeans, jackets, kurtis, trousers, and winter items in Janakpur, Nepal. Expert fitting and mending services with home pickup available." />
-  <meta property="og:image" content="https://www.samirrain.com.np/samirbagandjeanrepairingcenter.png" />
-  <meta property="og:url" content="https://www.samirrain.com.np/" />
+  <meta property="og:image" content="https://samirrain.com.np/samirbagandjeanrepairingcenter.png" />
+  <meta property="og:url" content="https://samirrain.com.np/" />
   <meta property="og:type" content="website" />
 
   {/* Structured Data - JSON-LD */}
@@ -56,7 +56,7 @@ export default function RootLayout({
         "@type": "LocalBusiness",
         "name": "Samir Bag and Jeans Repairing Center",
         "description": "Samir Bag and Jeans Repairing Center in Janakpur, Nepal, specializes in high-quality clothing and bag repairs, including jeans, jackets, kurtis, trousers, leather bags, backpacks, and winter wear. Expert fitting and mending services with convenient home pickup available.",
-        "image": "https://www.samirrain.com.np/samirbagandjeanrepairingcenter.png",
+        "image": "https://samirrain.com.np/samirbagandjeanrepairingcenter.png",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Pidari Chowk",
@@ -66,7 +66,7 @@ export default function RootLayout({
           "addressCountry": "NP"
         },
         "telephone": "+977 9824823877",
-        "url": "https://www.samirrain.com.np/",
+        "url": "https://samirrain.com.np/",
         "sameAs": [
           "https://www.facebook.com/profile.php?id=61569347120608&mibextid=ZbWKwl",
           "https://www.instagram.com/teamofsamir"
