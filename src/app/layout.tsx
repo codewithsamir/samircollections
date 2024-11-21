@@ -47,7 +47,8 @@ export default function RootLayout({
   <meta property="og:image" content="https://samirrain.com.np/samirbagandjeanrepairingcenter.png" />
   <meta property="og:url" content="https://samirrain.com.np/" />
   <meta property="og:type" content="website" />
-
+  
+  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
   {/* Structured Data - JSON-LD */}
   <script type="application/ld+json">
     {`
