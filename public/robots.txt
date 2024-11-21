@@ -4,7 +4,7 @@ Disallow: /private/
 Disallow: /temp/
 
 # Specify the location of the sitemap
-Sitemap: https://www.samirrain.com.np/sitemap.xml
+Sitemap: https://samirrain.com.np/samir-sitemap.xml
 
 # Allow Googlebot to access everything (optional, as it's usually allowed by default)
 User-agent: Googlebot
