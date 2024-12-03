@@ -9,7 +9,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, imageSrc }) => {
   return (
-    <div className="p-4 bg-white shadow-lg rounded-lg w-[350px] transform transition-all hover:scale-105 hover:shadow-2xl">
+    <div  className="p-4 bg-white shadow-lg rounded-lg w-[350px] transform transition-all hover:scale-105">
     <Image
       width={500}
       height={300}

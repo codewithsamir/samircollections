@@ -37,15 +37,15 @@ const steps: ServiceStep[] = [
 
 const ServiceSteps: React.FC = () => {
   return (
-    <div className="flex justify-center gap-6 mt-8 flex-wrap">
+    <div className="flex justify-center gap-6 mt-8 flex-wrap py-10">
       {steps.map(({ stepNumber, title, description, Icon }) => (
     <div
     key={stepNumber}
-    className="group w-70 h-72 bg-white hover:bg-slate-700 text-black hover:text-white transition-all rounded-lg shadow-lg flex flex-col justify-center items-center p-6 transform hover:scale-105 hover:shadow-xl cursor-pointer"
+    className="group w-[300px]  h-[200px] bg-white hover:bg-red-500 text-black hover:text-white transition-all rounded-lg shadow-lg flex flex-col justify-center items-center p-4 transform  hover:shadow-xl cursor-pointer"
   >
-    <Icon className="text-5xl mb-4" />
-    <div className="text-xl font-bold mb-2">{stepNumber}. {title}</div>
-    <p className="text-center hidden group-hover:block">{description}</p>
+    <Icon className="text-5xl mb-4 text-red-500 group-hover:text-white" />
+    <div className="text-xl font-bold mb-2 transition-al">{stepNumber}. {title}</div>
+    <p className="text-center hidden group-hover:block transition-all">{description}</p>
   </div>
   
       ))}
