@@ -1,52 +1,32 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { HiMenu, HiX } from 'react-icons/hi';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+
 
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  const pathname = usePathname()
+ 
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Detect scroll position and update background color
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 500) { // Change 100 to the height of your hero section
-        setIsScrolled(true);
-      } 
-
-      else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    // Cleanup the event listener
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  
 
   return (
-<header className={`w-full top-0 z-20 py-2 px-10 text-white transition-all ${pathname === "/" ? (isScrolled ? 'bg-green-900 fixed' : 'bg-transparent fixed') : 'bg-blue-900 relative'}`}>
+<header className={`w-full   px-10  transition-all shadow-lg sticky top-0 z-50 bg-white`}>
 
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <Link href="/">
           <div className="flex items-center space-x-2 cursor-pointer md:ml-10">
             {/* Placeholder for Logo Image */}
-            <Image src="/logo.png" alt="Logo" width={80} height={70}
-            className='drop-shadow-lg'
+            <Image src="/brandlogo.png" alt="Logo" width={120} height={120} 
+            className='drop-shadow-lg w-full h-full'
             />
           </div>
         </Link>
@@ -64,7 +44,7 @@ const Header: React.FC = () => {
           </a>
           <Link href="/termandcondition" className="hover:text-yellow-400 transition-colors text-lg font-medium">Terms and Conditions</Link>
 
-          <Link href="/login" className="hover:text-yellow-400 bg-red-500 rounded-md p-2 transition-colors text-md font-medium">Signup/login</Link>
+          <Link href="/login" className="hover:text-yellow-400 bg-red-500 text-white rounded-md p-2 transition-colors text-md font-medium">Signup/login</Link>
         </nav>
 
         {/* Mobile Menu Toggle Button */}
