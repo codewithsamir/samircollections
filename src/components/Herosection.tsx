@@ -82,30 +82,32 @@ import Link from 'next/link';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative  py-16   ">
+    <section className="relative py-6 md:py-16  bg-red-100 ">
     
      <div className="relative z-10  text-center px-6">
-        <h1 className="text-5xl font-bold mb-4">Samir Bag and Jeans Repairing Center</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">Samir Bag and Jeans Repairing Center</h1>
 
-        <p className="text-xl italic mb-8">
+        <p className="text-lg md:text-xl italic mb-8">
           Fixing the fashion industry by powering online tailoring and repairs.
         </p>
 
   {/* Buttons */}
-<div className="flex justify-center  gap-6">
-  <button className="bg-white text-orange-700 font-semibold py-2 px-8 rounded-full hover:bg-gray-100 transition duration-300 ease-in-out">
+<div className="flex justify-center flex-wrap gap-2 md:gap-6">
+  <Link href="#service">
+  <button className="border-2 border-red-500 text-red-500 font-semibold py-1 md:py-2 px-4 md:px-8 rounded-full text-sm  md:text-xl hover:bg-red-500  hover:text-white transition duration-300 ease-in-out">
     Explore our Services
   </button>
+  </Link>
   <Link href={"/pricelist"}>
-  <button className="bg-white text-orange-700 font-semibold py-2 px-8 rounded-full hover:bg-gray-100 transition duration-300 ease-in-out">
+  <button className="bg-red-500  text-white font-semibold py-1 md:py-2 px-4 md:px-8 rounded-full text-sm md:text-xl hover:bg-red-700 transition duration-300 ease-in-out">
     See our prices
   </button>
   </Link>
 </div>
 
       </div>
-     <div className="w-[80%] mx-auto h-[400px]">
-     <Image src={"/cloth2.png"}   alt="Background"
+     <div className="w-full sm:w-[600px] md:w-[1000px] mx-auto h-full sm:h-[350px]">
+     <Image src={"/cloth.png"}   alt="Background"
        width={800}
        height={400}
         
@@ -128,6 +130,12 @@ const HeroSection: React.FC = () => {
     
   </div>
       </div> */}
+<h3 className="text-center text-lg md:text-xl italic tracking-wide">
+  We now offer a range of high-quality bag cloths and products to meet your needs.  
+  <span className="font-semibold text-red-600 block">If you want to explore our products, please visit the Product page.</span>
+</h3>
+
+
     </section>
   );
 };
