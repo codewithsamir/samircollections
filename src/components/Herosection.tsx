@@ -77,6 +77,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 // import Header from './Header';
 
 const HeroSection: React.FC = () => {
@@ -95,9 +96,11 @@ const HeroSection: React.FC = () => {
   <button className="bg-white text-orange-700 font-semibold py-2 px-8 rounded-full hover:bg-gray-100 transition duration-300 ease-in-out">
     Explore our Services
   </button>
+  <Link href={"/pricelist"}>
   <button className="bg-white text-orange-700 font-semibold py-2 px-8 rounded-full hover:bg-gray-100 transition duration-300 ease-in-out">
     See our prices
   </button>
+  </Link>
 </div>
 
       </div>
