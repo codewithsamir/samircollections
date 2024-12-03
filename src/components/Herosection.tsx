@@ -82,7 +82,7 @@ import Link from 'next/link';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center bg-slate-900 text-white">
+    <section className="relative  py-16   ">
     
      <div className="relative z-10  text-center px-6">
         <h1 className="text-5xl font-bold mb-4">Samir Bag and Jeans Repairing Center</h1>
@@ -92,7 +92,7 @@ const HeroSection: React.FC = () => {
         </p>
 
   {/* Buttons */}
-<div className="flex justify-center gap-6">
+<div className="flex justify-center  gap-6">
   <button className="bg-white text-orange-700 font-semibold py-2 px-8 rounded-full hover:bg-gray-100 transition duration-300 ease-in-out">
     Explore our Services
   </button>
@@ -104,19 +104,30 @@ const HeroSection: React.FC = () => {
 </div>
 
       </div>
-
+     <div className="w-[80%] mx-auto h-[400px]">
+     <Image src={"/cloth2.png"}   alt="Background"
+       width={800}
+       height={400}
+        
+          className='w-full h-full object-cover'
+         
+         />
+     </div>
+{/* 
          <div className="iamge-box">
         <Image
-          src="/Clothing-alterations.jpg" // Update with your image path
+          src="/Clothing-alterations.jpg" 
           alt="Background"
           layout="fill"
           objectFit="cover"
           objectPosition="center"
           className="opacity-75"
         />
-          {/* Overlay layer */}
-  <div className="absolute top-0 left-0 w-full h-full bg-slate-900 bg-opacity-50"></div>
-      </div>
+        
+  <div className="absolute top-0 left-0 w-full h-full bg-red-100 bg-opacity-30 -z-1">
+    
+  </div>
+      </div> */}
     </section>
   );
 };
