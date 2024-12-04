@@ -1,25 +1,16 @@
-"use client"
-import React, { useState, ChangeEvent, FormEvent } from "react";
+"use client";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import Image from "next/image";
+import axios from "axios";
 
-interface UserProfile {
-  name: string;
+interface UserData {
+  username: string; 
   email: string;
-  avatarUrl: string;
-  totalOrders: number;
-  totalPaid: number;
 }
 
 const ProfilePage: React.FC = () => {
-  // Mock user data
-  const user: UserProfile = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    avatarUrl: "/logo.png",
-    totalOrders: 15,
-    totalPaid: 1200,
-  };
-
+  const [user, setUser] = useState<UserData>();
+  const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [passwords, setPasswords] = useState({
     currentPassword: "",
@@ -29,13 +20,29 @@ const ProfilePage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
 
-  // Handle input change for password fields
+  // Fetch user details
+  useEffect(() => {
+    const getUserDetails = async () => {
+      try {
+        const response = await axios.get("/api/users/me");
+        setUser(response.data.data);
+      } catch (error) {
+        const typedError = error as Error;
+        console.error("Error fetching user details:", typedError.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getUserDetails();
+  }, []);
+
+  // Handle input change
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setPasswords({ ...passwords, [id]: value });
   };
 
-  // Handle form submission for password change
+  // Submit password change
   const handlePasswordSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
@@ -54,31 +61,34 @@ const ProfilePage: React.FC = () => {
     }
 
     try {
-      // Replace with actual API call
-      console.log("Changing password...");
-      console.log({ currentPassword, newPassword });
-
-      // Simulate successful API response
-      setSuccessMessage("Password changed successfully!");
-      setPasswords({
-        currentPassword: "",
-        newPassword: "",
-        confirmNewPassword: "",
+      const response = await axios.post("/api/users/change-password", {
+        currentPassword,
+        newPassword,
       });
+      setSuccessMessage(response.data.message || "Password changed successfully!");
+      setPasswords({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
       setIsModalOpen(false);
     } catch (error) {
-      setErrorMessage("Failed to change password. Please try again.");
+      const typedError = error as Error;
+      setErrorMessage(typedError.message || "Failed to change password. Please try again.");
     }
   };
+
+  if (isLoading) {
+    return <div className="text-center mt-10">Loading...</div>;
+  }
+
+  if (!user) {
+    return <div className="text-center mt-10">Failed to load user data.</div>;
+  }
 
   return (
     <div className="px-5 py-20 bg-gray-100 flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <div className="flex flex-col items-center">
-          {/* User Avatar */}
           <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-500 relative">
             <Image
-              src={user.avatarUrl}
+              src={"/logo.png"}
               alt="User Avatar"
               layout="fill"
               objectFit="cover"
@@ -86,12 +96,8 @@ const ProfilePage: React.FC = () => {
               className="rounded-full"
             />
           </div>
-
-          {/* User Information */}
-          <h2 className="text-xl font-semibold mt-4">{user.name}</h2>
-          <p className="text-gray-600">{user.email}</p>
-
-          {/* Reset Password Button */}
+          <h2 className="text-xl font-semibold mt-4">{user && user.username}</h2>
+          <p className="text-gray-600">{user && user.email}</p>
           <button
             onClick={() => setIsModalOpen(true)}
             className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
@@ -100,21 +106,19 @@ const ProfilePage: React.FC = () => {
           </button>
         </div>
 
-        {/* User Stats */}
         <div className="mt-8 border-t pt-6">
           <h3 className="text-lg font-semibold text-gray-700">Order Summary</h3>
           <div className="mt-4 flex justify-between text-gray-600">
             <p>Total Orders:</p>
-            <p>{user.totalOrders}</p>
+            <p>{ 0}</p>
           </div>
           <div className="flex justify-between text-gray-600">
             <p>Total Paid:</p>
-            <p>${user.totalPaid}</p>
+            <p>${ 0}</p>
           </div>
         </div>
       </div>
 
-      {/* Change Password Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">

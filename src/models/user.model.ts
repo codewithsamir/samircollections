@@ -37,8 +37,8 @@ forgotPasswordToken:String,
     verifyTokenExpiry:Date,
 
     
-})
+},{timestamps:true})
 
- const CustomerUser =  mongoose.models.customerusers || mongoose.model("CustomerUser", userSchema)
+ const CustomerUser =  mongoose.models.CustomerUser || mongoose.model("CustomerUser", userSchema)
 
  export default CustomerUser;

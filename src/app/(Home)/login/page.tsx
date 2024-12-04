@@ -3,6 +3,8 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface LoginFormData {
   email: string;
@@ -10,6 +12,7 @@ interface LoginFormData {
 }
 
 export default function Login() {
+  const router = useRouter(); // Import useRouter hook from Next.js
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
@@ -29,25 +32,35 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://example.com/api/login", formData); // Replace with your server URL
-      console.log("Login successful:", response.data);
-      alert("Login successful!"); // Handle success (e.g., redirect or token storage)
+       await axios.post("/api/users/login", formData); // Replace with your server URL
+      // console.log("Login successful:", response.data);
+      
+      toast.success('Login successful!',{
+        position: "top-right",
+        richColors:true,
+      });
+      router.push("/Dashboard"); // Redirect to dashboard if successful
     } catch (error) {
-      console.error("Login failed:", error);
-      setErrorMessage("Invalid email or password. Please try again.");
+      const typedError = error as Error;
+      console.error("Login failed:", typedError.message);
+      // setErrorMessage("Invalid email or password. Please try again.");
+      toast.error('Invalid email or password. Please try again.',{
+        position: "top-right",
+        richColors:true,
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-[80vh] bg-red-100 flex flex-col items-center py-10">
+    <div className="min-h-screen bg-red-100 flex flex-col items-center py-10 px-6">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">Samir Bag and Jeans Preparing Center</h1>
         <p className="text-gray-600 mt-2 text-xl">Welcome! Please log in to continue.</p>
       </header>
 
-      <main className="bg-white shadow-md rounded-md p-8 w-full md:w-[400px]">
+      <main className="bg-white shadow-md rounded-md p-8 w-full sm:w-[400px]">
         <h2 className="text-center text-xl font-semibold mb-4">Login</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">
