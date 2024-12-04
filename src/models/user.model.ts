@@ -1,7 +1,7 @@
 import mongoose, {  Schema } from "mongoose";
 
 const userSchema =new Schema({
-userName:{
+    username:{
     type:String,
     required:[true,"please provide a username"],
     unique:true
@@ -37,8 +37,8 @@ forgotPasswordToken:String,
     verifyTokenExpiry:Date,
 
     
-},{timestamps:true})
+})
 
- const User =  mongoose.models.users || mongoose.model("User", userSchema)
+ const CustomerUser =  mongoose.models.customerusers || mongoose.model("CustomerUser", userSchema)
 
- export default User;
+ export default CustomerUser;

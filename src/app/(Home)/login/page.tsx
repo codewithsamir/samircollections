@@ -47,7 +47,7 @@ export default function Login() {
         <p className="text-gray-600 mt-2 text-xl">Welcome! Please log in to continue.</p>
       </header>
 
-      <main className="bg-white shadow-md rounded-md p-8 w-full md:w-[500px]">
+      <main className="bg-white shadow-md rounded-md p-8 w-full md:w-[400px]">
         <h2 className="text-center text-xl font-semibold mb-4">Login</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">
