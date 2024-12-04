@@ -1,9 +1,11 @@
 "use client";
+
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 
+// Define the shape of the form data using a TypeScript interface
 interface SignupFormData {
   name: string;
   email: string;
@@ -11,29 +13,35 @@ interface SignupFormData {
   confirmPassword: string;
 }
 
-export default function Signup() {
+export default function Signup(): JSX.Element {
+  // State hooks for managing form data and UI behavior
   const [formData, setFormData] = useState<SignupFormData>({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false); // State to toggle password visibility
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false); // State to toggle confirm password visibility
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
+  // Handle input changes and update the form state
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleFormSubmit = async (e: FormEvent): Promise<void> => {
+  // Handle form submission
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+
     setErrorMessage("");
     setSuccessMessage("");
 
+    // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       setErrorMessage("Passwords do not match!");
       return;
@@ -42,14 +50,16 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://example.com/api/signup", {
+      // Replace with your API endpoint
+      const response = await axios.post<{ message: string }>("https://example.com/api/signup", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-      }); // Replace with your API endpoint
+      });
+
       console.log("Signup successful:", response.data);
       setSuccessMessage("Account created successfully! Please log in.");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Signup failed:", error);
       setErrorMessage("Failed to create account. Please try again.");
     } finally {
@@ -63,7 +73,9 @@ export default function Signup() {
         <h1 className="text-3xl font-bold">
           Samir Bag and Jeans Preparing Center
         </h1>
-        <p className="text-gray-600 mt-2 text-xl">Join us by creating an account!</p>
+        <p className="text-gray-600 mt-2 text-xl">
+          Join us by creating an account!
+        </p>
       </header>
 
       <main className="bg-white shadow-md rounded-md p-8 w-full md:w-[500px]">
@@ -139,8 +151,12 @@ export default function Signup() {
               {showConfirmPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
             </button>
           </div>
-          {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}
-          {successMessage && <p className="text-green-500 text-sm mb-4">{successMessage}</p>}
+          {errorMessage && (
+            <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+          )}
+          {successMessage && (
+            <p className="text-green-500 text-sm mb-4">{successMessage}</p>
+          )}
           <button
             type="submit"
             disabled={loading}
