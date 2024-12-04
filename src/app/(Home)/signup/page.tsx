@@ -4,6 +4,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // Define the shape of the form data using a TypeScript interface
 interface SignupFormData {
@@ -15,6 +16,7 @@ interface SignupFormData {
 
 export default function Signup(): JSX.Element {
   // State hooks for managing form data and UI behavior
+  const router = useRouter()
   const [formData, setFormData] = useState<SignupFormData>({
     name: "",
     email: "",
@@ -51,14 +53,15 @@ export default function Signup(): JSX.Element {
 
     try {
       // Replace with your API endpoint
-      const response = await axios.post<{ message: string }>("https://example.com/api/signup", {
-        name: formData.name,
+      const response = await axios.post<{ message: string }>("/api/users/signup", {
+        username: formData.name,
         email: formData.email,
         password: formData.password,
       });
 
       console.log("Signup successful:", response.data);
       setSuccessMessage("Account created successfully! Please log in.");
+      router.push("/login")
     } catch (error: unknown) {
       console.error("Signup failed:", error);
       setErrorMessage("Failed to create account. Please try again.");
@@ -78,7 +81,7 @@ export default function Signup(): JSX.Element {
         </p>
       </header>
 
-      <main className="bg-white shadow-md rounded-md p-8 w-full md:w-[500px]">
+      <main className="bg-white shadow-md rounded-md p-8 w-full md:w-[400px]">
         <h2 className="text-center text-xl font-semibold mb-4">Sign Up</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">

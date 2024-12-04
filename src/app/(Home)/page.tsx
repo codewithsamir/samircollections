@@ -36,14 +36,14 @@ const Home: React.FC = () => {
 
               {/* Service Steps how we works  */}
 
-        <div className="container mx-auto py-10 px-8">
-  <h1 className="text-4xl font-bold text-center mb-10">How We Work</h1>
+        <div className="container mx-auto py-10 md:py-20 px-8">
+  <h1 className="text-3xl font-semibold text-red-500 text-center mb-10">How We Work</h1>
   <ServiceSteps />
 </div>
 
         {/* Highlighted Services */}
-        <section id='service' className=" py-1o">
-          <h3 className="text-4xl font-semibold  text-center py-4 ">Our Popular Services</h3>
+        <section id='service' className=" py-10 md:py-20">
+          <h3 className="text-3xl font-semibold  text-center py-4 text-red-500">Our Popular Services</h3>
           <div className="flex flex-wrap gap-5 justify-center mt-6">
             {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
 
 
 <div className="relative pt-10 ">
-<h1 className="text-4xl px-4 py-8 font-semibold text-gray-800 text-center" >View our location</h1>
+<h1 className="text-3xl px-4 py-8 font-semibold text-red-500 text-center" >View our location</h1>
  <Mapsection />
 
 </div>
