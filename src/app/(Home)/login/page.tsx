@@ -32,7 +32,7 @@ export default function Login() {
       const response = await axios.post("https://example.com/api/login", formData); // Replace with your server URL
       console.log("Login successful:", response.data);
       alert("Login successful!"); // Handle success (e.g., redirect or token storage)
-    } catch (error: any) {
+    } catch (error) {
       console.error("Login failed:", error);
       setErrorMessage("Invalid email or password. Please try again.");
     } finally {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ServiceCard from '@/components/Landingpage/Servicecard'
-import { FaHome } from 'react-icons/fa';
+
 
 
 import Mapsection from '@/components/Landingpage/Mapsection';
