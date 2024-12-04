@@ -5,6 +5,7 @@ import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 // Define the shape of the form data using a TypeScript interface
 interface SignupFormData {
@@ -60,18 +61,27 @@ export default function Signup(): JSX.Element {
       });
 
       console.log("Signup successful:", response.data);
-      setSuccessMessage("Account created successfully! Please log in.");
+      // setSuccessMessage("Account created successfully! Please log in.");
+      toast.success('Account created successfully!',{
+        position: "top-right",
+        richColors:true,
+      });
       router.push("/login")
-    } catch (error: unknown) {
-      console.error("Signup failed:", error);
-      setErrorMessage("Failed to create account. Please try again.");
+    } catch (error) {
+      const typedError = error as Error;
+      console.error("Signup failed:", typedError.message);
+      // setErrorMessage("Failed to create account. Please try again.");
+      toast.error('Failed to create account. Please try again.',{
+        position: "top-right",
+        richColors:true,
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen py-10 bg-red-100 flex flex-col items-center">
+    <div className="min-h-screen py-10 bg-red-100 flex flex-col items-center px-6">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">
           Samir Bag and Jeans Preparing Center
@@ -81,7 +91,7 @@ export default function Signup(): JSX.Element {
         </p>
       </header>
 
-      <main className="bg-white shadow-md rounded-md p-8 w-full md:w-[400px]">
+      <main className="bg-white shadow-md rounded-md p-8 w-full sm:w-[400px]">
         <h2 className="text-center text-xl font-semibold mb-4">Sign Up</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">

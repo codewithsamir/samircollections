@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { username, email, password } = reqBody;
-    console.log(reqBody);
+    // console.log(reqBody);
     if (!username || !email || !password) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -38,14 +38,15 @@ export async function POST(request: NextRequest) {
     });
 
     const savedUser = await newUser.save();
-    console.log(savedUser);
+    // console.log(savedUser);
 
     return NextResponse.json({
       message: "User created successfully",
       sucess: true,
-      user: savedUser,
+      data: savedUser,
     });
-  } catch (error: unknown) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error) {
+    const typedError = error as Error;
+    return NextResponse.json({ error: typedError.message }, { status: 500 });
   }
 }

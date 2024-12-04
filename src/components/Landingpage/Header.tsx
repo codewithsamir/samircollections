@@ -47,7 +47,7 @@ const menu = [
           <Link href="/termandcondition" className="hover:text-red-500 transition-colors text-lg font-medium">Terms and Conditions</Link> */}
 
           {
-            menu.map((item, index) => (
+            menu.map((item) => (
               <Link href={item.href} key={item.name} className={`hover:text-red-500 transition-colors text-md lg:text-lg font-medium capitalize ${path === item.href ? "text-red-500" : ""}`}>{item.name}</Link>
             ))
           }
@@ -75,7 +75,7 @@ const menu = [
       {isMobileMenuOpen && (
         <nav className="md:hidden bg-red-300 mt-2 w-full p-4 space-y-2">
             {
-            menu.map((item, index) => (
+            menu.map((item) => (
               <Link href={item.href} key={item.name} className={`hover:text-red-500 transition-colors block text-md lg:text-lg font-medium capitalize ${path === item.href ? "text-red-500" : "text-white"}`}>{item.name}</Link>
             ))
           }
