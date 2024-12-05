@@ -6,6 +6,7 @@ import bcryptjs from 'bcryptjs'
 
 
 export const sendemail = async ({ email, emailType, userId }:{email:string,emailType:string,userId:string}) => {
+// console.log(email,emailType,userId);
 
     try {
         //create a hash token
