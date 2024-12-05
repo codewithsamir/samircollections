@@ -93,7 +93,7 @@ const CustomerDashboard: React.FC = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.username || "John Doe"}</h1>
-          <p className="text-gray-600">Here's an overview of your account.</p>
+          <p className="text-gray-600">Here&rsquo;s an overview of your account.</p>
           <p className="text-gray-600">Email: {user?.email}</p>
         </div>
       </header>
