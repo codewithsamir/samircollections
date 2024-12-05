@@ -5,7 +5,7 @@ import bcryptjs from 'bcryptjs'
 
 
 
-export const sendemail = async ({ email, emailType, userId }: any) => {
+export const sendemail = async ({ email, emailType, userId }:{email:string,emailType:string,userId:string}) => {
 
     try {
         //create a hash token
@@ -47,7 +47,10 @@ export const sendemail = async ({ email, emailType, userId }: any) => {
         from: 'samirbagandjeansreapairingservice@gmail.com',
         to: email,
         subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-    html : `<p> <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to ${emailType === "VERIFY" ? "verify form email" : "reset your passowrd"}</p>` 
+    html : `<p> <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to ${emailType === "VERIFY" ? "verify form email" : "reset your passowrd"}
+    or copy and paste the link below in your browser. <br>
+    ${process.env.domain}/verifyemail?token=${hashedToken}
+    </p>` 
     }
 
     const mailresponse = await transport.sendMail(mailOptions)
