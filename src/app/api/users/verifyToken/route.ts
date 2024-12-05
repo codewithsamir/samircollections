@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import CustomerUser from "@/models/user.model";
-import { error } from "console";
+
 
 connect()
 
