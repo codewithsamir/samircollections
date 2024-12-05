@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     const typedError = error as Error;
-    console.error("Error resetting password:", typedError);
+    // console.error("Error resetting password:", typedError);
 
     return NextResponse.json(
       { error: "An unexpected error occurred. Please try again." },
