@@ -53,16 +53,8 @@ const Sidebar = () => {
           Dashboard
         </button>
       </Link>
-      <Link href="/Dashboard/Orders">
-        <button className="w-full my-2 block px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition">
-          Orders
-        </button>
-      </Link>
-      <Link href="/Dashboard/Profile">
-        <button className="w-full my-2 block px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition">
-          Profile
-        </button>
-      </Link>
+    
+   
      
         <button 
         onClick={logoutHandle}

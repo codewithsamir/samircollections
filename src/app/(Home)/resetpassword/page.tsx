@@ -1,11 +1,11 @@
-import VerifyEmail from '@/components/Landingpage/Verifyemail'
 import React, { Suspense } from 'react'
+import ForgotPassword from '@/components/Landingpage/Resetpassword'
 
 const page = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-<VerifyEmail />
-</Suspense>
+    <ForgotPassword />
+    </Suspense>
   )
 }
 
