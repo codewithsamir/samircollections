@@ -8,6 +8,7 @@ import Mapsection from '@/components/Landingpage/Mapsection';
 import Herosection from '@/components/Herosection';
 import ServiceSteps from '@/components/Landingpage/ServiceSteps';
 import AboutUs from '@/components/Landingpage/Aboutus';
+import Orderprocess from '@/components/Landingpage/Orderprocess';
 
 
 
@@ -33,6 +34,7 @@ const Home: React.FC = () => {
   <Herosection />
 
           <AboutUs />
+          <Orderprocess />
 
               {/* Service Steps how we works  */}
 

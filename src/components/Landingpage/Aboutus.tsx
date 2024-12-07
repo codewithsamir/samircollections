@@ -1,15 +1,11 @@
 "use client";
-import { processSteps } from "@/utility/process";
+
 import Image from "next/image";
-import { useState } from "react";
-import { FaToolbox, FaHandshake, FaTag, FaBullseye } from 'react-icons/fa';
+
+import { FaToolbox, FaHandshake,  } from 'react-icons/fa';
 
 export default function AboutUs() {
-  const [showMission, setShowMission] = useState(false);
 
-  const handleToggleMission = () => {
-    setShowMission(!showMission);
-  };
 
   return (
     <section className="w-full py-16 bg-gray-50">
@@ -49,53 +45,6 @@ export default function AboutUs() {
         </div>
       </div>
 
-      {/* Main Content: Row 2 */}
-      <div className="w-full p-8  flex justify-center flex-col items-center ">
-        <h2 className="text-3xl text-center font-semibold mb-6">
-          Our Online Process
-        </h2>
-        <ul className="list-none  text-gray-700 space-y-6"> 
-          {processSteps.map((step, index) => ( 
-            <li key={index} className="flex flex-col "> 
-            <span className="flex items-center  gap-2">
-            {step.icon} 
-            <span className="text-lg font-semibold text-red-600">{step.title}
-              </span> 
-            </span>
-              <span className="text-lg ml-12">{step.description}</span> 
-              </li> 
-            ))} 
-          </ul>
-
-        <p className="text-lg  text-gray-700 mt-8 text-left">
-          With this seamless process, you can get your repairs done without stepping out of your home.
-        </p>
-        <div className="text-lg text-gray-700 mt-6 flex items-center">
-          <FaTag className="text-red-600 bg-white border border-gray-300 rounded-full p-2 mr-4" size={36} />
-          <strong className="text-red-600 mr-2">Our Charges:</strong> Affordable services with a ₹50 additional charge for transportation and convenience.
-        </div>
-
-        <div className="mt-8 text-center">
-          <button
-            onClick={handleToggleMission}
-            className="py-3 px-6 bg-red-600 text-white rounded-md hover:bg-red-700 transition ease-in-out duration-200"
-          >
-            {showMission ? "Hide More Details" : "Show More Mission"}
-          </button>
-
-          {showMission && (
-            <div className="mt-6 text-gray-600 text-base">
-              <div className="flex justify-center items-center mb-4">
-                <FaBullseye className="text-red-600 bg-white border border-gray-300 rounded-full p-2 mr-4" size={36} />
-                <h3 className="text-xl font-semibold text-red-600">Our Mission</h3>
-              </div>
-              <p className="text-xl">
-                We aim to simplify repairs by offering reliable, timely, and hassle-free services. From registration to doorstep delivery, we ensure a smooth experience tailored to your convenience.
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
     </section>
   );
 }

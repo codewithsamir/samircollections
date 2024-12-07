@@ -85,7 +85,7 @@ const HeroSection: React.FC = () => {
     <section className="relative py-6 md:py-16  bg-red-100 ">
     
      <div className="relative z-10  text-center px-6">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">Samir Bag and Jeans Repairing Center</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4">Samir Bag & Jeans Repairing Center</h1>
 
         <p className="text-lg md:text-xl italic mb-8">
           Fixing the fashion industry by powering online tailoring and repairs.

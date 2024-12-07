@@ -49,6 +49,12 @@ const VerifyEmail: React.FC = () => {
 
   return (
     <div className="min-h-screen flex py-20 justify-center bg-gray-100">
+        <header className="text-center mb-8">
+        <h1 className="text-3xl font-bold">
+          Samir Bag and Jeans Repairing Center
+        </h1>
+      
+      </header>
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md h-[200px] w-full text-center">
         <h1 className="text-3xl font-bold mb-4">Verify Your Email</h1>
 
