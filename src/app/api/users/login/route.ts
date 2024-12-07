@@ -22,17 +22,19 @@ export async function POST(request: NextRequest){
         },{status:400})
     }
 
+
+  // check if user verified or not 
+  if(!user.isVerified){
+    console.log("email not verified")
+    return NextResponse.json({
+        error:"Email not verified. Check your inbox or spam to complete verification."
+    },{status:401})
+}
+
     // check if password is correct 
     const isPasswordsCorrect = await bcryptjs.compare(password, user.password)
 
-    // check if user verified or not 
-    if(!user.isVerified){
-        return NextResponse.json({
-            error:"Email not verified. Check your inbox or spam to complete verification."
-        },{status:401})
-    }
-
-    if(!isPasswordsCorrect){
+   if(!isPasswordsCorrect){
         return NextResponse.json({error:"Password is incorrect"},{status:400})
     }
 

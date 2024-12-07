@@ -33,8 +33,8 @@ const Home: React.FC = () => {
         {/* Hero Section */}
   <Herosection />
 
-          <AboutUs />
           <Orderprocess />
+          <AboutUs />
 
               {/* Service Steps how we works  */}
 

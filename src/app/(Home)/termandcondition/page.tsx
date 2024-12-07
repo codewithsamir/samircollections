@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const TermAndCondition = () => {
@@ -13,14 +12,8 @@ const TermAndCondition = () => {
         
         <h2 className="text-lg font-semibold text-gray-800 mt-4 mb-2">Pickup and Delivery Policies</h2>
         <p className="text-gray-700 mb-4">
-          Our service includes the option to pick up clothing items from your location. You will be contacted to arrange the pickup and confirm your order details. 
-          Please ensure that you are available at the arranged time and place for pickup.
-        </p>
-        
-        <h2 className="text-lg font-semibold text-gray-800 mt-4 mb-2">Service Fees</h2>
-        <p className="text-gray-700 mb-4">
-          In addition to the repair fees, a service fee of <strong>₹50</strong> is applied for pickup and delivery. This fee is added to the total amount and is 
-          non-refundable. Repair charges vary based on the type and complexity of the repairs requested.
+          We offer free pick-up and delivery for clothing repairs within **Janakpur city**. For locations outside Janakpur, a service charge of <strong>₹100</strong> will apply.  
+          You will be contacted to arrange the pickup and confirm your order details. Please ensure that you are available at the arranged time and place for pickup.
         </p>
         
         <h2 className="text-lg font-semibold text-gray-800 mt-4 mb-2">Repair Limitations</h2>
@@ -37,7 +30,7 @@ const TermAndCondition = () => {
         </p>
         
         <p className="text-gray-700 mt-6">
-          Thank you for choosing our service. We look forward to serving you!
+          Thank you for choosing our service. We look forward to serving you with convenient pick-up and delivery options!
         </p>
       </div>
     </div>
