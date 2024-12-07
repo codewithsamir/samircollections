@@ -60,7 +60,7 @@ export default function Signup(): JSX.Element {
         password: formData.password,
       });
 
-      console.log("Signup successful:", response.data);
+      // console.log("Signup successful:", response.data);
       // setSuccessMessage("Account created successfully! Please log in.");
       toast.success('Account created successfully!',{
         position: "top-right",
@@ -69,7 +69,7 @@ export default function Signup(): JSX.Element {
       router.push("/login")
     } catch (error) {
       const typedError = error as Error;
-      console.error("Signup failed:", typedError.message);
+      // console.error("Signup failed:", typedError.message);
       // setErrorMessage("Failed to create account. Please try again.");
       toast.error('Failed to create account. Please try again.',{
         position: "top-right",

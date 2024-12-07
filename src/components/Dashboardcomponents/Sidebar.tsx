@@ -20,7 +20,7 @@ const Sidebar = () => {
             richColors:true,
             
           })
-          router.push("/login")
+          router.push("/")
     
         } catch (error) {
             const typedError = error as Error;
@@ -58,7 +58,7 @@ const Sidebar = () => {
      
         <button 
         onClick={logoutHandle}
-        className="w-full  block px-4 py-1 text-sm sm:text-lg md:py-2  rounded-md bg-red-500 hover:bg-red-800 transition">
+        className="w-full hidden  sm:block px-4 py-1 text-sm sm:text-lg md:py-2  rounded-md bg-red-500 hover:bg-red-800 transition">
           Logout
         </button>
      
