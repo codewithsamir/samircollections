@@ -130,10 +130,13 @@ const HeroSection: React.FC = () => {
     
   </div>
       </div> */}
-<h3 className="text-center text-lg md:text-xl italic tracking-wide">
-  We now offer a range of high-quality bag cloths and products to meet your needs.  
-  <span className="font-semibold text-red-600 block">If you want to explore our products, please visit the Product page.</span>
+<h3 className="text-center text-lg md:text-xl italic tracking-wide leading-relaxed">
+  Great news! <span className="font-semibold text-green-600">We offer FREE pick-up and delivery</span> 
+  <span className="font-semibold text-blue-600">within Janakpur city</span> for all <span className="font-semibold">repair services</span>.
 </h3>
+
+
+
 
 
     </section>

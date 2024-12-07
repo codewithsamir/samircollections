@@ -1,72 +1,95 @@
 export const getVerificationEmailTemplate = (hashedToken: string, domain: string) => {
-    return `
-      <html>
-        <head>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              background-color: #f4f4f4;
-              margin: 0;
-              padding: 0;
-            }
-            .container {
-              max-width: 600px;
-              margin: 50px auto;
-              padding: 20px;
-              background-color: #ffffff;
-              border-radius: 8px;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
-            h2 {
-              color: #333;
-            }
-            p {
-              color: #555;
-              line-height: 1.6;
-            }
-            a {
-              color: #4CAF50;
-              text-decoration: none;
-              font-weight: bold;
-            }
-            .footer {
-              text-align: center;
-              font-size: 12px;
-              color: #777;
-              margin-top: 20px;
-            }
-            .button {
-              display: inline-block;
-              background-color: #4CAF50;
-              color: #ffffff;
-              padding: 10px 20px;
-              border-radius: 4px;
-              text-decoration: none;
-              font-size: 16px;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
+  return `
+    <html>
+      <head>
+        <style>
+          body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+          }
+          .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+          }
+          .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #4CAF50;
+            color: #ffffff;
+          }
+          .header img {
+            width: 120px;
+            margin-bottom: 10px;
+          }
+          .header h1 {
+            font-size: 24px;
+            margin: 0;
+          }
+          h2 {
+            color: #333;
+            margin-top: 20px;
+          }
+          p {
+            color: #555;
+            line-height: 1.8;
+          }
+          a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+          }
+          .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+          }
+          .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #999;
+            margin-top: 20px;
+            border-top: 1px solid #eaeaea;
+            padding-top: 15px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <img src="${domain}/logo.png" alt="Logo" />
+            <h1>Welcome to Our Platform</h1>
+          </div>
+          <div class="content">
             <h2>Verify Your Email</h2>
             <p>Hi,</p>
-            <p>You requested to verify your email.</p>
-            <p>
-              To verify your account, click the link below:
-            </p>
+            <p>Thank you for registering with us! To complete your registration, please verify your email address by clicking the button below:</p>
             <p style="text-align: center;">
               <a href="${domain}/verifyemail?token=${hashedToken}" class="button">Verify Email</a>
             </p>
-            <p>Or copy and paste the link below into your browser:</p>
-            <p style="word-wrap: break-word;">
+            <p>If the button above does not work, copy and paste the following link into your browser:</p>
+            <p style="word-wrap: break-word; color: #007bff;">
               ${domain}/verifyemail?token=${hashedToken}
             </p>
-            <div class="footer">
-              <p>If you did not request this, please ignore this email.</p>
-            </div>
           </div>
-        </body>
-      </html>
-    `;
-  };
-  
+          <div class="footer">
+            <p>If you did not request this email, no action is needed.</p>
+            <p>&copy; ${new Date().getFullYear()} Your Company Name. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+};

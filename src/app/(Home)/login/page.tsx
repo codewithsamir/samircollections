@@ -30,28 +30,37 @@ export default function Login() {
     e.preventDefault();
     setErrorMessage(""); // Clear previous errors
     setLoading(true);
-
+  
     try {
-       await axios.post("/api/users/login", formData); // Replace with your server URL
-      // console.log("Login successful:", response.data);
-      
-      toast.success('Login successful!',{
+      const response = await axios.post("/api/users/login", formData); // Replace with your server URL
+      toast.success('Login successful!', {
         position: "top-right",
-        richColors:true,
+        richColors: true,
       });
       router.push("/Dashboard"); // Redirect to dashboard if successful
     } catch (error) {
-      const typedError = error as Error;
-      console.error("Login failed:", typedError.message);
-      // setErrorMessage("Invalid email or password. Please try again.");
-      toast.error('Invalid email or password. Please try again.',{
-        position: "top-right",
-        richColors:true,
-      });
+      if (axios.isAxiosError(error) && error.response) {
+        // Capture server error message
+        const serverMessage = error.response.data?.error || "An error occurred. Please try again.";
+        setErrorMessage(serverMessage);
+        toast.error(serverMessage, {
+          position: "top-right",
+          richColors: true,
+        });
+      } else {
+        // Generic error fallback
+        const genericMessage = "Something went wrong. Please try again later.";
+        setErrorMessage(genericMessage);
+        toast.error(genericMessage, {
+          position: "top-right",
+          richColors: true,
+        });
+      }
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-red-100 flex flex-col items-center py-10 px-6">

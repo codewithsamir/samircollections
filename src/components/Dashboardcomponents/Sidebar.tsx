@@ -32,9 +32,9 @@ const Sidebar = () => {
         }
        }
   return (
-    <aside className="bg-blue-600 text-white w-full md:w-64 p-5 space-y-8">
+    <aside className="bg-blue-600 text-white w-full md:w-64 p-5 sm:space-y-8">
     <div className="text-center">
-      <div className="w-16 h-16 mx-auto mb-3">
+      <div className="w-16 h-16 mx-auto ">
         <Image
           src="/logo.png" // Replace with your logo path
           alt="Company Logo"
@@ -49,7 +49,7 @@ const Sidebar = () => {
 
     <nav className="space-y-4">
       <Link href="/Dashboard">
-        <button className="w-full my-2 block px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition">
+        <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition hidden sm:block">
           Dashboard
         </button>
       </Link>
@@ -58,8 +58,8 @@ const Sidebar = () => {
      
         <button 
         onClick={logoutHandle}
-        className="w-full  block px-4 py-2 rounded-md bg-red-500 hover:bg-red-800 transition">
-          logout
+        className="w-full  block px-4 py-1 text-sm sm:text-lg md:py-2  rounded-md bg-red-500 hover:bg-red-800 transition">
+          Logout
         </button>
      
     </nav>

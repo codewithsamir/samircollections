@@ -73,7 +73,7 @@ const CustomerDashboard: React.FC = () => {
   }, []);
 
   // WhatsApp link with the user's email
-  const whatsappLink = `https://wa.me/9824823877?text=Hello, I need assistance. My email is ${user?.email || 'Not provided'}.`;
+  const whatsappLink = `https://wa.me/9824823877?text=Hello, My email is ${user?.email || 'Not provided'}.`;
 
   if (isLoading) {
     return <div>Loading...</div>; // Display loading state while fetching user data
@@ -81,10 +81,11 @@ const CustomerDashboard: React.FC = () => {
 
   return (
     <main className="flex-1 p-5">
-      <header className="bg-white p-4 rounded-lg shadow-md mb-6 flex items-center">
-        <div className="w-12 h-12 mr-4">
+      <header className="bg-white p-4  rounded-lg shadow-md mb-6 flex items-center justify-center sm:justify-between flex-wrap gap-3">
+      <div className="left flex items-center gap-2 flex-wrap justify-center">
+      <div className="w-12 h-12 mr-4">
           <Image
-            src={user?.profilePicture || "/logo.png"} // Use user profile picture if available
+            src={user?.profilePicture || "/user.png"} // Use user profile picture if available
             alt="Profile Picture"
             width={48}
             height={48}
@@ -92,10 +93,25 @@ const CustomerDashboard: React.FC = () => {
           />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.username || "John Doe"}</h1>
-          <p className="text-gray-600">Here&rsquo;s an overview of your account.</p>
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800">Welcome, {user?.username || "new user"}</h1>
+      
           <p className="text-gray-600">Email: {user?.email}</p>
         </div>
+      </div>
+      <div className="right">
+          {/* WhatsApp Button */}
+      <div className=" flex justify-center">
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-500 text-white text-sm sm:text-lg py-3 px-6 rounded-md flex items-center hover:bg-green-600 transition"
+        >
+          <FaWhatsapp className="mr-2" size={24} />
+          Contact Us on WhatsApp
+        </a>
+      </div>
+      </div>
       </header>
 
       {/* Stats Section */}
@@ -149,18 +165,7 @@ const CustomerDashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* WhatsApp Button */}
-      <div className="mt-8 flex justify-center">
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-green-500 text-white py-3 px-6 rounded-md flex items-center hover:bg-green-600 transition"
-        >
-          <FaWhatsapp className="mr-2" size={24} />
-          Contact Us on WhatsApp
-        </a>
-      </div>
+    
     </main>
   );
 };
