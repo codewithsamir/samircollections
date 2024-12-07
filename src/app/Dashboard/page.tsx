@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa"; // WhatsApp Icon from React Icons
 import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // Define types for user data and order stats
 interface User {
@@ -34,6 +36,32 @@ const CustomerDashboard: React.FC = () => {
   const [user, setUser] = useState<User | null>(null); // User can be null initially
   const [orders, setOrders] = useState<Order[]>([]); // Orders can be an empty array initially
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter()
+
+
+
+  const logoutHandle = async () => { 
+
+      try {
+        
+       await axios.get('/api/users/logout');
+        
+        toast.success("Logout Success",{
+          position: "top-right",
+          richColors:true,
+          
+        })
+        router.push("/")
+  
+      } catch (error) {
+          const typedError = error as Error;
+      //   console.log(typedError.message)
+        toast.error(typedError.message,{
+          position: "top-right",
+      richColors:true,
+        })
+      }
+     }
 
   // Fetch user details and order details
   useEffect(() => {
@@ -165,6 +193,13 @@ const CustomerDashboard: React.FC = () => {
         </div>
       </section>
 
+      <button 
+        onClick={logoutHandle}
+        className="w-full block 
+         sm:hidden px-4 py-2 text-lg  mt-5 
+         rounded-md text-white bg-red-500 hover:bg-red-800 transition">
+          Logout
+        </button>
     
     </main>
   );
