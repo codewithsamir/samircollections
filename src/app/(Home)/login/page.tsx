@@ -56,7 +56,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-red-100 flex flex-col items-center py-10 px-6">
       <header className="text-center mb-8">
-        <h1 className="text-3xl font-bold">Samir Bag and Jeans Preparing Center</h1>
+        <h1 className="text-3xl font-bold">Samir Bag and Jeans Repairing Center</h1>
         <p className="text-gray-600 mt-2 text-xl">Welcome! Please log in to continue.</p>
       </header>
 

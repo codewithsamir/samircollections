@@ -66,7 +66,7 @@ const menu = [
         </button>
 
 
-        <Link href="/login" className="hover:bg-red-700 bg-red-500 text-white rounded-md py-1 md:py-2 px-4 tracking-widest transition-colors text-sm md:text-md font-medium">Signup</Link>
+        <Link href="/login" className="hover:bg-red-700 bg-red-500 text-white rounded-md py-1 md:py-2 px-4 tracking-widest transition-colors text-sm md:text-md font-medium">Book now</Link>
    </div>
       </div>
       
