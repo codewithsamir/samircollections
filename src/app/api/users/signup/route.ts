@@ -3,6 +3,7 @@ import CustomerUser from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { sendemail } from "@/helpers/mailer";
+import jwt from 'jsonwebtoken';
 
 
 connect();
@@ -44,11 +45,28 @@ export async function POST(request: NextRequest) {
     // send verification email 
    await sendemail({email, emailType: "VERIFY", userId: savedUser._id});
 
-    return NextResponse.json({
-      message: "User created successfully",
-      sucess: true,
-      data: savedUser,
-    });
+     // create token data 
+     const tokenData = { 
+      id:savedUser._id,
+      email:savedUser.email,
+      username:savedUser.username,
+   }
+
+  //  create Token
+  const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET! as string , {expiresIn: "1d"})
+
+  const response = NextResponse.json({
+    message: "User created successfully",
+    sucess: true,
+    data: savedUser,
+  })
+  response.cookies.set("token",token,{
+    httpOnly:true,
+
+})
+
+
+    return response;
   } catch (error) {
     const typedError = error as Error;
     return NextResponse.json({ error: typedError.message }, { status: 500 });
