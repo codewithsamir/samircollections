@@ -4,7 +4,7 @@ const userSchema =new Schema({
     username:{
     type:String,
     required:[true,"please provide a username"],
-    unique:true
+    
 
 },
 email:{
@@ -15,8 +15,12 @@ email:{
 password:{
         type:String,
         required:[true,"please provide a password"],
-        minlength:8
+        minlength:6
         },
+address:{
+    type:String,
+          
+    },
 role:{
         type:String,
         enum:["user","admin"],

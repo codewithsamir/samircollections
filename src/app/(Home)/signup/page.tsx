@@ -6,45 +6,41 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
+import Input from "@/components/Form/Input";
 
-// Define the shape of the form data using a TypeScript interface
 interface SignupFormData {
   name: string;
   email: string;
+  address:string;
   password: string;
   confirmPassword: string;
 }
 
 export default function Signup(): JSX.Element {
-  // State hooks for managing form data and UI behavior
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState<SignupFormData>({
     name: "",
     email: "",
+    address: "",
     password: "",
     confirmPassword: "",
   });
 
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [successMessage, setSuccessMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
-  // Handle input changes and update the form state
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // Handle form submission
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-
     setErrorMessage("");
-    setSuccessMessage("");
 
-    // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       setErrorMessage("Passwords do not match!");
       return;
@@ -53,27 +49,26 @@ export default function Signup(): JSX.Element {
     setLoading(true);
 
     try {
-      // Replace with your API endpoint
       const response = await axios.post<{ message: string }>("/api/users/signup", {
         username: formData.name,
         email: formData.email,
+        address:formData.address,
         password: formData.password,
       });
 
-      // console.log("Signup successful:", response.data);
-      // setSuccessMessage("Account created successfully! Please log in.");
-      toast.success('Account created successfully!',{
+      toast.success(response.data.message || "Account created successfully!", {
         position: "top-right",
-        richColors:true,
+        richColors: true,
       });
-      router.push("/login")
-    } catch (error) {
-      const typedError = error as Error;
-      // console.error("Signup failed:", typedError.message);
-      // setErrorMessage("Failed to create account. Please try again.");
-      toast.error('Failed to create account. Please try again.',{
+      setTimeout(() => router.push("/Dashboard"), 2000);
+    } catch (error: any) {
+      const backendErrorMessage =
+        error.response?.data?.error || "Failed to create account. Please try again.";
+      setErrorMessage(backendErrorMessage);
+
+      toast.error(backendErrorMessage, {
         position: "top-right",
-        richColors:true,
+        richColors: true,
       });
     } finally {
       setLoading(false);
@@ -81,47 +76,65 @@ export default function Signup(): JSX.Element {
   };
 
   return (
-    <div className="min-h-screen py-10 bg-red-100 flex flex-col items-center px-6">
-      <header className="text-center mb-8">
+    <motion.div
+      className="min-h-screen py-10 bg-red-100 flex flex-col items-center px-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.header
+        className="text-center mb-8"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <h1 className="text-3xl font-bold">
           Samir Bag and Jeans Repairing Center
         </h1>
         <p className="text-gray-600 mt-2 text-xl">
           Join us by creating an account!
         </p>
-      </header>
+      </motion.header>
 
-      <main className="bg-white shadow-md rounded-md p-8 w-full sm:w-[400px]">
+      <motion.main
+        className="bg-white shadow-md rounded-md p-8 w-full sm:w-[400px]"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         <h2 className="text-center text-xl font-semibold mb-4">Sign Up</h2>
         <form onSubmit={handleFormSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="name">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your name"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+        <Input
+  type="text"
+  id="name"
+  label="Full Name"
+  value={formData.name}
+  placeholder="Enter your full name"
+  required
+  onChange={handleInputChange}
+/>
+
+<Input
+  type="email"
+  id="email"
+  label="Email"
+  value={formData.email}
+  placeholder="Enter your email"
+  required
+  onChange={handleInputChange}
+/>
+
+<Input
+  type="text"
+  id="address"
+  label="Address"
+  value={formData.address}
+  placeholder="Enter your address"
+  required
+  onChange={handleInputChange}
+/>
+
+         
           <div className="mb-4 relative">
             <label className="block text-gray-700 mb-2" htmlFor="password">
               Password
@@ -165,21 +178,33 @@ export default function Signup(): JSX.Element {
             </button>
           </div>
           {errorMessage && (
-            <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
-          )}
-          {successMessage && (
-            <p className="text-green-500 text-sm mb-4">{successMessage}</p>
+            <motion.p
+              className="text-red-500 text-sm mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              {errorMessage}
+            </motion.p>
           )}
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 rounded-md ${
+            className={`w-full py-2 rounded-md flex justify-center items-center ${
               loading
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-red-600 text-white hover:bg-red-700 transition"
             }`}
           >
-            {loading ? "Creating Account..." : "Sign Up"}
+            {loading ? (
+              <motion.div
+                className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 1 }}
+              />
+            ) : (
+              "Sign Up"
+            )}
           </button>
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
@@ -188,7 +213,7 @@ export default function Signup(): JSX.Element {
             Log in
           </Link>
         </p>
-      </main>
-    </div>
+      </motion.main>
+    </motion.div>
   );
 }

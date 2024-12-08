@@ -48,6 +48,11 @@ const Sidebar = () => {
     </div>
 
     <nav className="space-y-4">
+      <Link href="/">
+        <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition block">
+          Home
+        </button>
+      </Link>
       <Link href="/Dashboard">
         <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition hidden sm:block">
           Dashboard
