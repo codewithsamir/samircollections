@@ -6,9 +6,10 @@ import Customerorder from "@/models/customerorder.model";
 
 
 connect();
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-  
+  const reqbody = request.json()
+  const {} = reqbody;
    
    
   } catch (error:any) {
