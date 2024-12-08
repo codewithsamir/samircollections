@@ -3,14 +3,13 @@ import CustomerUser from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { sendemail } from "@/helpers/mailer";
-import jwt from 'jsonwebtoken';
-
+import jwt from "jsonwebtoken";
 
 connect();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { username, email, password } = reqBody;
+    const { username, email, password, isAdmin, role } = reqBody;
     // console.log(reqBody);
     if (!username || !email || !password) {
       return NextResponse.json(
@@ -29,6 +28,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (isAdmin) {
+      const existingAdmin = await CustomerUser.countDocuments({
+        isAdmin: true,
+      });
+
+      if (existingAdmin > 0) {
+        return NextResponse.json(
+          { error: "An admin already exists. Only one admin allowed." },
+          { status: 400 }
+        );
+      }
+    }
+
     // hash password
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
@@ -42,29 +54,31 @@ export async function POST(request: NextRequest) {
     const savedUser = await newUser.save();
     // console.log(savedUser);
 
-    // send verification email 
-   await sendemail({email, emailType: "VERIFY", userId: savedUser._id});
+    // send verification email
+    await sendemail({ email, emailType: "VERIFY", userId: savedUser._id });
 
-     // create token data 
-     const tokenData = { 
-      id:savedUser._id,
-      email:savedUser.email,
-      username:savedUser.username,
-   }
+    // create token data
+    const tokenData = {
+      id: savedUser._id,
+      email: savedUser.email,
+      username: savedUser.username,
+    };
 
-  //  create Token
-  const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET! as string , {expiresIn: "1d"})
+    //  create Token
+    const token = await jwt.sign(
+      tokenData,
+      process.env.TOKEN_SECRET! as string,
+      { expiresIn: "1d" }
+    );
 
-  const response = NextResponse.json({
-    message: "User created successfully",
-    sucess: true,
-    data: savedUser,
-  })
-  response.cookies.set("token",token,{
-    httpOnly:true,
-
-})
-
+    const response = NextResponse.json({
+      message: "User created successfully",
+      sucess: true,
+      data: savedUser,
+    });
+    response.cookies.set("token", token, {
+      httpOnly: true,
+    });
 
     return response;
   } catch (error) {
