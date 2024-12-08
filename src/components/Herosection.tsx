@@ -1,80 +1,3 @@
-// "use client";
-// import React, { useEffect, useState } from 'react';
-// // Import Swiper React components
-// import { Swiper, SwiperSlide } from 'swiper/react';
-
-// // Import Swiper styles
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-
-// // import required modules
-// import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-// import Image from 'next/image';
-
-// const images = [
-//   { src: '/jacket-repairing.png', alt: 'Tailor', mobileSrc: '/small-jacket-repairing.png' },
-//   { src: '/jacket-repairing-2.png', alt: 'Jacket Zipper Change', mobileSrc: '/small-jacket-reparing2.png' },
-//   // Add more images as needed
-// ];
-
-// const Herosection = () => {
-//   const [isMobile, setIsMobile] = useState(false);
-
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setIsMobile(window.innerWidth < 800);
-//     };
-
-//     // Initial check
-//     handleResize();
-
-//     // Add event listener
-//     window.addEventListener('resize', handleResize);
-
-//     // Cleanup event listener
-//     return () => window.removeEventListener('resize', handleResize);
-//   }, []);
-
-//   return (
-//     <div className="relative w-full lg:h-[400px] h-[300px]">
-//       <Swiper
-//         pagination={{ clickable: true }}
-//         navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
-//         autoplay={{ delay: 10000 }} // Auto slide every 10 seconds
-//         modules={[Navigation, Pagination, Autoplay]}
-//         className="w-full h-full"
-//       >
-//         {images.map((image, index) => (
-//           <SwiperSlide key={index}>
-//             <div className="relative w-full h-full">
-//               <Image
-//                 src={isMobile ? image.mobileSrc : image.src}
-//                 alt={image.alt}
-//                 fill
-//                 style={{ objectFit: 'cover', objectPosition: 'center' }}
-//                 className="w-full h-full"
-//               />
-//             </div>
-//           </SwiperSlide>
-//         ))}
-//       </Swiper>
-//       <div className="bg-[#f5b92010] absolute top-0 left-0 w-full h-full z-10"></div>
-//       {!isMobile && (
-//         <>
-//           {/* Navigation buttons */}
-//           <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
-//           <div className="swiper-button-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 cursor-pointer"></div>
-//         </>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Herosection;
-
-
-
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -131,9 +54,10 @@ const HeroSection: React.FC = () => {
   </div>
       </div> */}
 <h3 className="text-center text-lg md:text-xl italic tracking-wide leading-relaxed">
-  Great news! <span className="font-semibold text-green-600">We offer FREE pick-up and delivery</span> 
-  <span className="font-semibold text-blue-600">within Janakpur city</span> for all <span className="font-semibold">repair services</span>.
+  Good news! <span className="font-semibold text-green-600">We offer free pick-up and delivery</span> 
+  <span className="font-semibold text-blue-600"> within 5 km of Janakpur city</span> for all <span className="font-semibold">repair services</span>.
 </h3>
+
 
 
 
