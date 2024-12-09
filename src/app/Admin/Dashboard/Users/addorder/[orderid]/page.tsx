@@ -26,7 +26,7 @@ const OrderForm = ({params}:any) => {
   const [formData, setFormData] = useState<OrderFormData>({
     customer_id: customerid,
 
-    cloth_detail: [{ clothname: '', cloth_qty: 0, clothrepair_price: 0 }],
+    cloth_detail: [{ clothname: '', cloth_qty:0, clothrepair_price: 0 }],
     pickup_date: '',
 
 

@@ -44,7 +44,7 @@ const CustomerOderSchema = new Schema({
     default: "pending",
     required: [true, "status required"],
   },
-});
+},{timestamps:true});
 
 // Middleware to calculate total price and total quantity before saving
 CustomerOderSchema.pre("save", function (next) {
