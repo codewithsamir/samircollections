@@ -6,9 +6,9 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { sendemail } from "@/helpers/mailer";
 
 interface User {
+  _id: string;
   username: string;
   email: string;
   profilePicture?: string;
@@ -22,10 +22,10 @@ interface OrderStats {
 }
 
 interface Order {
-  orderId: string;
+  _id: string;
   status: string;
-  amount: number;
-  date: string;
+  total_price: number;
+  pickup_date: string;
 }
 
 const CustomerDashboard: React.FC = () => {
@@ -39,23 +39,7 @@ const CustomerDashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  const logoutHandle = async () => {
-    try {
-      await axios.get("/api/users/logout");
-      toast.success("Logout Success", {
-        position: "top-right",
-        richColors: true,
-      });
-      router.push("/");
-    } catch (error) {
-      const typedError = error as Error;
-      toast.error(typedError.message, {
-        position: "top-right",
-        richColors: true,
-      });
-    }
-  };
-
+  // Fetch user details
   useEffect(() => {
     const getUserDetails = async () => {
       try {
@@ -78,6 +62,48 @@ const CustomerDashboard: React.FC = () => {
 
     getUserDetails();
   }, []);
+
+  // Fetch order statistics and orders
+  useEffect(() => {
+    const getOrderStatsAndOrders = async () => {
+      try {
+        if (user) {
+          const orderStatsResponse = await axios.post("/api/order/showorder", {
+            id: user._id,
+          });
+
+          console.log(orderStatsResponse.data.data)
+         
+          // Ensure fetchedOrders is an array before setting it to state
+          setOrders(orderStatsResponse.data.data);
+        }
+      } catch (error) {
+        const typedError = error as Error;
+        console.error("Error fetching order details:", typedError.message);
+      }
+    };
+
+    if (user) {
+      getOrderStatsAndOrders();
+    }
+  }, [user]);
+
+  const logoutHandle = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      toast.success("Logout Success", {
+        position: "top-right",
+        richColors: true,
+      });
+      router.push("/");
+    } catch (error) {
+      const typedError = error as Error;
+      toast.error(typedError.message, {
+        position: "top-right",
+        richColors: true,
+      });
+    }
+  };
 
   const whatsappLink = `https://wa.me/9824823877?text=Hello, My email is ${user?.email || "Not provided"}.`;
 
@@ -102,18 +128,25 @@ const CustomerDashboard: React.FC = () => {
 
   if (user && !user.isVerified) {
     return (
-      <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md">
-        <h2 className="font-semibold text-lg">Account Verification Required</h2>
-        <p className="mt-2">Please verify your account to access the dashboard.</p>
+      <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-6 rounded-md">
+      <h2 className="font-semibold text-lg">Account Verification Required</h2>
+      <p className="mt-2">Please verify your account to access the dashboard. If you haven’t received the email, be sure to check your inbox and spam folder.</p>
+      <div className="mt-4">
         <button
-          onClick={async () =>{
-           
-            toast.success("Verification email resent!")}}
-          className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition"
+          onClick={async () => {
+            toast.success("Verification email resent!");
+          }}
+          className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition"
         >
           Resend Verification Email
         </button>
       </div>
+      <div className="mt-4 text-sm text-yellow-800">
+        <p>If you still haven’t received the email, make sure to check your spam or junk folder.</p>
+        <p className="font-semibold">Once verified, you will be granted access to the dashboard.</p>
+      </div>
+    </div>
+    
     );
   }
 
@@ -155,28 +188,20 @@ const CustomerDashboard: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-gray-700">Total Orders</h2>
-          <p className="text-3xl font-bold text-blue-600">
-            {orderStats.totalOrders}
-          </p>
+          <p className="text-3xl font-bold text-blue-600">{orderStats.totalOrders}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-gray-700">In Progress</h2>
-          <p className="text-3xl font-bold text-yellow-500">
-            {orderStats.inProgress}
-          </p>
+          <p className="text-3xl font-bold text-yellow-500">{orderStats.inProgress}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-gray-700">Total Paid</h2>
-          <p className="text-3xl font-bold text-green-500">
-            Rs.{orderStats.totalPaid}
-          </p>
+          <p className="text-3xl font-bold text-green-500">Rs.{orderStats.totalPaid}</p>
         </div>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">
-          Recent Orders
-        </h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">Recent Orders</h2>
         <div className="overflow-x-auto bg-white p-6 rounded-lg shadow-md">
           <table className="min-w-full table-auto">
             <thead>
@@ -188,22 +213,21 @@ const CustomerDashboard: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.length === 0 ? (
+              {orders && orders.length === 0 ? (
                 <tr>
-                  <td
-                    colSpan={4}
-                    className="py-4 px-4 text-center text-gray-500"
-                  >
+                  <td colSpan={4} className="py-4 px-4 text-center text-gray-500">
                     No orders available.
                   </td>
                 </tr>
               ) : (
                 orders.map((order) => (
-                  <tr key={order.orderId} className="border-b">
-                    <td className="py-2 px-4">{order.orderId}</td>
+                  <tr key={order._id} className="border-b">
+                    <td className="py-2 px-4">{order._id}</td>
                     <td className="py-2 px-4">{order.status}</td>
-                    <td className="py-2 px-4">${order.amount}</td>
-                    <td className="py-2 px-4">{order.date}</td>
+                    <td className="py-2 px-4">Rs.{order.total_price}</td>
+                    <td className="py-2 px-4">
+                      {new Date(order.pickup_date).toLocaleString()}
+                    </td>
                   </tr>
                 ))
               )}

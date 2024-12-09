@@ -4,10 +4,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 
-const layout = ({children}: Readonly<{
+const Layout = ({children}: Readonly<{
     children: React.ReactNode;
   }>) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser]:any = useState([]);
 const menu = [
 
   {
@@ -68,4 +68,4 @@ useEffect(() => {
   )
 }
 
-export default layout
+export default Layout

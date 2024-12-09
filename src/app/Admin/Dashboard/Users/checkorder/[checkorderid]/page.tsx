@@ -85,6 +85,7 @@ const OrdersPage = ({ params }: any) => {
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
+            <th className="border border-gray-300 p-2">#</th>
             <th className="border border-gray-300 p-2">Order ID</th>
             <th className="border border-gray-300 p-2">Total Cloths</th>
             <th className="border border-gray-300 p-2">Total Price</th>
@@ -95,27 +96,59 @@ const OrdersPage = ({ params }: any) => {
           </tr>
         </thead>
         <tbody>
-          {filteredOrders?.map((order) => (
-            <tr key={order._id} className="hover:bg-gray-100">
-              <td className="border border-gray-300 p-2">{order._id}</td>
-              <td className="border border-gray-300 p-2">{order.cloth_total_quantity}</td>
-              <td className="border border-gray-300 p-2">{order.total_price}</td>
-              <td className="border border-gray-300 p-2">
-                {order.pickup_date ? new Date(order.pickup_date).toLocaleDateString() : "N/A"}
-              </td>
-              <td className="border border-gray-300 p-2">
-                {order.delivery_date ? new Date(order.delivery_date).toLocaleDateString() : "N/A"}
-              </td>
-              <td className="border border-gray-300 p-2 capitalize">{order.status}</td>
-              <td className="border border-gray-300 p-2">
-                <button
-                  className="bg-green-600 text-white px-4 py-2 rounded"
-                  onClick={() => (window.location.href = `/order/update/${order._id}`)}
-                >
-                  Update Order
-                </button>
-              </td>
-            </tr>
+          {filteredOrders?.map((order, index) => (
+            <React.Fragment key={order._id}>
+              <tr className="hover:bg-gray-100">
+                <td className="border border-gray-300 p-2">{index + 1}</td>
+                <td className="border border-gray-300 p-2">{order._id}</td>
+                <td className="border border-gray-300 p-2">{order.cloth_total_quantity}</td>
+                <td className="border border-gray-300 p-2">Rs.{order.total_price}</td>
+                <td className="border border-gray-300 p-2">
+                  {order.pickup_date ? new Date(order.pickup_date).toLocaleDateString() : "N/A"}
+                </td>
+                <td className="border border-gray-300 p-2">
+                  {order.delivery_date ? new Date(order.delivery_date).toLocaleDateString() : "not delivered"}
+                </td>
+                <td className="border border-gray-300 p-2 capitalize">{order.status}</td>
+                <td className="border border-gray-300 p-2">
+                  <button
+                    className="bg-green-600 text-white px-4 py-2 rounded"
+                    onClick={() => (window.location.href = `/order/update/${order._id}`)}
+                  >
+                    Update Order
+                  </button>
+                </td>
+              </tr>
+
+              {/* Cloth Details Row */}
+              <tr className="bg-gray-50">
+                <td colSpan={8}>
+                  <table className="w-full">
+                    <thead>
+                      <tr className="bg-gray-200">
+                        <th className="border border-gray-300 p-2">Cloth Name</th>
+                        <th className="border border-gray-300 p-2">Quantity</th>
+                        <th className="border border-gray-300 p-2">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {order.cloth_detail.map((cloth, index) => (
+                        <tr key={index}>
+                          <td className="border border-gray-300 p-2">{cloth.clothname}</td>
+                          <td className="border border-gray-300 p-2">{cloth.cloth_qty}</td>
+                          <td className="border border-gray-300 p-2">Rs.{cloth.clothrepair_price}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+              {/* Spacer Between Orders */}
+              <tr>
+                <td colSpan={8} className="h-4"></td>
+              </tr>
+            </React.Fragment>
           ))}
         </tbody>
       </table>
