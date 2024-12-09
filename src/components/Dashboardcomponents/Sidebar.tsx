@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'sonner';
 
-const Sidebar = () => {
+const Sidebar = ({menu,header}:any) => {
     const router = useRouter()
     const logoutHandle = async () => { 
 
@@ -43,21 +43,25 @@ const Sidebar = () => {
           className="rounded-full"
         />
       </div>
-      <h1 className="text-2xl font-bold">Customer Panel</h1>
+      <h1 className="text-2xl font-bold">{header}</h1>
       <p className="text-gray-200">Samir Bag & Jeans</p>
     </div>
 
     <nav className="space-y-4">
-      <Link href="/">
+
+      {menu.map((link:any)=>(
+
+      <Link href={link.href} key={link.name}>
         <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition block">
-          Home
+         {link.name}
         </button>
       </Link>
-      <Link href="/Dashboard">
+      ))}
+      {/* <Link href="/Dashboard">
         <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition hidden sm:block">
           Dashboard
         </button>
-      </Link>
+      </Link> */}
     
    
      

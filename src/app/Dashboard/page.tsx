@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { sendemail } from "@/helpers/mailer";
 
 interface User {
   username: string;
@@ -105,7 +106,9 @@ const CustomerDashboard: React.FC = () => {
         <h2 className="font-semibold text-lg">Account Verification Required</h2>
         <p className="mt-2">Please verify your account to access the dashboard.</p>
         <button
-          onClick={() => toast.success("Verification email resent!")}
+          onClick={async () =>{
+           
+            toast.success("Verification email resent!")}}
           className="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition"
         >
           Resend Verification Email

@@ -54,6 +54,8 @@ export default function Signup(): JSX.Element {
         email: formData.email,
         address:formData.address,
         password: formData.password,
+        role:"user",
+        isAdmin:false,
       });
 
       toast.success(response.data.message || "Account created successfully!", {
