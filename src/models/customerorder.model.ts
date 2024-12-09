@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const EachclothSchema = new Schema({
   clothname: {
     type: String,
-    required: [true, "cloth name is requred"],
+    required: [true, "cloth name is required"],
   },
   cloth_qty: {
     type: Number,
@@ -20,10 +20,10 @@ const CustomerOderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "CustomerUser",
   },
-  cloth_quantity: {
+  cloth_total_quantity: {
     type: Number,
     default: 0,
-    required: [true, "cloth quantity required"],
+    required: [true, "cloth total quantity is required"],
   },
   cloth_detail: [EachclothSchema],
   pickup_date: {
@@ -46,23 +46,28 @@ const CustomerOderSchema = new Schema({
   },
 });
 
-
-
-// Middleware to calculate total price before saving
+// Middleware to calculate total price and total quantity before saving
 CustomerOderSchema.pre("save", function (next) {
-    if (this.cloth_detail && this.cloth_detail.length > 0) {
-      const totalWithoutDiscount = this.cloth_detail.reduce(
-        (sum, item) => sum + item.cloth_qty * item.clothrepair_price,
-        0
-      );
-      const discountAmount = (totalWithoutDiscount * (this.discount || 0)) / 100;
-      this.total_price = totalWithoutDiscount - discountAmount;
-    }
-    next();
-  });
+  if (this.cloth_detail && this.cloth_detail.length > 0) {
+    // Calculate total price
+    const totalWithoutDiscount = this.cloth_detail.reduce(
+      (sum, item) => sum + item.cloth_qty * item.clothrepair_price,
+      0
+    );
+    const discountAmount = (totalWithoutDiscount * (this.discount || 0)) / 100;
+    this.total_price = totalWithoutDiscount - discountAmount;
+
+    // Calculate total cloth quantity
+    this.cloth_total_quantity = this.cloth_detail.reduce(
+      (sum, item) => sum + item.cloth_qty,
+      0
+    );
+  }
+
+  next();
+});
 
 const Customerorder =
-  mongoose.models.Customerorder ||
-  mongoose.model("Customerorder", CustomerOderSchema);
+  mongoose.models.Customerorder || mongoose.model("Customerorder", CustomerOderSchema);
 
 export default Customerorder;

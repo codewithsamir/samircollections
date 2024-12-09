@@ -48,7 +48,7 @@ const VerifyEmail: React.FC = () => {
   }, [token, verifyUserEmail]);
 
   return (
-    <div className="min-h-screen flex py-20 justify-center bg-gray-100">
+    <div className="min-h-[80vh] flex flex-col items-center py-20 justify-center bg-gray-100">
         <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">
           Samir Bag and Jeans Repairing Center

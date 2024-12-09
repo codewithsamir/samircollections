@@ -15,11 +15,12 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({error:"Admin not found or unauthorized access"},{status:403})
     }
 
-    const alluser = await CustomerUser.find({}).select("-password")
+    const allUser = await CustomerUser.find({ role: 'user' }).select("-password");
+
 
     // Return users as JSON
     return NextResponse.json(
-      { success: true, data: alluser },
+      { success: true, data: allUser },
       { status: 200 }
     );
   } catch (error) {

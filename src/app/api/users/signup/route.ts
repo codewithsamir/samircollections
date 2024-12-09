@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { username, email, password, isAdmin, role } = reqBody;
-    // console.log(reqBody);
+    console.log(reqBody);
     if (!username || !email || !password) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -28,18 +28,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
+   
+    
     if (isAdmin) {
-      const existingAdmin = await CustomerUser.countDocuments({
-        isAdmin: true,
-      });
-
-      if (existingAdmin > 0) {
+      // Ensure `isAdmin` field exists and is set correctly in the database
+      const existingAdmin = await CustomerUser.findOne({ isAdmin: true });
+    
+      console.log("Existing admin:", existingAdmin);
+    
+      if (existingAdmin) {
+        // Return an error response if an admin already exists
         return NextResponse.json(
-          { error: "An admin already exists. Only one admin allowed." },
+          { error: "An admin user already exists. Only one admin is allowed." },
           { status: 400 }
         );
       }
     }
+    
 
     // hash password
     const salt = await bcryptjs.genSalt(10);
@@ -49,6 +54,8 @@ export async function POST(request: NextRequest) {
       username,
       email,
       password: hashedPassword,
+      role,
+      isAdmin
     });
 
     const savedUser = await newUser.save();

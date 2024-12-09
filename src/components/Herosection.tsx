@@ -54,9 +54,10 @@ const HeroSection: React.FC = () => {
   </div>
       </div> */}
 <h3 className="text-center text-lg md:text-xl italic tracking-wide leading-relaxed">
-  Good news! <span className="font-semibold text-green-600">We offer free pick-up and delivery</span> 
-  <span className="font-semibold text-blue-600"> within 5 km of Janakpur city</span> for all <span className="font-semibold">repair services</span>.
+  Exciting news! <span className="font-semibold text-green-600">We now offer free pick-up and delivery</span>, 
+  <span className="font-semibold text-blue-600">available in select areas of Janakpur city</span>, exclusively for all <span className="font-semibold">repair services</span>.
 </h3>
+
 
 
 
