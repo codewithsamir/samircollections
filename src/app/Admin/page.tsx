@@ -15,7 +15,7 @@ const AdminPage = () => {
         <h2 className="text-2xl font-semibold text-center mb-6">Welcome to the Admin Portal</h2>
 
         <p className="text-center text-gray-700 mb-4">
-          This portal allows you to manage users, view analytics, and configure your platform's settings.
+          This portal allows you to manage users, view analytics, and configure your platform&apos;s settings.
         </p>
 
         <div className="text-center">
