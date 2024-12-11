@@ -8,10 +8,11 @@ interface ResetPasswordResponse {
   message?: string;
   error?: string;
 }
+
 // Define the error structure for Axios
 interface AxiosResponseError {
-    error?: string;
-  }
+  error?: string;
+}
 
 const ResetPassword: React.FC = () => {
   const searchParams = useSearchParams();
@@ -22,6 +23,7 @@ const ResetPassword: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,6 +51,7 @@ const ResetPassword: React.FC = () => {
 
       if (response.status === 200) {
         setMessage(response.data.message || 'Password reset successfully.');
+        setSuccess(true); // Set success state to true
       } else {
         setError(response.data.error || 'Something went wrong. Please try again.');
       }
@@ -68,12 +71,11 @@ const ResetPassword: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <header className="text-center mb-8">
+    <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gray-100">
+      <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">
           Samir Bag and Jeans Repairing Center
         </h1>
-      
       </header>
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Reset Password</h1>
@@ -81,43 +83,63 @@ const ResetPassword: React.FC = () => {
         {message && <p className="text-green-600 text-center mb-4">{message}</p>}
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
         
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="password" className="block text-sm font-medium mb-2">
-            New Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter new password"
-            required
-          />
-          
-          <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
-            Confirm Password:
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Confirm new password"
-            required
-          />
-          
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full bg-red-500 text-white py-3 rounded-md font-semibold ${
-              loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-600'
-            }`}
-          >
-            {loading ? 'Resetting Password...' : 'Reset Password'}
-          </button>
-        </form>
+        {success ? (
+          <div className="flex flex-col items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-16 w-16 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m1-1a9 9 0 11-7-4 9 9 0 018 8 9 9 0 01-8-8z"
+              />
+            </svg>
+            <p className="text-green-600 text-center mt-4">Password reset successfully.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="password" className="block text-sm font-medium mb-2">
+              New Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter new password"
+              required
+            />
+            
+            <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
+              Confirm Password:
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Confirm new password"
+              required
+            />
+            
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full bg-red-500 text-white py-3 rounded-md font-semibold ${
+                loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-600'
+              }`}
+            >
+              {loading ? 'Resetting Password...' : 'Reset Password'}
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );

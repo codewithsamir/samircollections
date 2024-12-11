@@ -42,12 +42,10 @@ export async function POST(request: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    const typedError = error as Error;
-    // console.error("Error resetting password:", typedError);
-
+  } catch (error:any) {
+ 
     return NextResponse.json(
-      { error: "An unexpected error occurred. Please try again." },
+      { error: "An unexpected error occurred. Please try again.", },
       { status: 500 }
     );
   }

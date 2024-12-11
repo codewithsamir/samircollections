@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import Input from "@/components/Form/Input";
+import { RiUser5Fill } from "react-icons/ri";
 
 interface LoginFormData {
   email: string;
@@ -38,7 +39,9 @@ export default function Login() {
       const response = await axios.post("/api/users/login", formData);
 
       // Check if user is an admin
-      const user = response.data.user;
+      const user = response.data;
+  
+     
       if (!user.isAdmin) {
         // If the user is not an admin, show an error message
         setErrorMessage("Only admins are allowed to log in.");

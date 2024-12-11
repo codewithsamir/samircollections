@@ -101,9 +101,9 @@ export const sendemail = async ({ email, emailType, userId }: { email: string; e
     // Choose the template based on email type
     let emailContent;
     if (emailType === "VERIFY") {
-      emailContent = getVerificationEmailTemplate(hashedToken, process.env.DOMAIN!);
+      emailContent = getVerificationEmailTemplate(hashedToken, process.env.DOMAIN!,emailType);
     } else if (emailType === "RESET") {
-      emailContent = getVerificationEmailTemplate(hashedToken, process.env.DOMAIN!); // You can create a separate template for reset email
+      emailContent = getVerificationEmailTemplate(hashedToken, process.env.DOMAIN!,emailType); // You can create a separate template for reset email
     }
 
     // Email options: sender, recipient, and email content

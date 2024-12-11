@@ -51,19 +51,28 @@ export async function POST(request: NextRequest){
     const response = NextResponse.json(
      { 
           message: "Login successful",
+          isAdmin:user.isAdmin,
         success:true,
     }
     )
-    response.cookies.set("token",token,{
-        httpOnly:true,
-
-    })
+    if(user.role === "admin"){
+        response.cookies.set("admin_token",token,{
+            httpOnly:true,
+    
+        })
+    }else{
+        response.cookies.set("token",token,{
+            httpOnly:true,
+    
+        })
+    }
+   
 
     return response;
 
         
-    } catch (error) {
-        const typedError = error as Error;
-        return NextResponse.json({error: typedError.message}, {status: 500});
+    } catch (error:any) {
+      
+        return NextResponse.json({error: error.message}, {status: 500});
     }
 }

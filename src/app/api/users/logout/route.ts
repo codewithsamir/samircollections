@@ -11,11 +11,15 @@ export async function GET(){
             httpOnly: true,
             expires: new Date(0),
         })
+        response.cookies.set("admin_token","",{
+            httpOnly: true,
+            expires: new Date(0),
+        })
 
         return response;
         
-    } catch (error) {
-        const typedError = error as Error;
-        return NextResponse.json({error: typedError.message},{status: 500});
+    } catch (error:any) {
+        
+        return NextResponse.json({error: error.message},{status: 500});
     }
 }

@@ -83,9 +83,17 @@ export async function POST(request: NextRequest) {
       sucess: true,
       data: savedUser,
     });
-    response.cookies.set("token", token, {
-      httpOnly: true,
-    });
+    if(role === "admin"){
+      response.cookies.set("admin_token", token, {
+        httpOnly: true,
+      });
+    }
+    else{
+
+      response.cookies.set("token", token, {
+        httpOnly: true,
+      });
+    }
 
     return response;
   } catch (error) {

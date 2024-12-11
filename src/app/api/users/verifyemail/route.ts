@@ -28,9 +28,9 @@ export async function POST(request: NextRequest){
         
         return NextResponse.json({message:"Email verified successfully", success:true})
         
-    } catch (error) {
-        const typedError = error as Error;
-     return NextResponse.json({error: typedError.message},
+    } catch (error:any) {
+        
+     return NextResponse.json({error: error.message},
         {status:500}
      )   
     }

@@ -1,4 +1,4 @@
-export const getVerificationEmailTemplate = (hashedToken: string, domain: string) => {
+export const getVerificationEmailTemplate = (hashedToken: string, domain: string,emailType:string) => {
   return `
     <html>
       <head>
@@ -45,6 +45,9 @@ export const getVerificationEmailTemplate = (hashedToken: string, domain: string
             text-decoration: none;
             font-weight: bold;
           }
+            p a {
+            color:white;
+            }
           .button {
             display: inline-block;
             background-color: #4CAF50;
@@ -73,15 +76,21 @@ export const getVerificationEmailTemplate = (hashedToken: string, domain: string
             <h1>Welcome to Our Platform</h1>
           </div>
           <div class="content">
-            <h2>Verify Your Email</h2>
+            <h2> ${emailType === "VERIFY" ? "Verify Your Email" : "Reset your password"} </h2>
             <p>Hi,</p>
-            <p>Thank you for registering with us! To complete your registration, please verify your email address by clicking the button below:</p>
+            <p>
+            ${emailType === "VERIFY" ?
+               " Thank you for registering with us! To complete your registration, please verify your email address by clicking the button below:" 
+               :
+                "Please click the button below to set a new password:"}
+            
+           </p>
             <p style="text-align: center;">
-              <a href="${domain}/verifyemail?token=${hashedToken}" class="button">Verify Email</a>
+              <a href="${domain}${emailType === "VERIFY" ? "/verifyemail" : "resetpassword"}?token=${hashedToken}" class="button">${emailType === "VERIFY" ? "Verify Your Email" : "Reset your password"}</a>
             </p>
             <p>If the button above does not work, copy and paste the following link into your browser:</p>
             <p style="word-wrap: break-word; color: #007bff;">
-              ${domain}/verifyemail?token=${hashedToken}
+            ${domain}${emailType === "VERIFY" ? "/verifyemail" : "resetpassword"}?token=${hashedToken}
             </p>
           </div>
           <div class="footer">
