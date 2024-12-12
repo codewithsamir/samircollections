@@ -41,7 +41,7 @@ const OrdersPage = ({ params }: any) => {
         console.log(response.data.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        // console.error("Error fetching orders:", error);
         setLoading(false);
       }
     };

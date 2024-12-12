@@ -91,9 +91,11 @@ const OrderForm = ({ params }: any) => {
 
     try {
       const response = await axios.post("/api/order/addorder", formData);
-      console.log("Order created:", response.data);
+      // console.log("Order created:", response.data);
 
-      toast.success("Order created successfully!");
+      toast.success("Order created successfully!",{
+        richColors: true,
+      });
 
       // Reset the form
       setFormData({
@@ -105,9 +107,11 @@ const OrderForm = ({ params }: any) => {
         status: "pending",
       });
       setErrors({});
-    } catch (error) {
-      console.error("Error creating order:", error);
-      toast.error("Failed to create the order. Please try again.");
+    } catch (error:any) {
+      // console.error("Error creating order:", error.message);
+      toast.error("Failed to create the order. Please try again.",{
+        richColors: true,
+      });
     }
   };
 
