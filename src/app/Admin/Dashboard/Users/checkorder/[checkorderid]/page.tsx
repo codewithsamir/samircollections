@@ -38,7 +38,7 @@ const OrdersPage = ({ params }: any) => {
         const response = await axios.post("/api/order/showorder", { id: customerId });
         setOrders(response.data.data);
         setFilteredOrders(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setLoading(false);
       } catch (error) {
         // console.error("Error fetching orders:", error);
