@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     try {
         const userId = await getDataFromToken(request)
         // console.log(userId)
-        const user = await CustomerUser.findOne({_id: userId}).select("-password ")
+        const user = await CustomerUser.findOne({_id: userId}).select("-password -refreshToken")
         // console.log(user)
         return NextResponse.json({
             message:"user found successfully",

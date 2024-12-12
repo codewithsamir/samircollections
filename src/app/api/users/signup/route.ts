@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { sendemail } from "@/helpers/mailer";
 import jwt from "jsonwebtoken";
+import { generateAccessAndRefreshTokens } from "@/helpers/generateAccessAndRefreshTokens";
 
 connect();
 export async function POST(request: NextRequest) {
@@ -50,6 +51,8 @@ export async function POST(request: NextRequest) {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
+  
+
     const newUser = new CustomerUser({
       username,
       email,
@@ -65,17 +68,21 @@ export async function POST(request: NextRequest) {
     await sendemail({ email, emailType: "VERIFY", userId: savedUser._id });
 
     // create token data
-    const tokenData = {
-      id: savedUser._id,
-      email: savedUser.email,
-      username: savedUser.username,
-    };
+    // const tokenData = {
+    //   id: savedUser._id,
+    //   email: savedUser.email,
+    //   username: savedUser.username,
+    // };
 
     //  create Token
-    const token = await jwt.sign(
-      tokenData,
-      process.env.TOKEN_SECRET! as string,
-      { expiresIn: "1d" }
+    // const token = await jwt.sign(
+    //   tokenData,
+    //   process.env.TOKEN_SECRET! as string,
+    //   { expiresIn: "1d" }
+    // );
+
+    const { accesstoken, refreshtoken } = await generateAccessAndRefreshTokens(
+      user._id
     );
 
     const response = NextResponse.json({
@@ -84,13 +91,19 @@ export async function POST(request: NextRequest) {
       data: savedUser,
     });
     if(role === "admin"){
-      response.cookies.set("admin_token", token, {
+      response.cookies.set("admin_token", accesstoken, {
+        httpOnly: true,
+      });
+      response.cookies.set("admin_refresh_Token", refreshtoken, {
         httpOnly: true,
       });
     }
     else{
 
-      response.cookies.set("token", token, {
+      response.cookies.set("token", accesstoken, {
+        httpOnly: true,
+      });
+      response.cookies.set("refresh_token", refreshtoken, {
         httpOnly: true,
       });
     }

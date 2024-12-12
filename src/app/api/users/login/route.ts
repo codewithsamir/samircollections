@@ -3,6 +3,7 @@ import CustomerUser from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken"
+import { generateAccessAndRefreshTokens } from "@/helpers/generateAccessAndRefreshTokens";
 
 
 
@@ -39,14 +40,17 @@ export async function POST(request: NextRequest){
     }
 
     // create token data 
-    const tokenData = { 
-        id:user._id,
-        email:user.email,
-        username:user.username,
-     }
+    // const tokenData = { 
+    //     id:user._id,
+    //     email:user.email,
+    //     username:user.username,
+    //  }
 
     //  create Token
-    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET! as string , {expiresIn: "1d"})
+    // const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET! as string , {expiresIn: String(process.env.ACCESS_TOKEN_EXPIRE)})
+    const { accesstoken, refreshtoken } = await generateAccessAndRefreshTokens(
+        user._id
+      );
 
     const response = NextResponse.json(
      { 
@@ -56,14 +60,20 @@ export async function POST(request: NextRequest){
     }
     )
     if(user.role === "admin"){
-        response.cookies.set("admin_token",token,{
+        response.cookies.set("admin_token",accesstoken,{
             httpOnly:true,
     
         })
+        response.cookies.set("admin_refreshToken",refreshtoken,{
+            httpOnly:true,
+        })
     }else{
-        response.cookies.set("token",token,{
+        response.cookies.set("token",accesstoken,{
             httpOnly:true,
     
+        })
+        response.cookies.set("refreshToken",refreshtoken,{
+            httpOnly:true,
         })
     }
    
