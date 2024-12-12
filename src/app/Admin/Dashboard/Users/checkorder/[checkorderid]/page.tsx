@@ -28,6 +28,8 @@ const OrdersPage = ({ params }: any) => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
   const [statusFilter, setStatusFilter] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -50,13 +52,38 @@ const OrdersPage = ({ params }: any) => {
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const status = e.target.value;
     setStatusFilter(status);
+    applyFilters(status, startDate, endDate);
+  };
+
+  const handleDateChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: "start" | "end"
+  ) => {
+    const value = e.target.value;
+    if (type === "start") setStartDate(value);
+    else setEndDate(value);
+
+    applyFilters(statusFilter, type === "start" ? value : startDate, type === "end" ? value : endDate);
+  };
+
+  const applyFilters = (status: string, start: string, end: string) => {
+    let filtered = [...orders];
 
     if (status) {
-      const filtered = orders.filter((order) => order.status === status);
-      setFilteredOrders(filtered);
-    } else {
-      setFilteredOrders(orders);
+      filtered = filtered.filter((order) => order.status === status);
     }
+
+    if (start) {
+      const startDate = new Date(start);
+      filtered = filtered.filter((order) => order.pickup_date && new Date(order.pickup_date) >= startDate);
+    }
+
+    if (end) {
+      const endDate = new Date(end);
+      filtered = filtered.filter((order) => order.delivery_date && new Date(order.delivery_date) <= endDate);
+    }
+
+    setFilteredOrders(filtered);
   };
 
   if (loading) {
@@ -67,18 +94,40 @@ const OrdersPage = ({ params }: any) => {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Order List</h1>
 
-      {/* Filter Orders */}
-      <div className="mb-4">
-        <label className="mr-2 font-semibold">Filter by Status:</label>
-        <select
-          value={statusFilter}
-          onChange={handleFilterChange}
-          className="border p-2 rounded"
-        >
-          <option value="">All</option>
-          <option value="pending">Pending</option>
-          <option value="delivered">Delivered</option>
-        </select>
+      {/* Filters */}
+      <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label className="mr-2 font-semibold">Filter by Status:</label>
+          <select
+            value={statusFilter}
+            onChange={handleFilterChange}
+            className="border p-2 rounded w-full"
+          >
+            <option value="">All</option>
+            <option value="pending">Pending</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="mr-2 font-semibold">Start Date:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => handleDateChange(e, "start")}
+            className="border p-2 rounded w-full"
+          />
+        </div>
+
+        <div>
+          <label className="mr-2 font-semibold">End Date:</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => handleDateChange(e, "end")}
+            className="border p-2 rounded w-full"
+          />
+        </div>
       </div>
 
       {/* Orders Table */}
@@ -157,3 +206,4 @@ const OrdersPage = ({ params }: any) => {
 };
 
 export default OrdersPage;
+  

@@ -13,6 +13,7 @@ const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [copyMessage, setCopyMessage] = useState(""); // State to handle success message
   const router = useRouter();
 
   useEffect(() => {
@@ -45,6 +46,11 @@ const UsersPage = () => {
       case "viewOrders":
         router.push(`/Admin/Dashboard/Users/checkorder/${userName}_${userId}`);
         break;
+      case "copyUsername":
+        navigator.clipboard.writeText(userName);
+        setCopyMessage(`Username "${userName}" successfully copied!`);
+        setTimeout(() => setCopyMessage(""), 3000); // Clear message after 3 seconds
+        break;
       default:
         console.log("Unknown action");
     }
@@ -62,6 +68,13 @@ const UsersPage = () => {
         onChange={handleSearch}
         className="mb-4 p-2 border border-gray-300 rounded-md w-full max-w-md"
       />
+
+      {/* Success Message */}
+      {copyMessage && (
+        <div className="mb-4 text-green-600 bg-green-100 p-2 rounded-md">
+          {copyMessage}
+        </div>
+      )}
 
       {/* Table for Displaying Users */}
       <table className="min-w-full table-auto border-collapse">
@@ -87,9 +100,15 @@ const UsersPage = () => {
                 </button>
                 <button
                   onClick={() => handleAction(user._id, user.username, "viewOrders")}
-                  className="bg-green-500 text-white px-3 py-1 rounded-md"
+                  className="bg-green-500 text-white px-3 py-1 rounded-md mr-2"
                 >
                   View Orders
+                </button>
+                <button
+                  onClick={() => handleAction(user._id, user.username, "copyUsername")}
+                  className="bg-gray-500 text-white px-3 py-1 rounded-md"
+                >
+                  Copy Username
                 </button>
               </td>
             </tr>

@@ -213,25 +213,46 @@ const CustomerDashboard: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {orders && orders.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="py-4 px-4 text-center text-gray-500">
-                    No orders available.
-                  </td>
-                </tr>
-              ) : (
-                orders.map((order) => (
-                  <tr key={order._id} className="border-b">
-                    <td className="py-2 px-4">{order._id}</td>
-                    <td className="py-2 px-4">{order.status}</td>
-                    <td className="py-2 px-4">Rs.{order.total_price}</td>
-                    <td className="py-2 px-4">
-                      {new Date(order.pickup_date).toLocaleString()}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
+  {orders && orders.length === 0 ? (
+    <tr>
+      <td colSpan={4} className="py-4 px-4 text-center text-gray-500">
+        No orders available.
+      </td>
+    </tr>
+  ) : (
+    orders.map((order) => {
+      // Conditional class for order status
+      let statusClass = '';
+      switch (order.status) {
+        case 'Complete':
+        case 'Success':
+          statusClass = 'text-green-500'; // Green for completed or successful orders
+          break;
+        case 'In Progress':
+          statusClass = 'text-orange-500'; // Orange for in-progress orders
+          break;
+        case 'Failed':
+        case 'Cancelled':
+          statusClass = 'text-red-500'; // Red for failed or cancelled orders
+          break;
+        default:
+          statusClass = 'text-gray-500'; // Default color for unknown statuses
+      }
+
+      return (
+        <tr key={order._id} className="border-b">
+          <td className="py-2 px-4">{order._id}</td>
+          <td className={`py-2 px-4 ${statusClass}`}>{order.status}</td>
+          <td className="py-2 px-4">Rs.{order.total_price}</td>
+          <td className="py-2 px-4">
+            {new Date(order.pickup_date).toLocaleString()}
+          </td>
+        </tr>
+      );
+    })
+  )}
+</tbody>
+
           </table>
         </div>
       </section>

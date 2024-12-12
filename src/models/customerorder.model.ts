@@ -5,6 +5,10 @@ const EachclothSchema = new Schema({
     type: String,
     required: [true, "cloth name is required"],
   },
+  cloth_detail: {
+    type: String,
+    required: [true, "cloth detail  is required"],
+  },
   cloth_qty: {
     type: Number,
     required: [true, "cloth quantity is required"],
@@ -40,7 +44,8 @@ const CustomerOderSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "delivered"],
+    enum: ["pending", 
+      "processing", "delivered"],
     default: "pending",
     required: [true, "status required"],
   },
