@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
     // );
 
     const { accesstoken, refreshtoken } = await generateAccessAndRefreshTokens(
-      user._id
+      savedUser._id
     );
 
     const response = NextResponse.json({
@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
       response.cookies.set("token", accesstoken, {
         httpOnly: true,
       });
-      response.cookies.set("refresh_token", refreshtoken, {
+      response.cookies.set("refresh_Token", refreshtoken, {
         httpOnly: true,
       });
     }

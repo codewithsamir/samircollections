@@ -52,9 +52,9 @@ const CustomerDashboard: React.FC = () => {
             position: "top-right",
           });
         }
-      } catch (error) {
-        const typedError = error as Error;
-        console.error("Error fetching user details:", typedError.message);
+      } catch (error:any) {
+        
+        console.error("Error fetching user details:", error);
       } finally {
         setIsLoading(false);
       }

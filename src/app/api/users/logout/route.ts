@@ -11,7 +11,15 @@ export async function GET(){
             httpOnly: true,
             expires: new Date(0),
         })
+        response.cookies.set("refresh_Token","",{
+            httpOnly: true,
+            expires: new Date(0),
+        })
         response.cookies.set("admin_token","",{
+            httpOnly: true,
+            expires: new Date(0),
+        })
+        response.cookies.set("admin_refreshToken","",{
             httpOnly: true,
             expires: new Date(0),
         })

@@ -2,7 +2,7 @@ import { connect } from "@/dbConfig/dbConfig";
 import CustomerUser from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken"
+
 import { generateAccessAndRefreshTokens } from "@/helpers/generateAccessAndRefreshTokens";
 
 
@@ -13,7 +13,7 @@ export async function POST(request: NextRequest){
     try {
       const reqbody = await request.json();  
       const { email, password } = reqbody
-    //   console.log(reqbody);
+    //   console.log(email);
 
     //   check if user exits 
      const user = await CustomerUser.findOne({email})
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest){
 
   // check if user verified or not 
   if(!user.isVerified){
-    console.log("email not verified")
+    // console.log("email not verified")
     return NextResponse.json({
         error:"Email not verified. Check your inbox or spam to complete verification."
     },{status:401})

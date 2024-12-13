@@ -6,24 +6,42 @@ import { NextRequest, NextResponse } from "next/server";
 connect();
 
 export async function GET(request: NextRequest) {
-
-    try {
-        const userId = await getDataFromToken(request)
+  try {
+    // Retrieve user ID from the token
+    const userId = await getDataFromToken(request);
         // console.log(userId)
-        const user = await CustomerUser.findOne({_id: userId}).select("-password -refreshToken")
-        // console.log(user)
-        return NextResponse.json({
-            message:"user found successfully",
-            data: user,
-            success: true,
-        })
-
-    } catch (error) {
-        const typedError = error as Error;
-        return NextResponse.json(
-            {error:typedError.message},
-            {status:400}
-        )
+    if (!userId) {
+      return NextResponse.json(
+        { error: "Unauthorized: ID not found." },
+        { status: 401 }
+      );
     }
-}
 
+    // Fetch the user, excluding sensitive fields
+    const user = await CustomerUser.findOne({ _id: userId }).select(
+      "-password -refreshToken"
+    );
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "User not found." },
+        { status: 404 }
+      );
+    }
+
+    // Successful response with user data
+    return NextResponse.json({
+      message: "User found successfully.",
+      data: user,
+      success: true,
+    });
+  } catch (error: any) {
+    // console.error("Error in GET handler:", error.message);
+
+    // Return error response with appropriate status
+    return NextResponse.json(
+      { error: "Internal Server Error: " + error.message },
+      { status: 500 }
+    );
+  }
+}
