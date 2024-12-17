@@ -1,0 +1,10 @@
+MONGO_URL =mongodb+srv://mongodb:samir786@cluster0.72fv2.mongodb.net/RepairingService
+TOKEN_SECRET = serivcebasedword     
+DOMAIN =http://localhost:3000/
+SMTP_USER = samirbagandjeansrepairing@gmail.com
+SMTP_PASS = cdob gfii vtwj mxex
+ACCESS_TOKEN_SECRET = samirbagandjeasnreparingcenter_janakpurdham_accesstoken
+ACCESS_TOKEN_EXPIRE = 1D
+REFRESH_TOKEN_SECRET = samirbagandjeasnreparingcenter_janakpurdham_refreshtoken
+REFRESH_TOKEN_EXPIRE = 30D
+
