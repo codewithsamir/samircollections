@@ -26,7 +26,7 @@ const UpdateOrderForm = ({ params }: any) => {
   const customerid = decodeURIComponent(orderid).split("_")[1];
 
   const [formData, setFormData] = useState<OrderFormData | null>(null);
-  const [errors, setErrors] = useState<{ [key: string]: string | { [key: string]: string } }>({});
+  const [errors, setErrors] = useState<{ [key: string]: any }>({});
 
   useEffect(() => {
     // Fetch the existing order data
@@ -46,9 +46,7 @@ const UpdateOrderForm = ({ params }: any) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prevState) =>
-      prevState ? { ...prevState, [name]: value } : null
-    );
+    setFormData((prevState) => prevState ? { ...prevState, [name]: value } : null);
   };
 
   const handleClothDetailChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,62 +54,41 @@ const UpdateOrderForm = ({ params }: any) => {
     if (formData) {
       const updatedClothDetail = [...formData.cloth_detail];
       updatedClothDetail[index] = { ...updatedClothDetail[index], [name]: value };
-      setFormData({ ...formData, cloth_detail: updatedClothDetail });
+      setFormData((prevState) => prevState ? { ...prevState, cloth_detail: updatedClothDetail } : null);
     }
   };
 
   const addClothDetail = () => {
     if (formData) {
-      setFormData({
-        ...formData,
+      setFormData((prevState) => prevState ? {
+        ...prevState,
         cloth_detail: [
-          ...formData.cloth_detail,
+          ...prevState.cloth_detail,
           { clothname: "", cloth_detail: "", cloth_qty: 0, clothrepair_price: 0 },
         ],
-      });
+      } : null);
     }
-  };
-
-  const validateForm = (): boolean => {
-    if (!formData) return false;
-
-    const newErrors: { [key: string]: string | { [key: string]: string } } = {};
-
-    if (!formData.pickup_date) newErrors.pickup_date = "Pickup date is required";
-    if (!formData.delivery_date) newErrors.delivery_date = "Delivery date is required";
-
-    // Validate cloth details individually
-    const clothDetailErrors: { [key: number]: { [key: string]: string } } = {};
-    formData.cloth_detail.forEach((cloth, index) => {
-      const clothErrors: { [key: string]: string } = {};
-      if (!cloth.clothname) clothErrors.clothname = "Cloth name is required";
-      if (!cloth.cloth_detail) clothErrors.cloth_detail = "Cloth detail is required";
-      if (cloth.cloth_qty <= 0) clothErrors.cloth_qty = "Cloth quantity must be greater than 0";
-      if (cloth.clothrepair_price <= 0)
-        clothErrors.clothrepair_price = "Repair price must be greater than 0";
-
-      if (Object.keys(clothErrors).length > 0) {
-        clothDetailErrors[index] = clothErrors;
-      }
-    });
-
-    if (Object.keys(clothDetailErrors).length > 0) {
-      newErrors.cloth_detail = clothDetailErrors;
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
 
     try {
-      await axios.put(`/api/order/updateorder/${orderid}`, formData);
-      toast.success("Order updated successfully!", {
-        richColors: true,
-      });
+      const response = await axios.put(`/api/order/updateorder/${orderid}`, formData);
+      if (response.data.errors) {
+        // Set backend errors
+        setErrors(response.data.errors);
+        // Show error messages from the backend
+        let errorMessages = "";
+        Object.values(response.data.errors).forEach((error: any) => {
+          errorMessages += error + " ";
+        });
+        toast.error(errorMessages.trim(), { richColors: true });
+      } else {
+        toast.success("Order updated successfully!", {
+          richColors: true,
+        });
+      }
     } catch (error: any) {
       toast.error("Failed to update the order. Please try again.", {
         richColors: true,
@@ -140,32 +117,40 @@ const UpdateOrderForm = ({ params }: any) => {
                 name="clothname"
                 value={cloth.clothname}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail?.[index]?.clothname}
               />
+              {errors?.cloth_detail?.[index]?.clothname && (
+                <p className="text-red-600 text-sm">{errors.cloth_detail[index].clothname}</p>
+              )}
               <Input
                 label="Cloth Detail"
                 type="text"
                 name="cloth_detail"
                 value={cloth.cloth_detail}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail?.[index]?.cloth_detail}
               />
+              {errors?.cloth_detail?.[index]?.cloth_detail && (
+                <p className="text-red-600 text-sm">{errors.cloth_detail[index].cloth_detail}</p>
+              )}
               <Input
                 label="Cloth Quantity"
                 type="number"
                 name="cloth_qty"
                 value={cloth.cloth_qty}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail?.[index]?.cloth_qty}
               />
+              {errors?.cloth_detail?.[index]?.cloth_qty && (
+                <p className="text-red-600 text-sm">{errors.cloth_detail[index].cloth_qty}</p>
+              )}
               <Input
                 label="Cloth Repair Price"
                 type="number"
                 name="clothrepair_price"
                 value={cloth.clothrepair_price}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail?.[index]?.clothrepair_price}
               />
+              {errors?.cloth_detail?.[index]?.clothrepair_price && (
+                <p className="text-red-600 text-sm">{errors.cloth_detail[index].clothrepair_price}</p>
+              )}
             </div>
           ))}
           <button
@@ -185,8 +170,10 @@ const UpdateOrderForm = ({ params }: any) => {
             name="pickup_date"
             value={formData.pickup_date}
             onChange={handleChange}
-            error={errors.pickup_date}
           />
+          {errors?.pickup_date && (
+            <p className="text-red-600 text-sm">{errors.pickup_date}</p>
+          )}
         </div>
 
         {/* Delivery Date */}
@@ -197,8 +184,10 @@ const UpdateOrderForm = ({ params }: any) => {
             name="delivery_date"
             value={formData.delivery_date}
             onChange={handleChange}
-            error={errors.delivery_date}
           />
+          {errors?.delivery_date && (
+            <p className="text-red-600 text-sm">{errors.delivery_date}</p>
+          )}
         </div>
 
         {/* Status */}
@@ -214,6 +203,9 @@ const UpdateOrderForm = ({ params }: any) => {
             <option value="processing">Processing</option>
             <option value="delivered">Delivered</option>
           </select>
+          {errors?.status && (
+            <p className="text-red-600 text-sm">{errors.status}</p>
+          )}
         </div>
 
         {/* Submit Button */}
