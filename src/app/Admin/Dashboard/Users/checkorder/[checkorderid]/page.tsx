@@ -163,7 +163,7 @@ const router = useRouter()
                 <td className="border border-gray-300 p-2">
                   <button
                     className="bg-green-600 text-white px-4 py-2 rounded"
-                    onClick={() => router.push(`/updateorder/${order._id}`)}
+                    onClick={() => router.push(`/Admin/Dashboard/Users/updateorder/${order._id}`)}
                   >
                     Update Order
                   </button>
