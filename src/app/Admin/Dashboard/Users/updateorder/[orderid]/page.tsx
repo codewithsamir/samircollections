@@ -22,17 +22,17 @@ interface OrderFormData {
 }
 
 const UpdateOrderForm = ({ params }: any) => {
-  const { orderid }: any = React.use(params);
+  const { orderid } = params;  // Corrected the destructuring
   const customerid = decodeURIComponent(orderid).split("_")[1];
 
   const [formData, setFormData] = useState<OrderFormData | null>(null);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string | { [key: string]: string } }>({});
 
   useEffect(() => {
     // Fetch the existing order data
     const fetchOrderData = async () => {
       try {
-        const response = await axios.post(`/api/order/showorder`,{orderid});
+        const response = await axios.post(`/api/order/showorder`, { orderid });
         setFormData(response.data);
       } catch (error: any) {
         toast.error("Failed to fetch the order details. Please try again.", {
@@ -75,22 +75,28 @@ const UpdateOrderForm = ({ params }: any) => {
   const validateForm = (): boolean => {
     if (!formData) return false;
 
-    const newErrors: { [key: string]: string } = {};
+    const newErrors: { [key: string]: string | { [key: string]: string } } = {};
 
     if (!formData.pickup_date) newErrors.pickup_date = "Pickup date is required";
     if (!formData.delivery_date) newErrors.delivery_date = "Delivery date is required";
 
-    if (
-      formData.cloth_detail.some(
-        (cloth) =>
-          !cloth.clothname ||
-          !cloth.cloth_detail ||
-          cloth.cloth_qty <= 0 ||
-          cloth.clothrepair_price <= 0
-      )
-    ) {
-      newErrors.cloth_detail =
-        "Each cloth must have a valid name, detail, quantity, and repair price";
+    // Validate cloth details individually
+    const clothDetailErrors: { [key: number]: { [key: string]: string } } = {};
+    formData.cloth_detail.forEach((cloth, index) => {
+      const clothErrors: { [key: string]: string } = {};
+      if (!cloth.clothname) clothErrors.clothname = "Cloth name is required";
+      if (!cloth.cloth_detail) clothErrors.cloth_detail = "Cloth detail is required";
+      if (cloth.cloth_qty <= 0) clothErrors.cloth_qty = "Cloth quantity must be greater than 0";
+      if (cloth.clothrepair_price <= 0)
+        clothErrors.clothrepair_price = "Repair price must be greater than 0";
+
+      if (Object.keys(clothErrors).length > 0) {
+        clothDetailErrors[index] = clothErrors;
+      }
+    });
+
+    if (Object.keys(clothDetailErrors).length > 0) {
+      newErrors.cloth_detail = clothDetailErrors;
     }
 
     setErrors(newErrors);
@@ -134,7 +140,7 @@ const UpdateOrderForm = ({ params }: any) => {
                 name="clothname"
                 value={cloth.clothname}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail}
+                error={errors.cloth_detail?.[index]?.clothname}
               />
               <Input
                 label="Cloth Detail"
@@ -142,7 +148,7 @@ const UpdateOrderForm = ({ params }: any) => {
                 name="cloth_detail"
                 value={cloth.cloth_detail}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail}
+                error={errors.cloth_detail?.[index]?.cloth_detail}
               />
               <Input
                 label="Cloth Quantity"
@@ -150,7 +156,7 @@ const UpdateOrderForm = ({ params }: any) => {
                 name="cloth_qty"
                 value={cloth.cloth_qty}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail}
+                error={errors.cloth_detail?.[index]?.cloth_qty}
               />
               <Input
                 label="Cloth Repair Price"
@@ -158,7 +164,7 @@ const UpdateOrderForm = ({ params }: any) => {
                 name="clothrepair_price"
                 value={cloth.clothrepair_price}
                 onChange={(e) => handleClothDetailChange(index, e)}
-                error={errors.cloth_detail}
+                error={errors.cloth_detail?.[index]?.clothrepair_price}
               />
             </div>
           ))}
