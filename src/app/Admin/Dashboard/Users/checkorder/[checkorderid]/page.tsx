@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface ClothDetail {
   clothname: string;
@@ -23,7 +24,7 @@ interface Order {
 
 const OrdersPage = ({ params }: any) => {
   const { checkorderid }: any = React.use(params);
-
+const router = useRouter()
   const customerId = decodeURIComponent(checkorderid).split("_")[1];
   const [orders, setOrders] = useState<Order[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
@@ -162,7 +163,7 @@ const OrdersPage = ({ params }: any) => {
                 <td className="border border-gray-300 p-2">
                   <button
                     className="bg-green-600 text-white px-4 py-2 rounded"
-                    onClick={() => (window.location.href = `/order/update/${order._id}`)}
+                    onClick={() => router.push(`Admin/Dashboard/Users/updateorder/${order._id}`)}
                   >
                     Update Order
                   </button>
