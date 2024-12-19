@@ -137,7 +137,7 @@ const OrderForm = ({ params }: any) => {
               <Input
                 label="Cloth Detail"
                 type="text"
-                name="clothdetail"
+                name="cloth_detail"
                 value={cloth.cloth_detail}
                 onChange={(e) => handleClothDetailChange(index, e)}
                 error={errors.cloth_detail}
