@@ -12,9 +12,9 @@ export async function POST(request: NextRequest) {
     const { id, orderid } = reqbody;
 
     // Validate the input
-    if (!id || !orderid) {
-      return NextResponse.json(
-        { success: false, message: " ID  is required",check:[id,orderid] },
+    if (!id && !orderid) {
+      return NextResponse.json(git 
+        { success: false, message: " ID  is required"},
         { status: 400 }
       );
     }
