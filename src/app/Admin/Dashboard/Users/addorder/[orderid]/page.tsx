@@ -7,7 +7,7 @@ import { toast } from "sonner";
 // Define the structure for the cloth detail
 interface ClothDetail {
   clothname: string;
-  clothdetail: string;
+  cloth_detail: string;
   cloth_qty: number;
   clothrepair_price: number;
 }
@@ -27,7 +27,7 @@ const OrderForm = ({ params }: any) => {
   const [formData, setFormData] = useState<OrderFormData>({
     customer_id: customerid,
     cloth_detail: [
-      { clothname: "", clothdetail: "", cloth_qty: 0, clothrepair_price: 0 },
+      { clothname: "", cloth_detail: "", cloth_qty: 0, clothrepair_price: 0 },
     ],
     pickup_date: "",
     status: "pending",
@@ -58,7 +58,7 @@ const OrderForm = ({ params }: any) => {
       ...prevState,
       cloth_detail: [
         ...prevState.cloth_detail,
-        { clothname: "", clothdetail: "", cloth_qty: 0, clothrepair_price: 0 },
+        { clothname: "", cloth_detail: "", cloth_qty: 0, clothrepair_price: 0 },
       ],
     }));
   };
@@ -72,7 +72,7 @@ const OrderForm = ({ params }: any) => {
       formData.cloth_detail.some(
         (cloth) =>
           !cloth.clothname ||
-          !cloth.clothdetail ||
+          !cloth.cloth_detail ||
           cloth.cloth_qty <= 0 ||
           cloth.clothrepair_price <= 0
       )
@@ -101,7 +101,7 @@ const OrderForm = ({ params }: any) => {
       setFormData({
         customer_id: customerid,
         cloth_detail: [
-          { clothname: "", clothdetail: "", cloth_qty: 0, clothrepair_price: 0 },
+          { clothname: "", cloth_detail: "", cloth_qty: 0, clothrepair_price: 0 },
         ],
         pickup_date: "",
         status: "pending",
@@ -138,7 +138,7 @@ const OrderForm = ({ params }: any) => {
                 label="Cloth Detail"
                 type="text"
                 name="clothdetail"
-                value={cloth.clothdetail}
+                value={cloth.cloth_detail}
                 onChange={(e) => handleClothDetailChange(index, e)}
                 error={errors.cloth_detail}
               />
