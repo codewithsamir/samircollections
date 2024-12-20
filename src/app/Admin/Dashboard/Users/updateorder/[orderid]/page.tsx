@@ -32,7 +32,7 @@ const UpdateOrderForm = ({ params }: any) => {
     // Fetch the existing order data
     const fetchOrderData = async () => {
       try {
-        const response = await axios.post(`/api/order/showorder`, { orderid });
+        const response = await axios.post(`/api/order/showorder`, { orderid:customerid });
         setFormData(response.data);
       } catch (error: any) {
         toast.error("Failed to fetch the order details. Please try again.", {
@@ -74,7 +74,7 @@ const UpdateOrderForm = ({ params }: any) => {
     e.preventDefault();
 
     try {
-      const response = await axios.put(`/api/order/updateorder/${orderid}`, formData);
+      const response = await axios.put(`/api/order/updateorder/${customerid}`, formData);
       if (response.data.errors) {
         // Set backend errors
         setErrors(response.data.errors);
