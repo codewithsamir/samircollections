@@ -35,6 +35,7 @@ const UpdateOrderForm = ({ params }: any) => {
         const response = await axios.post(`/api/order/showorder`, { orderid:customerid });
         setFormData(response.data);
       } catch (error: any) {
+        console.log(error.messages)
         toast.error("Failed to fetch the order details. Please try again.", {
           richColors: true,
         });
