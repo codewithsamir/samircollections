@@ -22,8 +22,8 @@ interface OrderFormData {
 }
 
 const UpdateOrderForm = ({ params }: any) => {
-  const { orderid } = params;  // Corrected the destructuring
-  const customerid = decodeURIComponent(orderid).split("_")[1];
+  const { orderidcome } = params;  // Corrected the destructuring
+  const orderid = decodeURIComponent(orderidcome).split("_")[1];
 
   const [formData, setFormData] = useState<OrderFormData | null>(null);
   const [errors, setErrors] = useState<{ [key: string]: any }>({});
@@ -32,10 +32,10 @@ const UpdateOrderForm = ({ params }: any) => {
     // Fetch the existing order data
     const fetchOrderData = async () => {
       try {
-        const response = await axios.post(`/api/order/showorder`, { orderid:customerid });
+        const response = await axios.post(`/api/order/showorder`, { id:orderid });
         setFormData(response.data);
       } catch (error: any) {
-        console.log(error.messages)
+        // console.log(error.messages)
         toast.error("Failed to fetch the order details. Please try again.", {
           richColors: true,
         });
@@ -75,7 +75,7 @@ const UpdateOrderForm = ({ params }: any) => {
     e.preventDefault();
 
     try {
-      const response = await axios.put(`/api/order/updateorder/${customerid}`, formData);
+      const response = await axios.put(`/api/order/updateorder/${orderid}`, formData);
       if (response.data.errors) {
         // Set backend errors
         setErrors(response.data.errors);
