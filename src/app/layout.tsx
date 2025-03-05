@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en" >
 <Head>
   {/* Main Meta Tags */}
-  <title>Samir Bag and Jeans Repairing Center - Expert Bag & Clothing Repair in Janakpur, Nepal</title>
+  <title>samir collection</title>
   
   <meta name="description" content="Samir Bag and Jeans Repairing Center in Janakpur, Nepal, specializes in expert repair services for bags, jeans, jackets, kurtis, trousers, and all types of clothing. Convenient home pickup service available." />
 
