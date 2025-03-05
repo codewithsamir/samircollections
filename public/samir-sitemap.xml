@@ -3,7 +3,7 @@
   <!-- Landing Page -->
   <url>
   
-    <loc>https://samirrain.com.np/</loc>
+    <loc>https://www.samircollection.com.np</loc>
     <lastmod>2024-11-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- Terms and Conditions Page -->
   <url>
-    <loc>https://samirrain.com.np/termandcondition</loc>
+    <loc>https://www.samircollection.com.np/termandcondition</loc>
     <lastmod>2024-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -19,7 +19,7 @@
 
   <!-- Login Page -->
   <url>
-    <loc>https://samirrain.com.np/login</loc>
+    <loc>https://www.samircollection.com.np/login</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -27,7 +27,7 @@
 
   <!-- Signup Page -->
   <url>
-    <loc>https://samirrain.com.np/signup</loc>
+    <loc>https://www.samircollection.com.np/signup</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -35,7 +35,7 @@
 
   <!-- Pricelist Page -->
   <url>
-    <loc>https://samirrain.com.np/pricelist</loc>
+    <loc>https://www.samircollection.com.np/pricelist</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -43,7 +43,7 @@
 
   <!-- Products Page -->
   <url>
-    <loc>https://samirrain.com.np/products</loc>
+    <loc>https://www.samircollection.com.np/products</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -53,7 +53,7 @@
 
   <!-- Services Page -->
   <url>
-    <loc>https://samirrain.com.np/services</loc>
+    <loc>https://www.samircollection.com.np/services</loc>
     <lastmod>2024-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
