@@ -1,4 +1,4 @@
-import { connect } from "@/dbConfig/dbConfig";
+import { connectToDatabase } from "@/dbConfig/dbConfig";
 import CustomerUser from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
@@ -6,7 +6,7 @@ import { sendemail } from "@/helpers/mailer";
 import jwt from "jsonwebtoken";
 import { generateAccessAndRefreshTokens } from "@/helpers/generateAccessAndRefreshTokens";
 
-connect();
+connectToDatabase();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();

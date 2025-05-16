@@ -1,4 +1,4 @@
-import { connect } from "@/dbConfig/dbConfig";
+import  {connectToDatabase}  from "@/dbConfig/dbConfig";
 import CustomerUser from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
@@ -7,7 +7,7 @@ import { generateAccessAndRefreshTokens } from "@/helpers/generateAccessAndRefre
 
 
 
-connect()
+connectToDatabase()
 export async function POST(request: NextRequest){
     
     try {
