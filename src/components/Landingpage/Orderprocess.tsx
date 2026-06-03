@@ -1,7 +1,6 @@
 "use client";
 import { processSteps } from "@/utility/process";
 import Image from "next/image";
-import Link from "next/link";
 
 const Orderprocess = () => {
   return (
@@ -23,7 +22,7 @@ const Orderprocess = () => {
                   className="w-full relative rounded-lg cursor-pointer transition-all duration-300 p-4 sm:w-[360px]"
                 >
                   {index === 0 ? (
-                    <Link href="/login">
+                    <a href="https://wa.me/9824823877?text=Hello%20Samir%20Repair%20Center%2C%20I%20want%20pickup%20and%20repair%20service." target="_blank" rel="noreferrer" className="block">
                       <div>
                         <span className="absolute top-[-20px] w-[30px] h-[30px] bg-red-500 rounded-full text-white flex justify-center items-center text-sm">
                           {index + 1}
@@ -38,7 +37,7 @@ const Orderprocess = () => {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </a>
                   ) : (
                     <div>
                       <span className="absolute top-[-20px] w-[30px] h-[30px] bg-red-500 rounded-full text-white flex justify-center items-center text-sm">

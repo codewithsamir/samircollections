@@ -34,7 +34,7 @@ const menu = [
         <Link href="/">
           <div className="flex items-center space-x-2 cursor-pointer lg:ml-10 ">
             {/* Placeholder for Logo Image */}
-            <Image src="/brandlogo2.png" alt="Logo" width={50} height={50} 
+            <Image src="/samircollectionlogo.png" alt="Logo" width={150} height={150} 
             
             />
           </div>
@@ -66,7 +66,7 @@ const menu = [
         </button>
 
 
-        <Link href="/login" className="hover:bg-red-700 bg-red-500 text-white rounded-md py-1 md:py-2 px-4 tracking-widest transition-colors text-sm md:text-md font-medium">Book now</Link>
+        <a href="https://wa.me/9824823877?text=Hello%20Samir%20Repair%20Center%2C%20I%20need%20pickup%20and%20repair%20service." target="_blank" rel="noreferrer" className="hover:bg-green-700 bg-green-500 text-white rounded-md py-1 md:py-2 px-4 tracking-widest transition-colors text-sm md:text-md font-medium">WhatsApp</a>
    </div>
       </div>
       

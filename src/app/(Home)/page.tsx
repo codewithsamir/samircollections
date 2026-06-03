@@ -9,6 +9,7 @@ import Herosection from '@/components/Herosection';
 import ServiceSteps from '@/components/Landingpage/ServiceSteps';
 import AboutUs from '@/components/Landingpage/Aboutus';
 import Orderprocess from '@/components/Landingpage/Orderprocess';
+import Image from 'next/image';
 
 
 
@@ -33,6 +34,26 @@ const Home: React.FC = () => {
         {/* Hero Section */}
   <Herosection />
 
+        <section className="container mx-auto px-6 py-10">
+          <h2 className="text-3xl font-semibold text-red-500 text-center mb-8">Featured Service Highlights</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-xl">
+              <Image src="/newservice2.png" width={900} height={600} alt="Repair service" className="w-full h-[320px] object-cover" />
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-3">Same Trusted Repair Service</h3>
+                <p className="text-gray-600 text-sm">We repair bags, jeans, jackets and more with the same quality service. Leave your items with us and we will take care of the repair from start to finish.</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-3xl overflow-hidden shadow-xl">
+              <Image src="/newservice.png" width={900} height={600} alt="Pickup and delivery" className="w-full h-[320px] object-cover" />
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold mb-3">Pickup & Delivery for ₹100</h3>
+                <p className="text-gray-600 text-sm">After you leave your items, we will collect them, repair them expertly, and deliver them back to you for a flat charge of ₹100.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
           <Orderprocess />
           <AboutUs />
 
@@ -46,7 +67,7 @@ const Home: React.FC = () => {
         {/* Highlighted Services */}
         <section id='service' className=" py-10 md:py-20">
           <h3 className="text-3xl font-semibold  text-center py-4 text-red-500">Our Popular Services</h3>
-          <div className="flex flex-wrap gap-5 justify-center mt-6">
+          <div className="flex flex-wrap  gap-6 justify-center mt-6">
             {services.map((service, index) => (
               <ServiceCard key={index} {...service} />
             ))}
