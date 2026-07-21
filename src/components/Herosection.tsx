@@ -21,11 +21,11 @@ const HeroSection: React.FC = () => {
     Explore our Services
   </button>
   </Link>
-  <Link href={"/pricelist"}>
-  <button className="bg-red-500  text-white font-semibold py-1 md:py-2 px-4 md:px-8 rounded-full text-sm md:text-xl hover:bg-red-700 transition duration-300 ease-in-out">
-    See our prices
-  </button>
-  </Link>
+  <a href="https://wa.me/9824823877?text=Hello%20Samir%20Repair%20Center%2C%20I%20need%20pickup%20and%20repair%20service." target="_blank" rel="noreferrer">
+    <button className="bg-green-500 text-white font-semibold py-1 md:py-2 px-4 md:px-8 rounded-full text-sm md:text-xl hover:bg-green-700 transition duration-300 ease-in-out">
+      Contact on WhatsApp
+    </button>
+  </a>
 </div>
 
       </div>
@@ -54,8 +54,8 @@ const HeroSection: React.FC = () => {
   </div>
       </div> */}
 <h3 className="text-center text-lg md:text-xl italic tracking-wide leading-relaxed">
-  Exciting news! <span className="font-semibold text-green-600">We now offer free pick-up and delivery</span>, 
-  <span className="font-semibold text-blue-600">available in select areas of Janakpur city</span>, exclusively for all <span className="font-semibold">repair services</span>.
+  Exciting news! <span className="font-semibold text-green-600">Pickup and delivery are available</span> with a fixed service charge of <span className="font-semibold text-blue-600">₹100</span>. 
+  Leave your items with us and we will collect, repair, and deliver them back to you.
 </h3>
 
 
