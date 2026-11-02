@@ -12,9 +12,9 @@ const TermAndCondition = () => {
         
         <h2 className="text-lg font-semibold text-gray-800 mt-4 mb-2">Pickup and Delivery Policies</h2>
         <p className="text-gray-700 mb-4">
-          We offer free pick-up and delivery for clothing repairs within **Janakpur city**. For locations outside Janakpur, a service charge of <strong>₹100</strong> will apply.  
-          Additionally, if your address is more than 5 km away from our service center, a charge of <strong>₹100</strong> per order will be applied.
-          You will be contacted to arrange the pickup and confirm your order details. Please ensure that you are available at the arranged time and place for pickup.
+          We charge a flat service fee of <strong>₹100</strong> for pickup and delivery on all repair orders.  
+          You will be contacted to arrange the pickup, confirm your order details, and schedule the delivery.
+          Please ensure that you are available at the arranged time and place when the pickup is scheduled.
         </p>
         
         <h2 className="text-lg font-semibold text-gray-800 mt-4 mb-2">Repair Limitations</h2>

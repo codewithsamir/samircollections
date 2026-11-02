@@ -1,7 +1,6 @@
 "use client";
 import { processSteps } from "@/utility/process";
 import Image from "next/image";
-import Link from "next/link";
 
 const Orderprocess = () => {
   return (
@@ -38,7 +37,7 @@ const Orderprocess = () => {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </a>
                   ) : (
                     <div>
                       <span className="absolute top-[-20px] w-[30px] h-[30px] bg-brand rounded-full text-white flex justify-center items-center text-sm shadow-md">
