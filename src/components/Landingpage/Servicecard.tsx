@@ -18,8 +18,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, imageSrc 
       className="w-full h-[170px] object-cover rounded-t-lg"
     />
     <div className="p-2">
-      <h4 className=" text-xl font-semibold text-gray-800 hover:text-indigo-600 transition-all">{title}</h4>
-      <p className="text-gray-600 text-sm mt-2">{description}</p>
+      <h4 className="text-xl font-semibold text-brand-dark hover:text-brand transition-all">{title}</h4>
+      <p className="text-brand-dark/60 text-sm mt-2">{description}</p>
     </div>
   </div>
   );

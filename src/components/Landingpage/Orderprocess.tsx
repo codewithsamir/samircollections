@@ -23,15 +23,15 @@ const Orderprocess = () => {
                   className="w-full relative rounded-lg cursor-pointer transition-all duration-300 p-4 sm:w-[360px]"
                 >
                   {index === 0 ? (
-                    <Link href="/login">
+                    <Link href="https://wa.me/9779824823877?text=Hi%2C%20I%20need%20a%20repair%20service" target="_blank" rel="noopener noreferrer">
                       <div>
-                        <span className="absolute top-[-20px] w-[30px] h-[30px] bg-red-500 rounded-full text-white flex justify-center items-center text-sm">
+                        <span className="absolute top-[-20px] w-[30px] h-[30px] bg-brand rounded-full text-white flex justify-center items-center text-sm shadow-md">
                           {index + 1}
                         </span>
                         <div className="flex items-start justify-start gap-4 px-4">
                           <span className="text-2xl text-gray-600">{step.icon}</span>
                           <div className="flex flex-col">
-                            <span className="text-lg font-semibold text-red-600">
+                            <span className="text-lg font-semibold text-brand">
                               {step.title}
                             </span>
                             <p className="text-sm text-gray-600">{step.description}</p>
@@ -41,13 +41,13 @@ const Orderprocess = () => {
                     </Link>
                   ) : (
                     <div>
-                      <span className="absolute top-[-20px] w-[30px] h-[30px] bg-red-500 rounded-full text-white flex justify-center items-center text-sm">
+                      <span className="absolute top-[-20px] w-[30px] h-[30px] bg-brand rounded-full text-white flex justify-center items-center text-sm shadow-md">
                         {index + 1}
                       </span>
                       <div className="flex items-start justify-start gap-4 px-4">
                         <span className="text-2xl text-gray-600">{step.icon}</span>
                         <div className="flex flex-col">
-                          <span className="text-lg font-semibold text-red-600">
+                          <span className="text-lg font-semibold text-brand">
                             {step.title}
                           </span>
                           <p className="text-sm text-gray-600">{step.description}</p>
@@ -63,7 +63,7 @@ const Orderprocess = () => {
           {/* Right Side: Illustrative Image */}
           <div className="flex justify-center w-full sm:w-[500px]">
             <Image
-              src="/orderprocess.png" // Replace with your image URL
+              src="/newservice.png" 
               alt="Illustration of our process"
               width={1000}
               height={500}

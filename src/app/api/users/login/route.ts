@@ -2,87 +2,63 @@ import  {connectToDatabase}  from "@/dbConfig/dbConfig";
 import CustomerUser from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-
 import { generateAccessAndRefreshTokens } from "@/helpers/generateAccessAndRefreshTokens";
+import { authCookieOptions, isAdminUser, toStr } from "@/helpers/auth";
+import { rateLimit } from "@/helpers/rateLimit";
 
-
-
-connectToDatabase()
 export async function POST(request: NextRequest){
-    
     try {
-      const reqbody = await request.json();  
-      const { email, password } = reqbody
-    //   console.log(email);
+      // 10 login attempts per 15 minutes per IP to stop password guessing
+      const limited = rateLimit(request, "login", 10, 15 * 60 * 1000);
+      if (limited) return limited;
 
-    //   check if user exits 
-     const user = await CustomerUser.findOne({email})
-     if(!user){
-        return NextResponse.json({
-            error:"User does not exist"
-        },{status:400})
+      await connectToDatabase();
+      const reqbody = await request.json();
+      const email = toStr(reqbody.email, 120);
+      const password = typeof reqbody.password === "string" ? reqbody.password : "";
+
+      if (!email || !password) {
+        return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
+      }
+
+     const user = await CustomerUser.findOne({ email: { $in: [email, email.toLowerCase()] } })
+
+    // Same message for unknown email and wrong password so attackers can't discover registered emails
+    const isPasswordsCorrect = user ? await bcryptjs.compare(password, user.password) : false
+    if(!user || !isPasswordsCorrect){
+        return NextResponse.json({error:"Invalid email or password"},{status:400})
     }
 
-
-  // check if user verified or not 
   if(!user.isVerified){
-    // console.log("email not verified")
     return NextResponse.json({
         error:"Email not verified. Check your inbox or spam to complete verification."
     },{status:401})
 }
 
-    // check if password is correct 
-    const isPasswordsCorrect = await bcryptjs.compare(password, user.password)
-
-   if(!isPasswordsCorrect){
-        return NextResponse.json({error:"Password is incorrect"},{status:400})
-    }
-
-    // create token data 
-    // const tokenData = { 
-    //     id:user._id,
-    //     email:user.email,
-    //     username:user.username,
-    //  }
-
-    //  create Token
-    // const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET! as string , {expiresIn: String(process.env.ACCESS_TOKEN_EXPIRE)})
     const { accesstoken, refreshtoken } = await generateAccessAndRefreshTokens(
         user._id
       );
 
     const response = NextResponse.json(
-     { 
+     {
           message: "Login successful",
           isAdmin:user.isAdmin,
         success:true,
     }
     )
-    if(user.role === "admin"){
-        response.cookies.set("admin_token",accesstoken,{
-            httpOnly:true,
-    
-        })
-        response.cookies.set("admin_refreshToken",refreshtoken,{
-            httpOnly:true,
-        })
+
+    if(isAdminUser(user)){
+        response.cookies.set("admin_token",accesstoken,authCookieOptions)
+        response.cookies.set("admin_refreshToken",refreshtoken,authCookieOptions)
     }else{
-        response.cookies.set("token",accesstoken,{
-            httpOnly:true,
-    
-        })
-        response.cookies.set("refreshToken",refreshtoken,{
-            httpOnly:true,
-        })
+        response.cookies.set("token",accesstoken,authCookieOptions)
+        response.cookies.set("refreshToken",refreshtoken,authCookieOptions)
     }
-   
 
     return response;
 
-        
     } catch (error:any) {
-      
-        return NextResponse.json({error: error.message}, {status: 500});
+        console.error("Login error:", error.message);
+        return NextResponse.json({error: "Something went wrong. Please try again."}, {status: 500});
     }
 }

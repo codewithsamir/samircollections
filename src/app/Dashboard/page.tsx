@@ -117,7 +117,7 @@ const CustomerDashboard: React.FC = () => {
         transition={{ duration: 0.5 }}
       >
         <motion.div
-          className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+          className="w-16 h-16 border-4 border-brand border-t-transparent rounded-full animate-spin"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
@@ -176,7 +176,7 @@ const CustomerDashboard: React.FC = () => {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-500 text-white text-sm sm:text-lg py-3 px-6 rounded-md flex items-center hover:bg-green-600 transition"
+              className="bg-brand text-white text-sm sm:text-lg py-3 px-6 rounded-md flex items-center hover:bg-brand transition"
             >
               <FaWhatsapp className="mr-2" size={24} />
               Contact Us on WhatsApp
@@ -188,7 +188,7 @@ const CustomerDashboard: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-gray-700">Total Orders</h2>
-          <p className="text-3xl font-bold text-blue-600">{orderStats.totalOrders}</p>
+          <p className="text-3xl font-bold text-brand">{orderStats.totalOrders}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-gray-700">In Progress</h2>

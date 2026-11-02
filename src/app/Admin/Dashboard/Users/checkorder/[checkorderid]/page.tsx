@@ -162,7 +162,7 @@ const router = useRouter()
                 <td className="border border-gray-300 p-2 capitalize">{order.status}</td>
                 <td className="border border-gray-300 p-2">
                   <button
-                    className="bg-green-600 text-white px-4 py-2 rounded"
+                    className="bg-brand text-white px-4 py-2 rounded"
                     onClick={() => router.push(`/Admin/Dashboard/Users/updateorder/${order.customer_id}`)}
                   >
                     Update Order

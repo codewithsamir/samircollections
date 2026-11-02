@@ -32,19 +32,19 @@ const Sidebar = ({menu,header}:any) => {
         }
        }
   return (
-    <aside className="bg-blue-600 text-white w-full md:w-64 p-5 sm:space-y-8">
+    <aside className="bg-gradient-to-b from-brand to-brand-dark text-white w-full md:w-64 p-5 sm:space-y-8 border-r-4 border-gold">
     <div className="text-center">
       <div className="w-16 h-16 mx-auto ">
         <Image
-          src="/logo.png" // Replace with your logo path
+          src="/samircollection-logo.png"
           alt="Company Logo"
           width={64}
           height={64}
           className="rounded-full"
         />
       </div>
-      <h1 className="text-2xl font-bold">{header}</h1>
-      <p className="text-gray-200">Samir Bag & Jeans</p>
+      <h1 className="text-2xl font-bold font-serif text-gold mt-2">{header}</h1>
+      <p className="text-gold-light/80 text-sm">Samir Collection</p>
     </div>
 
     <nav className="space-y-4">
@@ -52,13 +52,13 @@ const Sidebar = ({menu,header}:any) => {
       {menu.map((link:any)=>(
 
       <Link href={link.href} key={link.name}>
-        <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition block">
+        <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-white/10 border border-gold/30 hover:bg-gold hover:text-brand-dark transition block">
          {link.name}
         </button>
       </Link>
       ))}
       {/* <Link href="/Dashboard">
-        <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-blue-500 hover:bg-blue-800 transition hidden sm:block">
+        <button className="w-full my-2  px-4 py-1 text-sm sm:text-lg md:py-2 rounded-md bg-brand hover:bg-brand-dark transition hidden sm:block">
           Dashboard
         </button>
       </Link> */}

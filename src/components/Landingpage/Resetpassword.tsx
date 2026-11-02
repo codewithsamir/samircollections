@@ -74,7 +74,7 @@ const ResetPassword: React.FC = () => {
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gray-100">
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">
-          Samir Bag and Jeans Repairing Center
+          Samir Collection General Store
         </h1>
       </header>
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -111,7 +111,7 @@ const ResetPassword: React.FC = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Enter new password"
               required
             />
@@ -124,7 +124,7 @@ const ResetPassword: React.FC = () => {
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Confirm new password"
               required
             />

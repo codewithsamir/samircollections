@@ -51,7 +51,7 @@ const VerifyEmail: React.FC = () => {
     <div className="min-h-[80vh] flex flex-col items-center py-20 justify-center bg-gray-100">
         <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">
-          Samir Bag and Jeans Repairing Center
+          Samir Collection General Store
         </h1>
       
       </header>

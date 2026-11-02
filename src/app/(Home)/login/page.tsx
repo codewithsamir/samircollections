@@ -73,7 +73,7 @@ export default function Login() {
     >
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">
-          Samir Bag and Jeans Repairing Center
+          Samir Collection General Store
         </h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -112,7 +112,7 @@ export default function Login() {
               id="password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Enter your password"
               required
             />
@@ -130,7 +130,7 @@ export default function Login() {
           <motion.button
             type="submit"
             disabled={loading}
-            whileHover={!loading && { scale: 1.05 }}
+            whileHover={loading ? undefined : { scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`w-full py-2 flex justify-center items-center rounded-md ${
               loading
@@ -156,7 +156,7 @@ export default function Login() {
         >
           <Link
             href="/forgotpassword"
-            className=" text-blue-500 hover:underline"
+            className=" text-brand hover:underline"
           >
             Forgot password
           </Link>

@@ -163,7 +163,7 @@ const OrderForm = ({ params }: any) => {
           <button
             type="button"
             onClick={addClothDetail}
-            className="text-blue-600 hover:text-blue-800"
+            className="text-brand hover:text-brand-dark"
           >
             Add Another Cloth
           </button>
@@ -200,7 +200,7 @@ const OrderForm = ({ params }: any) => {
         <div>
           <button
             type="submit"
-            className="bg-blue-600 text-white p-2 rounded-md w-full hover:bg-blue-700"
+            className="bg-brand text-white p-2 rounded-md w-full hover:bg-brand-dark"
           >
             Submit Order
           </button>

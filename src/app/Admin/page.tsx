@@ -6,7 +6,7 @@ const AdminPage = () => {
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center p-8">
       {/* Header */}
       <header className="text-center mb-8">
-        <h1 className="text-4xl font-semibold text-blue-600">Admin Portal</h1>
+        <h1 className="text-4xl font-semibold text-brand">Admin Portal</h1>
         <p className="text-gray-600 mt-2 text-xl">Manage your platform efficiently.</p>
       </header>
 
@@ -21,13 +21,13 @@ const AdminPage = () => {
         <div className="text-center">
           <Link
             href="/Admin/login"
-            className="block w-full py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 mb-4"
+            className="block w-full py-3 text-white bg-brand rounded-md hover:bg-brand-dark mb-4"
           >
             Login to Admin Panel
           </Link>
           <Link
             href="/Admin/signup"
-            className="block w-full py-3 text-white bg-green-500 rounded-md hover:bg-green-600"
+            className="block w-full py-3 text-white bg-brand rounded-md hover:bg-brand"
           >
             Create an Admin Account
           </Link>

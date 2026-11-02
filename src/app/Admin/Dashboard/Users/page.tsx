@@ -94,13 +94,13 @@ const UsersPage = () => {
                 {/* Action Buttons */}
                 <button
                   onClick={() => handleAction(user._id, user.username, "addOrder")}
-                  className="bg-blue-500 text-white px-3 py-1 rounded-md mr-2"
+                  className="bg-brand text-white px-3 py-1 rounded-md mr-2"
                 >
                   Add Order
                 </button>
                 <button
                   onClick={() => handleAction(user._id, user.username, "viewOrders")}
-                  className="bg-green-500 text-white px-3 py-1 rounded-md mr-2"
+                  className="bg-gold text-brand-dark font-semibold px-3 py-1 rounded-md mr-2"
                 >
                   View Orders
                 </button>

@@ -11,8 +11,8 @@ interface ServiceStep {
 const steps: ServiceStep[] = [
   {
     stepNumber: 1,
-    title: 'BOOK YOUR SERVICE',
-    description: 'Select a convenient time for us to collect your items, either online or by phone.',
+    title: 'MESSAGE ON WHATSAPP',
+    description: 'Send us a quick message on WhatsApp to schedule a pick-up and share details.',
     Icon: FaCalendarCheck,
   },
   {
@@ -41,9 +41,9 @@ const ServiceSteps: React.FC = () => {
       {steps.map(({ stepNumber, title, description, Icon }) => (
     <div
     key={stepNumber}
-    className="group w-[280px]  h-[200px] bg-white hover:bg-red-500 text-black hover:text-white transition-all rounded-lg shadow-lg flex flex-col justify-center items-center p-4 transform  hover:shadow-xl cursor-pointer"
+    className="group w-[280px]  h-[200px] bg-white hover:bg-brand text-black hover:text-white transition-all rounded-lg shadow-lg flex flex-col justify-center items-center p-4 transform  hover:shadow-xl cursor-pointer"
   >
-    <Icon className="text-5xl mb-4 text-red-500 group-hover:text-white" />
+    <Icon className="text-5xl mb-4 text-brand group-hover:text-white" />
     <div className="text-xl font-bold mb-2 transition-al">{stepNumber}. {title}</div>
     <p className="text-center hidden group-hover:block transition-all">{description}</p>
   </div>

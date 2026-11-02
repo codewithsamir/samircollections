@@ -1,14 +1,25 @@
+import { connectToDatabase } from "@/dbConfig/dbConfig";
+import { requireAdmin, toStr } from "@/helpers/auth";
+
+const ALLOWED_FIELDS = ["items", "total_quantity", "total_price", "pickup_date", "delivery_date", "discount", "status"];
 import Customerorder from "@/models/customerorder.model"; // Import the Mongoose model for the customer order
 import { NextRequest, NextResponse } from "next/server"; // Import Next.js types for request and response handling
 
 // Define the POST function to handle order updates
 export async function POST(req: NextRequest) {
   try {
+    await connectToDatabase();
+    const auth = await requireAdmin(req);
+    if (auth instanceof NextResponse) return auth;
     // Parse the JSON body of the request
     const reqbody = await req.json();
 
     // Extract the `orderid` and `updatedData` from the request body
-    const { orderid, updatedData } = reqbody;
+    const orderid = toStr(reqbody.orderid, 100);
+    // Only allow updating known order fields
+    const updatedData = Object.fromEntries(
+      Object.entries(reqbody.updatedData || {}).filter(([key]) => ALLOWED_FIELDS.includes(key))
+    );
 
     // Check if `orderid` is provided
     if (!orderid) {

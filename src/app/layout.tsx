@@ -1,5 +1,6 @@
 // import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Head from "next/head";
@@ -17,6 +18,14 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+// Devanagari font for the Nepali text across the site
+const nepaliFont = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  weight: ["400", "600", "700"],
+  variable: "--font-nepali",
+  display: "swap",
+});
+
 // export const metadata: Metadata = {
 //   title: "Samir Collections - Bag & Jean Repairing Center",
 //   description: "Samir Bag and Jean Repairing Center in Janakpur offers expert repair and fitting services for bags, jeans, jackets, and more. Convenient home pickup service available.",
@@ -32,34 +41,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" >
-<Head>
-  {/* Main Meta Tags */}
-  <title>samir collection</title>
-  
-  <meta name="description" content="Samir Bag and Jeans Repairing Center in Janakpur, Nepal, specializes in expert repair services for bags, jeans, jackets, kurtis, trousers, and all types of clothing. Convenient home pickup service available." />
+      <Head>
+        {/* Main Meta Tags */}
+        <title>Samir Collection</title>
 
-  <meta name="keywords" content="bag repair, bag repairing, bag fixing, cloth repair, cloth repairing, clothing alterations, jeans repair, jeans alterations, jacket repair, jacket fitting, kurti repair, trouser elastic replacement, clothing fitting, garment repair, winter wear repair, leather bag repair, travel bag repair, backpack repair, tailor shop, tailor service, clothing adjustment, Janakpur, Samir Bag and Jeans Repairing Center, garment repair center, fashion alterations, winter clothing repair, clothing mending, Nepal, cloth repairing at Janakpur, cloth repairing in Janakpur, cloth repairing in Pidari Chowk, cloth repairing inside Janakpur Dham , samir bag , samir bag shop" />
+        <meta name="description" content="Samir Collection in Janakpur, Nepal. We operate two branches: Fancy & Repair Service, and Readymade garments. We specialize in expert repair services for bags, jeans, jackets, kurtis, trousers, and all types of clothing." />
+
+        <meta name="keywords" content="samir collection, fancy and tailoring, readymade, bag repair, bag repairing, bag fixing, cloth repair, cloth repairing, clothing alterations, jeans repair, jeans alterations, jacket repair, jacket fitting, kurti repair, trouser elastic replacement, clothing fitting, garment repair, winter wear repair, leather bag repair, travel bag repair, backpack repair, tailor shop, tailor service, clothing adjustment, Janakpur, garment repair center, fashion alterations, winter clothing repair, clothing mending, Nepal, cloth repairing at Janakpur, cloth repairing in Janakpur, cloth repairing in Pidari Chowk, cloth repairing inside Janakpur Dham , samir bag , samir bag shop" />
 
 
-  {/* Google Site Verification */}
-  <meta name="google-site-verification" content="xkWHWxI1WqW17PwWCLavVZfWtUBivu8mY5bqyL8YiUE" />
+        {/* Google Site Verification */}
+        <meta name="google-site-verification" content="xkWHWxI1WqW17PwWCLavVZfWtUBivu8mY5bqyL8YiUE" />
 
-  {/* Open Graph / Facebook */}
-  <meta property="og:title" content="Samir Bag and Jeans Repairing Center - Expert Bag & Clothing Repair in Janakpur, Nepal" />
-  <meta property="og:description" content="Offering top-quality repair services for bags, jeans, jackets, kurtis, trousers, and winter items in Janakpur, Nepal. Expert fitting and mending services with home pickup available." />
-  <meta property="og:image" content="https://www.samircollection.com.np/samirbagandjeanrepairingcenter.png" />
-  <meta property="og:url" content="https://www.samircollection.com.np" />
-  <meta property="og:type" content="website" />
-  
-  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
-  {/* Structured Data - JSON-LD */}
-  <script type="application/ld+json">
-    {`
+        {/* Open Graph / Facebook */}
+        <meta property="og:title" content="Samir Collection - Fancy & Repair | Readymade" />
+        <meta property="og:description" content="Offering top-quality readymade items and repair services for bags, jeans, jackets, kurtis, trousers, and winter items in Janakpur, Nepal. Two branches: Fancy & Repair Service, and Readymade." />
+        <meta property="og:image" content="https://www.samircollection.com.np/samirbagandjeanrepairingcenter.png" />
+        <meta property="og:url" content="https://www.samircollection.com.np" />
+        <meta property="og:type" content="website" />
+
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        {/* Structured Data - JSON-LD */}
+        <script type="application/ld+json">
+          {`
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "name": "Samir Bag and Jeans Repairing Center",
-        "description": "Samir Bag and Jeans Repairing Center in Janakpur, Nepal, specializes in high-quality clothing and bag repairs, including jeans, jackets, kurtis, trousers, leather bags, backpacks, and winter wear. Expert fitting and mending services with convenient home pickup available.",
+        "name": "Samir Collection",
+        "description": "Samir Collection in Janakpur, Nepal, with two branches: Fancy & Repair Service, and Readymade garments.",
         "image": "https://www.samircollection.com.np/samirbagandjeanrepairingcenter.png",
         "address": {
           "@type": "PostalAddress",
@@ -79,35 +88,35 @@ export default function RootLayout({
         "priceRange": "10+"
       }
     `}
-  </script>
+        </script>
 
- {/* Google Tag Manager Script */}
- <script
+        {/* Google Tag Manager Script */}
+        <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-JPZ8LS2R2Y"
         ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-JPZ8LS2R2Y');
-            `,
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JPZ8LS2R2Y');
+        `,
           }}
         />
-</Head>
+      </Head>
 
 
 
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} ${nepaliFont.variable} antialiased `}
       >
-            <Toaster />
-              
+        <Toaster />
+
         {children}
-        <SpeedInsights/>
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>

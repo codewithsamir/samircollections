@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/dbConfig/dbConfig";
 import Customerorder from "@/models/customerorder.model";
+import { requireAdmin } from "@/helpers/auth";
 
-connectToDatabase();
 
 export async function POST(request: NextRequest) {
   try {
+    await connectToDatabase();
+    const auth = await requireAdmin(request);
+    if (auth instanceof NextResponse) return auth;
     const reqbody = await request.json();  // Await to properly parse the JSON body
 
     // Destructure values from the request body
