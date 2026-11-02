@@ -91,7 +91,7 @@ export default function Signup(): JSX.Element {
         transition={{ duration: 0.6 }}
       >
         <h1 className="text-3xl font-bold">
-          Samir Bag and Jeans Repairing Center
+          Samir Collection General Store
         </h1>
         <p className="text-gray-600 mt-2 text-xl">
           Join us by creating an account!
@@ -146,7 +146,7 @@ export default function Signup(): JSX.Element {
               id="password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Enter your password"
               required
             />
@@ -167,7 +167,7 @@ export default function Signup(): JSX.Element {
               id="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Confirm your password"
               required
             />

@@ -48,6 +48,7 @@ export async function connectToDatabase(){
 const opts = {
     bufferCommands: true,
     maxPoolSize: 10,
+    serverSelectionTimeoutMS: 10000, // fail with the real reason instead of a vague buffering timeout
 
 }
 
@@ -60,7 +61,8 @@ try {
     cached.connection = await cached.promise;
 } catch (error) {
     cached.promise = null;
-    throw error;
+    console.error("MongoDB connection failed. Check MONGO_URL in .env and Atlas Network Access:", (error as Error).message);
+    throw new Error("Database connection failed. Please try again later.");
 }
 
 

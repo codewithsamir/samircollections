@@ -1,15 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/dbConfig/dbConfig";
 import Customerorder from "@/models/customerorder.model";
+import { getAuthUser, isAdminUser, toStr } from "@/helpers/auth";
 
 // Establish the database connection
-connectToDatabase();
 
 export async function POST(request: NextRequest) {
   try {
+    await connectToDatabase();
+    const authUser = await getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json({ success: false, message: "Please log in to continue." }, { status: 401 });
+    }
     // Parse the request body
     const reqbody = await request.json();
-    const { id} = reqbody;
+    const id = toStr(reqbody.id, 100);
 
     // Validate the input
     if (!id ) {
@@ -17,6 +22,11 @@ export async function POST(request: NextRequest) {
         { success: false, message: " ID  is required"},
         { status: 400 }
       );
+    }
+
+    // Customers can only see their own orders
+    if (!isAdminUser(authUser) && String(authUser._id) !== id) {
+      return NextResponse.json({ success: false, message: "You are not allowed to view these orders." }, { status: 403 });
     }
 
     // Initialize a variable to hold the query result

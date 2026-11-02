@@ -86,11 +86,11 @@ export default function Login() {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-blue-100 flex flex-col items-center py-10 px-6"
+      className="min-h-screen bg-brand-light flex flex-col items-center py-10 px-6"
     >
       <header className="text-center mb-8">
         <h1 className="text-3xl font-bold">
-          Samir Bag and Jeans Repairing Center
+          Samir Collection General Store
         </h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -100,7 +100,7 @@ export default function Login() {
         >
           Welcome! Please log in to continue.
         </motion.p>
-        <Link href={"/Admin"} className="p-2 mt-2 block text-white bg-blue-500 rounded-md">Go Back</Link>
+        <Link href={"/Admin"} className="p-2 mt-2 block text-white bg-brand rounded-md">Go Back</Link>
       </header>
 
       <motion.main
@@ -130,7 +130,7 @@ export default function Login() {
               id="password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Enter your password"
               required
             />
@@ -148,12 +148,12 @@ export default function Login() {
           <motion.button
             type="submit"
             disabled={loading}
-            whileHover={!loading && { scale: 1.05 }}
+            whileHover={loading ? undefined : { scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`w-full py-2 flex justify-center items-center rounded-md ${
               loading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-600 text-white hover:bg-blue-700 transition"
+                : "bg-brand text-white hover:bg-brand-dark transition"
             }`}
           >
             {loading ? (
@@ -174,7 +174,7 @@ export default function Login() {
         >
           <Link
             href="/forgotpassword"
-            className=" text-blue-500 hover:underline"
+            className=" text-brand hover:underline"
           >
             Forgot password
           </Link>

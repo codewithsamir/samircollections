@@ -67,14 +67,14 @@
 
 import nodemailer from "nodemailer";
 import CustomerUser from "@/models/user.model";
-import bcryptjs from "bcryptjs";
-import { getVerificationEmailTemplate } from "@/utility/email";
+import crypto from "crypto";
+import { getEmailSubject, getVerificationEmailTemplate, getVerificationEmailText } from "@/utility/email";
 
 
 export const sendemail = async ({ email, emailType, userId }: { email: string; emailType: string; userId: string }) => {
   try {
-    // Create a hashed token for verification or password reset
-    const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+    // Create an unguessable random token for verification or password reset
+    const hashedToken = crypto.randomBytes(32).toString("hex");
 
     // Update user record in database based on the email type
     if (emailType === "VERIFY") {
@@ -98,20 +98,19 @@ export const sendemail = async ({ email, emailType, userId }: { email: string; e
       },
     });
 
-    // Choose the template based on email type
-    let emailContent;
-    if (emailType === "VERIFY") {
-      emailContent = getVerificationEmailTemplate(hashedToken, process.env.DOMAIN!,emailType);
-    } else if (emailType === "RESET") {
-      emailContent = getVerificationEmailTemplate(hashedToken, process.env.DOMAIN!,emailType); // You can create a separate template for reset email
-    }
+    // Build branded HTML + plain-text versions (template handles VERIFY and RESET)
+    const domain = process.env.DOMAIN!;
+    const emailContent = getVerificationEmailTemplate(hashedToken, domain, emailType);
+    const emailText = getVerificationEmailText(hashedToken, domain, emailType);
 
     // Email options: sender, recipient, and email content
     const mailOptions = {
-      from: `"Samir Bag & Jeans Repair Service" <${process.env.SMTP_USER}>`, // Update sender name
+      from: `"Samir Collection" <${process.env.SMTP_USER}>`,
+      replyTo: process.env.SMTP_USER,
       to: email, // Recipient email address
-      subject: emailType === "VERIFY" ? "Verify Your Email" : "Reset Your Password",
-      html: emailContent, // Use the generated email content
+      subject: getEmailSubject(emailType),
+      html: emailContent,
+      text: emailText, // Plain-text fallback improves deliverability
     };
 
     // Send the email

@@ -1,30 +1,71 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  const path = request.nextUrl.pathname;
+// Verifies an HS256 JWT's signature and expiry with Web Crypto, so forged or expired cookies are rejected
+async function isValidToken(token: string) {
+  const secret = process.env.ACCESS_TOKEN_SECRET;
+  if (!token || !secret) return false;
+  const [header, payload, signature] = token.split(".");
+  if (!header || !payload || !signature) return false;
+  try {
+    const decode = (part: string) => Uint8Array.from(atob(part.replace(/-/g, "+").replace(/_/g, "/")), (c) => c.charCodeAt(0));
+    const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["verify"]);
+    const valid = await crypto.subtle.verify("HMAC", key, decode(signature), new TextEncoder().encode(`${header}.${payload}`));
+    if (!valid) return false;
+    const { exp } = JSON.parse(new TextDecoder().decode(decode(payload)));
+    return !exp || exp * 1000 > Date.now();
+  } catch {
+    return false;
+  }
+}
 
-  const isPublicPath = path === "/login" || path === "/signup";
-  const isAdminPath = path.startsWith("/Admin");
+export async function middleware(request: NextRequest) {
+  const url = request.nextUrl;
+  const path = url.pathname;
+  const hostname = request.headers.get("host") || "";
 
-  const token = request.cookies.get("token")?.value || "";
-  const adminToken = request.cookies.get("admin_token")?.value || "";
-
-  if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/Dashboard", request.nextUrl));
+  // Check for admin subdomain
+  const isSubdomainAdmin = hostname.startsWith("admin.");
+  
+  // If it's an admin subdomain, we treat all paths as prefixed with /Admin
+  let effectivePath = path;
+  if (isSubdomainAdmin && !path.startsWith("/Admin")) {
+    effectivePath = `/Admin${path}`;
   }
 
-  if (!isPublicPath && !token && !isAdminPath) {
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
-  }
+  const isPublicPath = effectivePath === "/login" || effectivePath === "/signup";
+  const isAdminPath = effectivePath.startsWith("/Admin");
 
-  if (isAdminPath && path !== "/Admin/login" && path !== "/Admin/signup" && !adminToken) {
-    return NextResponse.redirect(new URL("/Admin/login", request.nextUrl));
-  }
+  const token = (await isValidToken(request.cookies.get("token")?.value || "")) ? "valid" : "";
+  const adminToken = (await isValidToken(request.cookies.get("admin_token")?.value || "")) ? "valid" : "";
 
-  if (isAdminPath && (path === "/Admin/login" || path === "/Admin/signup") && adminToken) {
-    return NextResponse.redirect(new URL("/Admin/Dashboard", request.nextUrl));
+  // Logic for Admin Subdomain / Admin Path
+  if (isAdminPath) {
+    const adminLoginPath = isSubdomainAdmin ? "/login" : "/Admin/login";
+    const adminSignupPath = isSubdomainAdmin ? "/signup" : "/Admin/signup";
+    const adminDashboardPath = isSubdomainAdmin ? "/Dashboard" : "/Admin/Dashboard";
+
+    if (effectivePath !== adminLoginPath && effectivePath !== adminSignupPath && !adminToken) {
+      return NextResponse.redirect(new URL(adminLoginPath, request.url));
+    }
+
+    if ((effectivePath === adminLoginPath || effectivePath === adminSignupPath) && adminToken) {
+      return NextResponse.redirect(new URL(adminDashboardPath, request.url));
+    }
+    
+    // Perform the rewrite if it's a subdomain
+    if (isSubdomainAdmin && !path.startsWith("/Admin")) {
+      return NextResponse.rewrite(new URL(effectivePath, request.url));
+    }
+  } else {
+    // Logic for main site / Dashboard
+    if (isPublicPath && token) {
+      return NextResponse.redirect(new URL("/Dashboard", request.url));
+    }
+
+    if (!isPublicPath && !token) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
   }
 }
 

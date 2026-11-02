@@ -66,7 +66,7 @@ const ForgotPassword: React.FC = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gold"
             placeholder="Enter your email"
             required
             aria-label="Email Address"

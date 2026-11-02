@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#9E1B1B"/>
+      <stop offset="100%" stop-color="#4A0000"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5E6E8"/>
+    </linearGradient>
+    <linearGradient id="clothFold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8C9CD"/>
+      <stop offset="100%" stop-color="#F5E6E8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Badge -->
+  <circle cx="256" cy="256" r="248" fill="url(#gold)"/>
+  <circle cx="256" cy="256" r="236" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="222" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-dasharray="10 7" opacity="0.85"/>
+
+  <g transform="translate(0,-24)">
+  <!-- Thread spool on top -->
+  <rect x="283" y="112" width="26" height="6" rx="2" fill="url(#gold)"/>
+  <rect x="287" y="118" width="18" height="22" fill="#FDE68A"/>
+  <rect x="283" y="140" width="26" height="6" rx="2" fill="url(#gold)"/>
+  <line x1="296" y1="146" x2="296" y2="152" stroke="#D4AF37" stroke-width="3"/>
+  <!-- Thread running to needle -->
+  <path d="M 296 128 C 250 110, 205 125, 201 168" fill="none" stroke="#FDE68A" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <!-- Sewing machine body -->
+  <path d="M 168 176 Q 168 152 192 152 L 342 152 Q 370 152 370 180 L 370 282 L 322 282 L 322 206 L 230 206 L 230 240 L 168 240 Z"
+        fill="url(#gold)" stroke="#4A0000" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Body highlight stripe -->
+  <path d="M 184 168 L 350 168" stroke="#FFF7D6" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <!-- Hand wheel -->
+  <circle cx="378" cy="196" r="24" fill="#4A0000" stroke="url(#gold)" stroke-width="7"/>
+  <circle cx="378" cy="196" r="6" fill="#D4AF37"/>
+  <!-- Needle bar, presser foot and needle -->
+  <rect x="193" y="240" width="12" height="20" fill="#D4AF37" stroke="#4A0000" stroke-width="2"/>
+  <line x1="199" y1="260" x2="199" y2="282" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 184 270 L 214 270" stroke="#D4AF37" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Cloth flowing over the machine bed -->
+  <path d="M 96 352 C 120 316, 160 284, 206 282 L 352 282 C 372 282, 386 292, 392 304 L 222 304 C 182 304, 150 326, 128 362 Z"
+        fill="url(#cloth)" stroke="#4A0000" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Cloth fold underside -->
+  <path d="M 96 352 C 104 366, 116 370, 128 362 C 150 326, 182 304, 222 304 L 392 304 C 390 312, 384 316, 376 316 L 226 316 C 190 316, 160 336, 138 370 C 122 384, 104 376, 96 352 Z"
+        fill="url(#clothFold)" stroke="#4A0000" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Stitch line on cloth -->
+  <path d="M 116 346 C 140 314, 172 293, 210 293 L 380 293" fill="none" stroke="#800000" stroke-width="2.5" stroke-dasharray="7 5" stroke-linecap="round"/>
+
+  <!-- Machine base -->
+  <rect x="150" y="316" width="250" height="16" rx="8" fill="url(#gold)" stroke="#4A0000" stroke-width="2.5"/>
+
+  </g>
+
+  <!-- Wordmark -->
+  <text x="256" y="378" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" font-weight="bold" letter-spacing="4" fill="#FFFFFF">SAMIR</text>
+  <text x="256" y="407" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="bold" letter-spacing="7" fill="#D4AF37">COLLECTION</text>
+  <line x1="170" y1="421" x2="342" y2="421" stroke="#D4AF37" stroke-width="1.5"/>
+  <text x="256" y="439" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" letter-spacing="2" fill="#FDE68A">TAILORING · REPAIR · FASHION</text>
+</svg>

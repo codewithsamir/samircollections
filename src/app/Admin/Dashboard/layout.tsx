@@ -9,15 +9,25 @@ const Layout = ({children}: Readonly<{
   }>) => {
     const [user, setUser]:any = useState([]);
 const menu = [
-
   {
     name:"Dashboard",
     href:"/Admin/Dashboard"
   },
-
+  {
+    name:"Products",
+    href:"/Admin/Dashboard/products"
+  },
+  {
+    name:"Services",
+    href:"/Admin/Dashboard/services"
+  },
   {
     name:"Users",
     href:"/Admin/Dashboard/Users"
+  },
+  {
+    name:"Site Settings",
+    href:"/Admin/Dashboard/settings"
   },
 ]
 

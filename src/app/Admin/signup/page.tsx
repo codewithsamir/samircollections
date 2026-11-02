@@ -91,13 +91,13 @@ export default function AdminSignup(): JSX.Element {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="text-4xl font-bold text-black">
-          Admin Signup - Samir Bag and Jeans Repairing Center
+        <h1 className="text-3xl font-bold">
+          Admin Signup - Samir Collection General Store
         </h1>
         <p className="text-gray-700 mt-2 text-xl">
           Create an admin account to manage the platform!
         </p>
-        <Link href={"/Admin"} className="p-2 mt-2 block text-white bg-green-500 rounded-md">Go Back</Link>
+        <Link href={"/Admin"} className="p-2 mt-2 block text-white bg-brand rounded-md">Go Back</Link>
       </motion.header>
 
       <motion.main
@@ -137,7 +137,7 @@ export default function AdminSignup(): JSX.Element {
               id="password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Enter your password"
               required
             />
@@ -159,7 +159,7 @@ export default function AdminSignup(): JSX.Element {
               id="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               placeholder="Confirm your password"
               required
             />
@@ -188,7 +188,7 @@ export default function AdminSignup(): JSX.Element {
             className={`w-full py-2 rounded-md flex justify-center items-center ${
               loading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 text-white hover:bg-green-700 transition"
+                : "bg-brand text-white hover:bg-brand-dark transition"
             }`}
           >
             {loading ? (
@@ -205,7 +205,7 @@ export default function AdminSignup(): JSX.Element {
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{" "}
-          <Link href="/Admin/login" className="text-blue-500 hover:underline">
+          <Link href="/Admin/login" className="text-brand hover:underline">
             Log in
           </Link>
         </p>
